@@ -25,6 +25,7 @@ public class Usuario {
 	private String nombre;
 	private String apellido;
 	private String email;
+	private String contrasena;
 	private String telefono;
 	private String direccion;
 	private String pais;
@@ -44,12 +45,13 @@ public class Usuario {
 		super();
 	}
 
-	public Usuario(String nombre, String apellido, String email, String telefono, String direccion, String pais,
+	public Usuario(String nombre, String apellido, String email, String contrasena, String telefono, String direccion, String pais,
 			Date fechaRegistro, Perfil perfil, List<MetodoPago> metodoDePago, List<Pedido> pedidos) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
+		this.contrasena = contrasena;
 		this.telefono = telefono;
 		this.direccion = direccion;
 		this.pais = pais;
@@ -89,6 +91,14 @@ public class Usuario {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 	public String getTelefono() {

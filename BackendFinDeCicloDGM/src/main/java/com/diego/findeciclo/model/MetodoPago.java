@@ -17,6 +17,7 @@ public class MetodoPago {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private int numeroTarjeta;
 	private Date fechaCaducidad;
 	private int cvv;

@@ -2,6 +2,8 @@ package com.diego.findeciclo.service;
 
 import java.util.List;
 
+import org.springframework.data.jpa.domain.Specification;
+
 import com.diego.findeciclo.model.Director;
 
 public interface IDirectorService {
@@ -12,8 +14,6 @@ public interface IDirectorService {
 	Director editarDirector(Director dire);
 	void eliminarDirector(int id);
 	
-	List<Director> buscarPorPais(String pais);
-	List<Director> buscarPorNombre(String nombre);
-	List<Director> buscarPorApellido(String apellido);
+	List<Director> filtrar(Specification<Director> spec);
 	
 }

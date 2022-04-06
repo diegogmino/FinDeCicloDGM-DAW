@@ -3,11 +3,13 @@ package com.diego.findeciclo.service.jpa;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.diego.findeciclo.model.Director;
 import com.diego.findeciclo.repository.DirectorRepository;
 import com.diego.findeciclo.service.IDirectorService;
+import com.diego.findeciclo.specification.DirectorSpecification;
 
 @Service
 public class DirectorService implements IDirectorService {
@@ -41,18 +43,8 @@ public class DirectorService implements IDirectorService {
 	}
 
 	@Override
-	public List<Director> buscarPorPais(String pais) {
-		return direRepo.filtrarPais(pais);
-	}
-
-	@Override
-	public List<Director> buscarPorNombre(String nombre) {
-		return direRepo.filtrarNombre(nombre);
-	}
-
-	@Override
-	public List<Director> buscarPorApellido(String apellido) {
-		return direRepo.filtrarApellido(apellido);
+	public List<Director> filtrar(Specification<Director> spec) {
+		return direRepo.findAll(spec);
 	}
 
 }

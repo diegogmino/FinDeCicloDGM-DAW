@@ -9,7 +9,7 @@ public interface IMetodoPagoService {
 
 	MetodoPago guardarMetodo(MetodoPago metodoPago);
 	List<MetodoPago> buscarTodos();
-	MetodoPago buscarPorUsuario(int idUsuario);
+	MetodoPago buscarPorId(int id);
 	MetodoPago editarMetodo(MetodoPago metodoPago);
 	void eliminarMetodo(int id);
 	

@@ -25,10 +25,10 @@ public class MetodoPagoService implements IMetodoPagoService {
 	public List<MetodoPago> buscarTodos() {
 		return pagoRepo.findAll();
 	}
-
+	
 	@Override
-	public MetodoPago buscarPorUsuario(int idUsuario) {
-		return pagoRepo.findById(idUsuario).get();
+	public MetodoPago buscarPorId(int id) {
+		return pagoRepo.findById(id).get();
 	}
 
 	@Override
@@ -46,6 +46,8 @@ public class MetodoPagoService implements IMetodoPagoService {
 	public List<MetodoPago> buscarPorFechaCaducidad(Date fechaCaducidad) {
 		return pagoRepo.filtrarFechaCaducidad(fechaCaducidad);
 	}
+
+
 	
 	
 	

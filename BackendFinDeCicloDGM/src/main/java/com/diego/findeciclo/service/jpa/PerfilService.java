@@ -19,10 +19,15 @@ public class PerfilService implements IPerfilService {
 	public Perfil guardarPerfil(Perfil perfil) {
 		return perfilRepo.save(perfil);
 	}
+	
+	@Override
+	public List<Perfil> buscarTodos() {
+		return perfilRepo.findAll();
+	}
 
 	@Override
-	public List<Perfil> buscarPerfiles(Perfil perfil) {
-		return perfilRepo.findAll();
+	public Perfil buscarPerfil(int id) {
+		return perfilRepo.findById(id).get();
 	}
 
 	@Override
@@ -35,4 +40,5 @@ public class PerfilService implements IPerfilService {
 		perfilRepo.deleteById(id);
 	}
 
+	
 }

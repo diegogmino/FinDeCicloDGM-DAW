@@ -1,7 +1,8 @@
 package com.diego.findeciclo.service;
 
-import java.math.BigDecimal;
 import java.util.List;
+
+import org.springframework.data.jpa.domain.Specification;
 
 import com.diego.findeciclo.model.Pelicula;
 
@@ -13,10 +14,7 @@ public interface IPeliculaService {
 	Pelicula editarPeli(Pelicula peli);
 	void eliminarPeli(int id);
 	
-	List<Pelicula> filtrarCodigoBarras(int codigo);
-	List<Pelicula> filtrarTitulo(String titulo);
-	List<Pelicula> filtrarPrecios(BigDecimal precioMin, BigDecimal precioMax);
 	List<Pelicula> filtrarDestacada();
-	List<Pelicula> filtrarGenero(String genero);
+	List<Pelicula> filtrar(Specification<Pelicula> spec);
 	
 }

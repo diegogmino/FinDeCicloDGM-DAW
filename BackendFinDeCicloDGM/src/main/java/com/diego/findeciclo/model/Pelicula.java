@@ -21,7 +21,7 @@ public class Pelicula {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private Integer codigoBarras;
+	private long codigoBarras;
 	private String titulo;
 	private BigDecimal precio;
 	private String portada;
@@ -41,7 +41,7 @@ public class Pelicula {
 		super();
 	}
 
-	public Pelicula(Integer codigoBarras, String titulo, BigDecimal precio, String portada, boolean destacada,
+	public Pelicula(long codigoBarras, String titulo, BigDecimal precio, String portada, boolean destacada,
 			int unidades, String genero, String sinopsis, List<Director> directores) {
 		super();
 		this.codigoBarras = codigoBarras;
@@ -63,11 +63,11 @@ public class Pelicula {
 		this.id = id;
 	}
 
-	public Integer getCodigoBarras() {
+	public long getCodigoBarras() {
 		return codigoBarras;
 	}
 
-	public void setCodigoBarras(Integer codigoBarras) {
+	public void setCodigoBarras(long codigoBarras) {
 		this.codigoBarras = codigoBarras;
 	}
 

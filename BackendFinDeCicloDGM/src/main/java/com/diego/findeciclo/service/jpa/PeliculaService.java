@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import com.diego.findeciclo.model.Pelicula;
 import com.diego.findeciclo.repository.PeliculaRepository;
@@ -40,20 +41,6 @@ public class PeliculaService implements IPeliculaService {
 		peliRepo.deleteById(id);
 	}
 
-	@Override
-	public List<Pelicula> filtrarCodigoBarras(int codigo) {
-		return peliRepo.filtrarCodigoBarras(codigo);
-	}
-
-	@Override
-	public List<Pelicula> filtrarTitulo(String titulo) {
-		return peliRepo.filtrarTitulo(titulo);
-	}
-
-	@Override
-	public List<Pelicula> filtrarPrecios(BigDecimal precioMin, BigDecimal precioMax) {
-		return peliRepo.filtrarPrecio(precioMin, precioMax);
-	}
 
 	@Override
 	public List<Pelicula> filtrarDestacada() {
@@ -61,8 +48,8 @@ public class PeliculaService implements IPeliculaService {
 	}
 
 	@Override
-	public List<Pelicula> filtrarGenero(String genero) {
-		return peliRepo.filtrarGenero(genero);
+	public List<Pelicula> filtrar(Specification<Pelicula> spec) {
+		return peliRepo.findAll(spec);
 	}
 	
 	

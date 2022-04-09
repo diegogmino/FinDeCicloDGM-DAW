@@ -109,7 +109,7 @@ public class DirectoresController {
 	
 	private String descargarImagen(String url, String nombre, String apellido) {
 		
-		String ruta = "src\\main\\resources\\fotos_directores\\"+apellido+"_"+nombre+".png";
+		String ruta = "src\\main\\resources\\fotos_directores\\"+apellido+"_"+nombre+".jpeg";
 		
 		try {
 			InputStream in = new URL(url).openStream();

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.diego.findeciclo.model.Pedido;
+import com.diego.findeciclo.model.Usuario;
 import com.diego.findeciclo.repository.PedidoRepository;
 import com.diego.findeciclo.service.IPedidoService;
 
@@ -26,10 +27,10 @@ public class PedidoService implements IPedidoService {
 	public List<Pedido> buscarTodos() {
 		return pedidoRepo.findAll();
 	}
-
+	
 	@Override
-	public Pedido actualizarPedido(Pedido pedido) {
-		return pedidoRepo.save(pedido);
+	public Pedido buscarPorId(int id) {
+		return pedidoRepo.findById(id).get();
 	}
 
 	@Override
@@ -38,18 +39,8 @@ public class PedidoService implements IPedidoService {
 	}
 
 	@Override
-	public List<Pedido> filtrarEntregados(List<Pedido> pedidosUsuario) {
-		
-		List<Pedido> pedidosEntregados = new ArrayList<Pedido>();
-		
-		for(Pedido pedido : pedidosUsuario) {
-			if(pedido.isEntregado()) {
-				pedidosEntregados.add(pedido);
-			}
-		}
-		
-		return pedidosEntregados;
-		
+	public List<Pedido> filtrarEntregados(Usuario usuario) {
+		return pedidoRepo.filtrarEntregadosPorUsuario(usuario);
 	}
 
 	@Override
@@ -57,6 +48,9 @@ public class PedidoService implements IPedidoService {
 		return pedidoRepo.filtrarFecha(minFecha, maxFecha);
 	}
 
-	
+	@Override
+	public List<Pedido> filtrarPorUsuario(Usuario usuario) {
+		return pedidoRepo.filtrarUsuario(usuario);
+	}
 	
 }

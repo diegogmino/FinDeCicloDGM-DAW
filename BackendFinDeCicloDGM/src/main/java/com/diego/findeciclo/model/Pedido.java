@@ -3,7 +3,6 @@ package com.diego.findeciclo.model;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,6 +13,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "pedidos")
@@ -29,13 +32,14 @@ public class Pedido {
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "peliculas_pedidos",
-			joinColumns = @JoinColumn(name="idPelicula"),
-			inverseJoinColumns = @JoinColumn(name="idPedido")
+			joinColumns = @JoinColumn(name="idPedido"),
+			inverseJoinColumns = @JoinColumn(name="idPelicula")
 	)
 	private List<Pelicula> peliculas;
 	
 	@ManyToOne
     @JoinColumn(name = "idUsuario", nullable = false)
+	@JsonIgnore
 	private Usuario pedidosUsuario;
 
 	public Pedido() {

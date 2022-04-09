@@ -42,7 +42,7 @@ public class Usuario {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "metodosPagoUsuario")
 	private List<MetodoPago> metodoDePago;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidosUsuario")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidosUsuario", fetch = FetchType.LAZY)
 	private List<Pedido> pedidos;
 
 	public Usuario() {

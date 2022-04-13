@@ -103,7 +103,7 @@ public class PeliculasController {
 	
 	private String descargarImagen(String url, String titulo, long codigoBarras) {
 		
-		String ruta = "src\\main\\resources\\portadas_pelis\\"+codigoBarras+"_"+titulo+".jpeg";
+		String ruta = "img\\portadas_pelis\\"+codigoBarras+"_"+titulo+".jpeg";
 		
 		try {
 			InputStream in = new URL(url).openStream();

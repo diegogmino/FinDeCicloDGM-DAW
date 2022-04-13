@@ -10,8 +10,6 @@ import com.diego.findeciclo.model.Usuario;
 
 @Mapper
 public interface UsuarioMapper {
-	
-	UsuarioMapper INSTANCE = Mappers.getMapper( UsuarioMapper.class );
 
     UsuarioDTO toUsuarioDTO(Usuario usuario);
     List<UsuarioDTO> toListUsuarioDTO(List<Usuario> usuarios);

@@ -21,19 +21,27 @@ public class UsuariosController {
 	@Autowired
 	private IUsuarioService usuarioService;
 	
+	@Autowired
+	private UsuarioMapper usuarioMapper;
+	
+	
 	public Usuario registro(@RequestBody Usuario usuario) {
 		return null;
 	}
 	
-	public Boolean login(@RequestBody Usuario usuario) {
-		return null;
+	@GetMapping("/buscar/{id}")
+	public UsuarioDTO listarPorId(@PathVariable int id) {
+
+		Usuario usuario = usuarioService.buscarPorId(id);
+		return usuarioMapper.toUsuarioDTO(usuario);
+		
 	}
 	
 	@GetMapping("/listarTodos")
 	public List<UsuarioDTO> listarTodos() {
 		
 		List<Usuario> usuarios = usuarioService.buscarTodos();
-		return UsuarioMapper.INSTANCE.toListUsuarioDTO(usuarios);
+		return usuarioMapper.toListUsuarioDTO(usuarios);
 		
 	}
 	

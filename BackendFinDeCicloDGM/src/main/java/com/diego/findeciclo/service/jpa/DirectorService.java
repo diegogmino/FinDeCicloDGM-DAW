@@ -5,11 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
 import com.diego.findeciclo.model.Director;
 import com.diego.findeciclo.repository.DirectorRepository;
 import com.diego.findeciclo.service.IDirectorService;
-import com.diego.findeciclo.specification.DirectorSpecification;
 
 @Service
 public class DirectorService implements IDirectorService {

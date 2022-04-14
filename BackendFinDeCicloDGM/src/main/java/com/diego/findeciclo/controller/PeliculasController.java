@@ -143,6 +143,4 @@ public class PeliculasController {
 		return spec;
 	}
 	
-	
-	
 }

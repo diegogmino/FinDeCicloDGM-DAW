@@ -50,5 +50,16 @@ public class UsuarioService implements IUsuarioService {
 	public void eliminarUsuario(int id) {
 		usuarioRepo.deleteById(id);
 	}
+
+	@Override
+	public Boolean buscarEmail(String email) {
+
+		if(usuarioRepo.buscarEmail(email) != null) {
+			return false;
+		} else {
+			return true;
+		}
+		
+	}
 	
 }

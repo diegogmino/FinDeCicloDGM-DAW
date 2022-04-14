@@ -1,17 +1,26 @@
 package com.diego.findeciclo.controller;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.diego.findeciclo.dto.CreateUsuarioDTO;
+import com.diego.findeciclo.dto.UpdateUsuarioDTO;
 import com.diego.findeciclo.dto.UsuarioDTO;
 import com.diego.findeciclo.mapper.UsuarioMapper;
 import com.diego.findeciclo.model.Usuario;
+import com.diego.findeciclo.model.Perfil;
+import com.diego.findeciclo.service.IPerfilService;
 import com.diego.findeciclo.service.IUsuarioService;
 
 @RestController
@@ -20,20 +29,41 @@ public class UsuariosController {
 
 	@Autowired
 	private IUsuarioService usuarioService;
-	
+
 	@Autowired
-	private UsuarioMapper usuarioMapper;
+	private IPerfilService perfilService;
 	
-	
-	public Usuario registro(@RequestBody Usuario usuario) {
-		return null;
+	// Métodos CRUD
+
+	@PostMapping("/guardar")
+	public ResponseEntity<UsuarioDTO> registro(@RequestBody CreateUsuarioDTO createUsuarioDTO) {
+
+		if(usuarioService.buscarEmail(createUsuarioDTO.getEmail())) {
+			return new ResponseEntity<UsuarioDTO>(HttpStatus.BAD_REQUEST);
+		}
+
+		Usuario usuario = UsuarioMapper.INSTANCE.toUsuario(createUsuarioDTO);
+		
+		java.sql.Date fechaRegistro = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		usuario.setFechaRegistro(fechaRegistro);
+
+		Perfil perfil = perfilService.buscarPerfil(2);
+		usuario.setPerfil(perfil);
+
+		return new ResponseEntity<UsuarioDTO>(UsuarioMapper.INSTANCE.toUsuarioDTO(usuarioService.guardarUsuario(usuario)), HttpStatus.OK);
+
 	}
 	
 	@GetMapping("/buscar/{id}")
-	public UsuarioDTO listarPorId(@PathVariable int id) {
+	public ResponseEntity<UsuarioDTO> listarPorId(@PathVariable int id) {
 
 		Usuario usuario = usuarioService.buscarPorId(id);
-		return usuarioMapper.toUsuarioDTO(usuario);
+
+		if(usuario == null) {
+			return new ResponseEntity<UsuarioDTO>(HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<UsuarioDTO>(UsuarioMapper.INSTANCE.toUsuarioDTO(usuario), HttpStatus.OK);
 		
 	}
 	
@@ -41,16 +71,41 @@ public class UsuariosController {
 	public List<UsuarioDTO> listarTodos() {
 		
 		List<Usuario> usuarios = usuarioService.buscarTodos();
-		return usuarioMapper.toListUsuarioDTO(usuarios);
+		return UsuarioMapper.INSTANCE.toListUsuarioDTO(usuarios);
 		
 	}
 	
-	public Usuario actualizar(@RequestBody Usuario usuario, @PathVariable int id) {
-		return null;
+	@PutMapping("/actualizar/{id}")
+	public ResponseEntity<UsuarioDTO> actualizar(@RequestBody UpdateUsuarioDTO updateUsuarioDTO, @PathVariable int id) {
+
+		Usuario usuarioBBDD = usuarioService.buscarPorId(id);
+
+		if(usuarioBBDD == null) {
+			return new ResponseEntity<UsuarioDTO>(HttpStatus.NOT_FOUND);
+		}
+
+		usuarioBBDD.setNombre(updateUsuarioDTO.getNombre());
+		usuarioBBDD.setApellido(updateUsuarioDTO.getApellido());
+		usuarioBBDD.setEmail(updateUsuarioDTO.getEmail());
+		usuarioBBDD.setContrasena(updateUsuarioDTO.getContrasena());
+		usuarioBBDD.setTelefono(updateUsuarioDTO.getTelefono());
+		usuarioBBDD.setDireccion(updateUsuarioDTO.getDireccion());
+		usuarioBBDD.setPais(updateUsuarioDTO.getPais());
+
+		return new ResponseEntity<UsuarioDTO>(UsuarioMapper.INSTANCE.toUsuarioDTO(usuarioService.guardarUsuario(usuarioBBDD)), HttpStatus.OK);
+
 	}
 	
-	public void borrar(@PathVariable int id) {
+	@DeleteMapping("/borrar/{id}")
+	public ResponseEntity<Void> borrar(@PathVariable int id) {
 		
+		if(usuarioService.buscarPorId(id) == null) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+
+		usuarioService.eliminarUsuario(id);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+
 	}
 	
 }

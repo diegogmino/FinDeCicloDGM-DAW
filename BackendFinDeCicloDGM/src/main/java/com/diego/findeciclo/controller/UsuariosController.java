@@ -1,8 +1,8 @@
 package com.diego.findeciclo.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +19,8 @@ import com.diego.findeciclo.dto.UpdateUsuarioDTO;
 import com.diego.findeciclo.dto.UsuarioDTO;
 import com.diego.findeciclo.mapper.UsuarioMapper;
 import com.diego.findeciclo.model.Usuario;
+import com.diego.findeciclo.model.MetodoPago;
+import com.diego.findeciclo.model.Pedido;
 import com.diego.findeciclo.model.Perfil;
 import com.diego.findeciclo.service.IPerfilService;
 import com.diego.findeciclo.service.IUsuarioService;
@@ -104,6 +106,72 @@ public class UsuariosController {
 		}
 
 		usuarioService.eliminarUsuario(id);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+
+	}
+
+	// Operaciones de los usuarios
+
+	@PostMapping("/nuevoPedido/{id}")
+	public ResponseEntity<Void> anhadirPedidoUsuario(@RequestBody Pedido pedido, int id) {
+
+		Usuario usuario = usuarioService.buscarPorId(id);
+
+		if(usuario == null) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+
+		List<Pedido> pedidos = usuario.getPedidos();
+		pedidos.add(pedido);
+		usuario.setPedidos(pedidos);
+
+		usuarioService.guardarUsuario(usuario);
+
+		return new ResponseEntity<Void>(HttpStatus.OK);
+
+	}
+
+	@PostMapping("/nuevoMetodoPago/{id}")
+	public ResponseEntity<Void> anhadirMetodoPago(@RequestBody MetodoPago metodoPago, int id) {
+
+		Usuario usuario = usuarioService.buscarPorId(id);
+
+		if(usuario == null) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+
+		List<MetodoPago> metodosPago = usuario.getMetodoDePago();
+		metodosPago.add(metodoPago);
+		usuario.setMetodoDePago(metodosPago);
+
+		usuarioService.guardarUsuario(usuario);
+
+		return new ResponseEntity<Void>(HttpStatus.OK);
+
+	}
+
+	@DeleteMapping("/eliminarMetodoPago/{id}")
+	public ResponseEntity<Void> eliminarMetodoPago(@RequestBody MetodoPago metodoPago, int id) {
+
+		Usuario usuario = usuarioService.buscarPorId(id);
+
+		if(usuario == null) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+
+		List<MetodoPago> metodosPago = usuario.getMetodoDePago();
+		List<MetodoPago> nuevosMetodosPago = new ArrayList<MetodoPago>();
+		
+		for(MetodoPago metodo : metodosPago) {
+			if(!metodo.equals(metodoPago)) {
+				nuevosMetodosPago.add(metodo);
+			}
+		}
+
+		usuario.setMetodoDePago(nuevosMetodosPago);
+
+		usuarioService.guardarUsuario(usuario);
+
 		return new ResponseEntity<Void>(HttpStatus.OK);
 
 	}

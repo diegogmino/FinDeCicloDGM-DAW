@@ -1,4 +1,4 @@
-package com.diego.findeciclo.controller;
+package com.diego.findeciclo.rest_controller;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,7 +27,7 @@ import com.diego.findeciclo.service.IUsuarioService;
 
 @RestController
 @RequestMapping("/usuarios")
-public class UsuariosController {
+public class UsuariosRestController {
 
 	@Autowired
 	private IUsuarioService usuarioService;

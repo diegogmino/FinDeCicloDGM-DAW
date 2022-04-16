@@ -1,4 +1,4 @@
-package com.diego.findeciclo.controller;
+package com.diego.findeciclo.rest_controller;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,7 +21,7 @@ import com.diego.findeciclo.service.IUsuarioService;
 
 @RestController
 @RequestMapping("/pedidos")
-public class PedidosController {
+public class PedidosRestController {
 
 	@Autowired
 	private IPedidoService pedidoService;

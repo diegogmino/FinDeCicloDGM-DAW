@@ -1,4 +1,4 @@
-package com.diego.findeciclo.controller;
+package com.diego.findeciclo.rest_controller;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +24,7 @@ import com.diego.findeciclo.specification.DirectorSpecification;
 
 @RestController
 @RequestMapping("/directores")
-public class DirectoresController {
+public class DirectoresRestController {
 	
 	@Autowired
 	private IDirectorService directorService;

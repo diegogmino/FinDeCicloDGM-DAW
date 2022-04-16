@@ -1,4 +1,4 @@
-package com.diego.findeciclo.controller;
+package com.diego.findeciclo.rest_controller;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import com.diego.findeciclo.service.IPerfilService;
 
 @RestController
 @RequestMapping("/perfiles")
-public class PerfilesController {
+public class PerfilesRestController {
 
 	@Autowired
 	private IPerfilService perfilService;

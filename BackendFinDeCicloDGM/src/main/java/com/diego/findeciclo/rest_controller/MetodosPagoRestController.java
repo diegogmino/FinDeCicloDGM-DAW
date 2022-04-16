@@ -1,4 +1,4 @@
-package com.diego.findeciclo.controller;
+package com.diego.findeciclo.rest_controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +13,7 @@ import com.diego.findeciclo.service.IMetodoPagoService;
 
 @RestController
 @RequestMapping("/metodosPago")
-public class MetodosPagoController {
+public class MetodosPagoRestController {
 
 	@Autowired
 	private IMetodoPagoService metodoPagoService;

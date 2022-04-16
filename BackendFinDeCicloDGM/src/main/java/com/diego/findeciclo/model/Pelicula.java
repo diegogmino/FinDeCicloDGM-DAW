@@ -3,7 +3,10 @@ package com.diego.findeciclo.model;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +31,11 @@ public class Pelicula {
 	private boolean destacada;
 	private int unidades;
 	private String genero;
+
+	@Column(columnDefinition = "ENUM('DVD', 'Bluray', 'UHD4K')")
+    @Enumerated(EnumType.STRING)
+	private Formato formato;
+	
 	private String sinopsis;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -42,7 +50,7 @@ public class Pelicula {
 	}
 
 	public Pelicula(long codigoBarras, String titulo, BigDecimal precio, String portada, boolean destacada,
-			int unidades, String genero, String sinopsis, List<Director> directores) {
+			int unidades, String genero, Formato formato, String sinopsis, List<Director> directores) {
 		super();
 		this.codigoBarras = codigoBarras;
 		this.titulo = titulo;
@@ -51,6 +59,7 @@ public class Pelicula {
 		this.destacada = destacada;
 		this.unidades = unidades;
 		this.genero = genero;
+		this.formato = formato;
 		this.sinopsis = sinopsis;
 		this.directores = directores;
 	}
@@ -117,6 +126,14 @@ public class Pelicula {
 
 	public void setGenero(String genero) {
 		this.genero = genero;
+	}
+
+	public Formato getFormato() {
+		return formato;
+	}
+
+	public void setFormato(Formato formato) {
+		this.formato = formato;
 	}
 
 	public String getSinopsis() {

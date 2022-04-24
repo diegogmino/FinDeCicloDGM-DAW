@@ -7,8 +7,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" th:href="@{/admin/peliculas/index}" th:if="${#httpServletRequest.requestURI == '/admin/peliculas/index'}">Peliculas</a>
-          <a class="nav-link" th:href="@{/admin/peliculas/index}" th:if="${#httpServletRequest.requestURI != '/admin/peliculas/index'}">Peliculas</a>
+          <div th:switch="${#httpServletRequest.requestURI}"> 
+            <a class="nav-link active" th:href="@{/admin/peliculas/index}" th:case="'/admin/peliculas/index'">Peliculas</a>
+            <a class="nav-link active" th:href="@{/admin/peliculas/index}" th:case="'/admin/peliculas/filtrar'">Peliculas</a>
+            <a class="nav-link" th:href="@{/admin/peliculas/index}" th:case="*">Peliculas</a> 
+          </div>
         </li>
         <li class="nav-item">
           <a class="nav-link active" th:href="@{/admin/directores/index}" th:if="${#httpServletRequest.requestURI == '/admin/directores/index'}">Directores</a>
@@ -24,10 +27,6 @@
           <a class="nav-link" href="#">Perfiles</a>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
-        <button class="btn btn-outline-light" type="submit">Buscar</button>
-      </form>
     </div>
   </div>
 </nav>

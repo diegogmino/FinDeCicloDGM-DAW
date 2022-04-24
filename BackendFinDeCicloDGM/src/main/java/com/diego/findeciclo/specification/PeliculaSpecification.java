@@ -2,6 +2,8 @@ package com.diego.findeciclo.specification;
 
 import java.math.BigDecimal;
 import org.springframework.data.jpa.domain.Specification;
+
+import com.diego.findeciclo.model.Formato;
 import com.diego.findeciclo.model.Pelicula;
 
 public class PeliculaSpecification {
@@ -9,6 +11,18 @@ public class PeliculaSpecification {
 	public static Specification<Pelicula> codigoBarras(Long codigoBarras) {
         return (root, query, builder) -> {
             return builder.equal(builder.lower(root.get("codigoBarras")), codigoBarras);
+        };
+    }
+
+    public static Specification<Pelicula> destacada(boolean destacada) {
+        return (root, query, builder) -> {
+            return builder.equal(builder.lower(root.get("destacada")), destacada);
+        };
+    }
+
+    public static Specification<Pelicula> formato(Formato formato) {
+        return (root, query, builder) -> {
+            return builder.equal(builder.lower(root.get("formato")), formato);
         };
     }
 

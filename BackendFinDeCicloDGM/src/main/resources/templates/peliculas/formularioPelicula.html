@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DCine - Nueva película</title>
+
+  <link th:href="@{/static/css/styles.css}" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link th:href="@{/static//bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <!-- Fontawesome -->
+  <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+
+</head>
+
+<body>
+  
+  <header th:insert="fragments/header::menu"></header>
+
+  <div class="container-fluid">
+    <div class="row d.flex justify-content-center mt-4">
+        <div class="col-10">
+            <div class="row justify-content-center mb-4">
+                <a type="button" class="btn btn-outline-dark" href="/admin/peliculas/index">Volver a películas</a>
+            </div>
+            <form th:action="@{/admin/peliculas/guardar}" method="post">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="codBarras" class="form-label">Código de barras</label>
+                            <input type="text" th:name="codigoBarras" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="codBarras" class="form-label">Título</label>
+                            <input type="text" th:name="titulo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="mb-3">
+                      <label for="disabledSelect" class="form-label">Director</label>
+                      <select class="form-select" aria-label="Default select example" th:name="director1">
+                        <option selected th:value=null>Selecciona...</option>
+                        <option th:each="director : ${directores}" th:value="${director.id}" th:text="${director.nombre} + ' ' + ${director.apellido}"></option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="mb-3">
+                      <label for="disabledSelect" class="form-label">Segundo director (opcional)</label>
+                      <select class="form-select" aria-label="Default select example" th:name="director2">
+                        <option selected th:value=null>Selecciona...</option>
+                        <option th:each="director : ${directores}" th:value="${director.id}" th:text="${director.nombre} + ' ' + ${director.apellido}"></option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="codBarras" class="form-label">Precio</label>
+                        <div class="input-group mb-3">
+                            <input type="text" th:name="precio" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-text">€</span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="portada" class="form-label">Portada</label>
+                            <input type="text" th:name="portada" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="mb-3">
+                      <label for="disabledSelect" class="form-label">Destacada</label>
+                      <select class="form-select" aria-label="Default select example" th:name="destacada">
+                        <option th:selected>Selecciona...</option>
+                        <option th:value=true>Sí</option>
+                        <option th:value=false>No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="mb-3">
+                        <label for="unidades" class="form-label">Unidades</label>
+                        <input type="text" th:name="unidades" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="mb-3">
+                        <label for="disabledSelect" class="form-label">Género</label>
+                        <select class="form-select" aria-label="Default select example" th:name="genero">
+                          <option selected th:value=null>Selecciona...</option>
+                          <option th:each="genero : ${generos}" th:value="${genero}" th:text="${genero}"></option>
+                        </select>
+                      </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="mb-3">
+                      <label for="disabledSelect" class="form-label">Formato</label>
+                      <select class="form-select" aria-label="Default select example" th:name="formato">
+                        <option selected th:value=null>Selecciona...</option>
+                          <option th:each="formato : ${formatos}" th:value="${formato}" th:text="${formato}"></option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" th:name="sinopsis" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <label for="floatingTextarea2">Sinopsis</label>
+                          </div>
+                    </div>
+                  </div>
+                <button type="submit" class="btn btn-outline-dark">Guardar</button>
+              </form>
+        </div>
+        
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script> 
+
+</body>
+</html>

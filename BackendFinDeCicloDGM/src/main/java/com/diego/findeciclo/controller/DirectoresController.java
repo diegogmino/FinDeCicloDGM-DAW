@@ -1,5 +1,8 @@
 package com.diego.findeciclo.controller;
 
+import com.diego.findeciclo.service.IDirectorService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -8,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "/admin/directores")
 public class DirectoresController {
     
+    @Autowired
+    private IDirectorService directorService;
+
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String mostrarPeliculas() {
         return "directores/listadoDirectores";

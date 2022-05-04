@@ -1,6 +1,5 @@
 package com.diego.findeciclo.controller;
 
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -35,6 +34,7 @@ public class PeliculasController {
     @Autowired
     private IDirectorService directorService;
 
+    // MÉTODOS GET
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String mostrarPeliculas(Model model) {
 
@@ -65,6 +65,76 @@ public class PeliculasController {
     
     }
 
+    @RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
+    public String mostrarFormularioEditarPelicula(Model model, @PathVariable int id) {
+
+        Pelicula peli = peliculaService.buscarPorId(id);
+        List<Director> directores = directorService.buscarTodos();
+        List<String> generos = crearListaGeneros();
+        List<String> formatos = crearListaFormatos();
+
+        directores.removeAll(peli.getDirectores());
+        generos.remove(peli.getGenero());
+        formatos.remove(peli.getFormato().toString());
+
+        model.addAttribute("pelicula", peli);
+        model.addAttribute("generos", generos);
+        model.addAttribute("formatos", formatos);
+        model.addAttribute("directores", directores);
+
+        return "peliculas/formularioEditarPelicula";
+    
+    }
+
+    @RequestMapping(value = "/detalle/{id}", method = RequestMethod.GET)
+    public String mostrarDetallePelicula(Model model, @PathVariable int id) {
+
+        Pelicula peli = peliculaService.buscarPorId(id);
+
+        model.addAttribute("pelicula", peli);
+
+        return "peliculas/detallePelicula";
+    
+    }
+
+    @RequestMapping(value = "/eliminar/{id}", method = RequestMethod.GET)
+    public String eliminarPelicula(@PathVariable int id, Model model) {
+
+        Pelicula peli = peliculaService.buscarPorId(id);
+
+        // Eliminar la portada asociada a la pelicula
+        try {
+            Files.delete(Paths.get(peli.getPortada()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        peliculaService.eliminarPeli(id);
+
+        return "redirect:/admin/peliculas/index";
+    
+    }
+
+    // Filtro
+	@RequestMapping(value = "/filtrar", method = RequestMethod.GET)
+	public String filtrar(@RequestParam(required = false) Boolean destacada, @RequestParam(required = false) Formato formato, @RequestParam(required = false) String titulo, @RequestParam(required = false) String genero, Model model) {
+
+		Specification<Pelicula> spec = construirSpecification(destacada, formato, titulo, genero);
+        List<Pelicula> peliculas = peliculaService.filtrar(spec);
+
+		List<String> generos = crearListaGeneros();
+        List<String> formatos = crearListaFormatos();
+
+        model.addAttribute("peliculas", peliculas);
+        model.addAttribute("generos", generos);
+        model.addAttribute("formatos", formatos);
+
+
+		return "peliculas/listadoPeliculas";
+		
+	}
+
+    // MÉTODOS POST
     @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     public String guardar(@RequestParam("codigoBarras") long codigoBarras, @RequestParam("titulo") String titulo, 
     @RequestParam("director1") Integer dire1, @RequestParam(name="director2", required = false) Integer dire2, @RequestParam("precio") BigDecimal precio,
@@ -88,27 +158,6 @@ public class PeliculasController {
 		return "redirect:/admin/peliculas/index";
         
 	}
-
-    @RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
-    public String mostrarFormularioEditarPelicula(Model model, @PathVariable int id) {
-
-        Pelicula peli = peliculaService.buscarPorId(id);
-        List<Director> directores = directorService.buscarTodos();
-        List<String> generos = crearListaGeneros();
-        List<String> formatos = crearListaFormatos();
-
-        directores.removeAll(peli.getDirectores());
-        generos.remove(peli.getGenero());
-        formatos.remove(peli.getFormato().toString());
-
-        model.addAttribute("pelicula", peli);
-        model.addAttribute("generos", generos);
-        model.addAttribute("formatos", formatos);
-        model.addAttribute("directores", directores);
-
-        return "peliculas/formularioEditarPelicula";
-    
-    }
 
     @RequestMapping(value = "/actualizar", method = RequestMethod.POST)
     public String actualizar(@RequestParam("id") int id, @RequestParam("codigoBarras") long codigoBarras, @RequestParam("titulo") String titulo, 
@@ -139,7 +188,8 @@ public class PeliculasController {
         } else {
             // Eliminar la portada asociada a la pelicula
             try {
-                Files.delete(Paths.get(peliculaBBDD.getPortada()));
+                String ruta = "src\\main\\resources\\static\\images\\portadas_pelis\\"+peliculaBBDD.getPortada();
+                Files.delete(Paths.get(ruta));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -159,54 +209,18 @@ public class PeliculasController {
 
 	}
 
-    @RequestMapping(value = "/eliminar/{id}", method = RequestMethod.GET)
-    public String eliminarPelicula(@PathVariable int id, Model model) {
-
-        Pelicula peli = peliculaService.buscarPorId(id);
-
-        // Eliminar la portada asociada a la pelicula
-        try {
-            Files.delete(Paths.get(peli.getPortada()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        peliculaService.eliminarPeli(id);
-
-        return "redirect:/admin/peliculas/index";
-    
-    }
-
-
-    // Filtro
-	@RequestMapping(value = "/filtrar", method = RequestMethod.GET)
-	public String filtrar(@RequestParam(required = false) Boolean destacada, @RequestParam(required = false) Formato formato, @RequestParam(required = false) String titulo, @RequestParam(required = false) String genero, Model model) {
-
-		Specification<Pelicula> spec = construirSpec(destacada, formato, titulo, genero);
-        List<Pelicula> peliculas = peliculaService.filtrar(spec);
-
-		List<String> generos = crearListaGeneros();
-        List<String> formatos = crearListaFormatos();
-
-        model.addAttribute("peliculas", peliculas);
-        model.addAttribute("generos", generos);
-        model.addAttribute("formatos", formatos);
-
-
-		return "peliculas/listadoPeliculas";
-		
-	}
-
     // Métodos privados
-
     private String descargarImagen(String url, String titulo, long codigoBarras) {
 		
-		String ruta = "img\\portadas_pelis\\"+codigoBarras+"_"+titulo+".jpeg";
+        titulo = titulo.toLowerCase();
+        titulo = titulo.replaceAll("\\s+","");
+
+		String ruta = "src\\main\\resources\\static\\images\\portadas_pelis\\"+codigoBarras+".jpeg";
 		
 		try {
 			InputStream in = new URL(url).openStream();
 			Files.copy(in, Paths.get(ruta), StandardCopyOption.REPLACE_EXISTING);
-			return ruta;
+			return codigoBarras+".jpeg";
 		} catch (IOException e) {
 			return null;
 		}
@@ -249,7 +263,7 @@ public class PeliculasController {
 
     }
 
-    private Specification<Pelicula> construirSpec(Boolean destacada, Formato formato, String titulo, String genero) {
+    private Specification<Pelicula> construirSpecification(Boolean destacada, Formato formato, String titulo, String genero) {
 		
 		// Seteamos el objeto spec con la cláusula where a null para que de forma predeterminada haga un findAll normal
         Specification<Pelicula> spec = Specification.where(null);

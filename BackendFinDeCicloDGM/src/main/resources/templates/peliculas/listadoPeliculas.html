@@ -38,8 +38,9 @@
                       <div class="mb-3">
                         <label for="disabledSelect" class="form-label">Destacada</label>
                         <select class="form-select" aria-label="Default select example" th:name="destacada">
+                          <option selected th:value=null>Selecciona...</option>
                           <option th:value=true>Sí</option>
-                          <option th:selected th:value=false>No</option>
+                          <option th:value=false>No</option>
                         </select>
                       </div>
                     </div>
@@ -48,9 +49,7 @@
                         <label for="disabledSelect" class="form-label">Formato</label>
                         <select class="form-select" aria-label="Default select example" th:name="formato">
                           <option selected th:value=null>Selecciona...</option>
-                          <option th:value="DVD">DVD</option>
-                          <option th:value="Bluray">Blu-ray</option>
-                          <option th:value="UHD4K">UHD 4K</option>
+                          <option th:each="formato : ${formatos}" th:value="${formato}" th:text="${formato}"></option>
                         </select>
                       </div>
                     </div>
@@ -65,7 +64,10 @@
                     <div class="col-6">
                       <div class="mb-3">
                         <label for="disabledSelect" class="form-label">Género</label>
-                        <input type="text" th:name="genero" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <select class="form-select" aria-label="Default select example" th:name="genero">
+                          <option selected th:value=null>Selecciona...</option>
+                          <option th:each="genero : ${generos}" th:value="${genero}" th:text="${genero}"></option>
+                        </select>
                       </div>
                     </div>
                   </div>

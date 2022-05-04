@@ -108,7 +108,7 @@
                       <label for="disabledSelect" class="form-label">Formato</label>
                       <select class="form-select" aria-label="Default select example" th:name="formato">
                         <option selected th:value=null>Selecciona...</option>
-                          <option th:each="formato : ${formatos}" th:value="${formato}" th:text="${formato}"></option>
+                        <option th:each="formato : ${formatos}" th:value="${formato}" th:text="${formato}"></option>
                       </select>
                     </div>
                   </div>

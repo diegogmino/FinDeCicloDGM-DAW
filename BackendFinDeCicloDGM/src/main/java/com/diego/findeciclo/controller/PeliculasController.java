@@ -39,7 +39,14 @@ public class PeliculasController {
     public String mostrarPeliculas(Model model) {
 
         List<Pelicula> peliculas = peliculaService.buscarTodas();
+
+        List<String> generos = crearListaGeneros();
+        List<String> formatos = crearListaFormatos();
+
         model.addAttribute("peliculas", peliculas);
+        model.addAttribute("generos", generos);
+        model.addAttribute("formatos", formatos);
+
         return "peliculas/listadoPeliculas";
     
     }
@@ -173,16 +180,18 @@ public class PeliculasController {
 
     // Filtro
 	@RequestMapping(value = "/filtrar", method = RequestMethod.GET)
-	public String filtrar(@RequestParam(required = false) String destacada, @RequestParam(required = false) Formato formato, @RequestParam(required = false) String titulo, @RequestParam(required = false) String genero, Model model) {
-
-        if(destacada.equals("null")) {
-            destacada = null;
-        }
+	public String filtrar(@RequestParam(required = false) Boolean destacada, @RequestParam(required = false) Formato formato, @RequestParam(required = false) String titulo, @RequestParam(required = false) String genero, Model model) {
 
 		Specification<Pelicula> spec = construirSpec(destacada, formato, titulo, genero);
         List<Pelicula> peliculas = peliculaService.filtrar(spec);
 
-		model.addAttribute("peliculas", peliculas);
+		List<String> generos = crearListaGeneros();
+        List<String> formatos = crearListaFormatos();
+
+        model.addAttribute("peliculas", peliculas);
+        model.addAttribute("generos", generos);
+        model.addAttribute("formatos", formatos);
+
 
 		return "peliculas/listadoPeliculas";
 		
@@ -204,7 +213,7 @@ public class PeliculasController {
 		
 	}
 
-    private List crearListaGeneros() {
+    private List<String> crearListaGeneros() {
 
         ArrayList<String> generos = new ArrayList<String>();
 
@@ -228,7 +237,7 @@ public class PeliculasController {
 
     }
 
-    private List crearListaFormatos() {
+    private List<String> crearListaFormatos() {
 
         ArrayList<String> formatos = new ArrayList<String>();
 
@@ -240,28 +249,24 @@ public class PeliculasController {
 
     }
 
-    private Specification<Pelicula> construirSpec(String destacada, Formato formato, String titulo, String genero) {
+    private Specification<Pelicula> construirSpec(Boolean destacada, Formato formato, String titulo, String genero) {
 		
 		// Seteamos el objeto spec con la cláusula where a null para que de forma predeterminada haga un findAll normal
         Specification<Pelicula> spec = Specification.where(null);
 
         if(destacada != null) {
-            boolean valor = false;
-            if(destacada.equals("Si")) {
-                valor = true;
-            }
-            spec = spec.and(PeliculaSpecification.destacada(valor));
+            spec = spec.and(PeliculaSpecification.destacada(destacada));
         }
 
         if(formato != null) {
             spec = spec.and(PeliculaSpecification.formato(formato));
         }
         
-        if(titulo != null) {
+        if(titulo != "") {
             spec = spec.and(PeliculaSpecification.titulo(titulo));
         }
 
-        if(genero != null) {
+        if(genero != "") {
             spec = spec.and(PeliculaSpecification.genero(genero));
         }
         

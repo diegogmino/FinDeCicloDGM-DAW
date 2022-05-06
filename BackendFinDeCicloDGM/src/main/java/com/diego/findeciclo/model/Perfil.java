@@ -19,6 +19,10 @@ public class Perfil {
 		super();
 	}
 
+	public Perfil(String perfil) {
+		this.perfil = perfil;
+	}
+
 	public Integer getId() {
 		return id;
 	}

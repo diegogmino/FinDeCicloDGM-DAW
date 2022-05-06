@@ -6,16 +6,12 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.ArrayList;
 import java.util.List;
-
 import com.diego.findeciclo.model.Director;
 import com.diego.findeciclo.model.Pelicula;
 import com.diego.findeciclo.service.IDirectorService;
 import com.diego.findeciclo.service.IPeliculaService;
 import com.diego.findeciclo.specification.DirectorSpecification;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
@@ -38,7 +34,7 @@ public class DirectoresController {
 
     // MÉTODOS GET
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String mostrarDirectoresString(Model model) {
+    public String mostrarDirectores(Model model) {
 
         List<Director> directores = directorService.buscarTodos();
 

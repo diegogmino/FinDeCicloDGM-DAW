@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DCine - Nueva película</title>
+
+  <link th:href="@{/static/css/styles.css}" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link th:href="@{/static//bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <!-- Fontawesome -->
+  <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
+
+</head>
+
+<body>
+  
+  <header th:insert="fragments/header::menu"></header>
+
+  <div class="container-fluid">
+    <div class="row d.flex justify-content-center mt-4">
+        <div class="col-10">
+            <div class="row justify-content-center mb-4">
+                <a type="button" class="btn btn-outline-dark" href="/admin/perfiles/index">Volver a perfiles</a>
+            </div>
+            <form th:action="@{/admin/perfiles/guardar}" method="post">
+              <div class="row">
+                  <div class="col-12">
+                      <div class="mb-3">
+                        <label for="perfil" class="form-label">Nombre del perfil</label>
+                        <input type="text" th:name="perfil" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                      </div>
+                  </div>
+              </div>
+              <button type="submit" class="btn btn-outline-dark mb-3">Guardar</button>
+            </form>
+        </div>
+        
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script> 
+
+</body>
+</html>

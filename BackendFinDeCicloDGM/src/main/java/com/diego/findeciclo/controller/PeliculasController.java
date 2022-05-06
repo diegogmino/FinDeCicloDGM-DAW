@@ -104,7 +104,8 @@ public class PeliculasController {
 
         // Eliminar la portada asociada a la pelicula
         try {
-            Files.delete(Paths.get(peli.getPortada()));
+            String ruta = "src\\main\\resources\\static\\images\\portadas_pelis\\"+peli.getPortada();
+            Files.delete(Paths.get(ruta));
         } catch (IOException e) {
             e.printStackTrace();
         }

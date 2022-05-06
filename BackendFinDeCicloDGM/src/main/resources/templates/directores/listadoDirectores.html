@@ -71,7 +71,13 @@
       <div class="col-10">
         <a type="button" class="btn btn-outline-dark" href="/admin/directores/nuevo">Nuevo director</a>
       </div>
-      
+    </div>
+
+    <div th:if="${alerta == true}" class="row justify-content-center mt-4">
+      <div class="col-10">
+        <div class="alert alert-danger" role="alert" th:text="'No se puede eliminar a ' + ${director.nombre} + ' ' + ${director.apellido} + ' porque tiene peliculas asociadas.'">
+        </div>
+      </div>
     </div>
   
     <div class="row d-flex justify-content-center mt-3">

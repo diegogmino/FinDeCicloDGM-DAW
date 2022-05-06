@@ -41,11 +41,6 @@ public class PeliculaService implements IPeliculaService {
 
 
 	@Override
-	public List<Pelicula> filtrarDestacada() {
-		return peliRepo.filtrarDestacada();
-	}
-
-	@Override
 	public List<Pelicula> filtrar(Specification<Pelicula> spec) {
 		return peliRepo.findAll(spec);
 	}

@@ -14,7 +14,6 @@ public interface IPeliculaService {
 	Pelicula editarPeli(Pelicula peli);
 	void eliminarPeli(int id);
 	
-	List<Pelicula> filtrarDestacada();
 	List<Pelicula> filtrar(Specification<Pelicula> spec);
 	
 }

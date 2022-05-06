@@ -74,7 +74,7 @@ public class DirectoresRestController {
 		
 		return directorService.guardarDirector(direBuscado);
 	}
-	
+	/*
 	@DeleteMapping("/borrar/{id}")
 	public void borrarDirector(@PathVariable int id) {
 		
@@ -89,7 +89,7 @@ public class DirectoresRestController {
 		
         // Eliminar el propio registro del director
 		directorService.eliminarDirector(id);
-	}
+	}*/
 	
 	
 	// Método que filtra por los campos que reciba

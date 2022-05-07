@@ -30,13 +30,13 @@
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="codBarras" class="form-label">Código de barras</label>
-                            <input type="text" th:name="codigoBarras" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input type="text" th:name="codigoBarras" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="codBarras" class="form-label">Título</label>
-                            <input type="text" th:name="titulo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input type="text" th:name="titulo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                   <div class="col-6">
                     <div class="mb-3">
                       <label for="disabledSelect" class="form-label">Director</label>
-                      <select class="form-select" aria-label="Default select example" th:name="director1">
+                      <select class="form-select" aria-label="Default select example" th:name="director1" required>
                         <option selected th:value=null>Selecciona...</option>
                         <option th:each="director : ${directores}" th:value="${director.id}" th:text="${director.nombre} + ' ' + ${director.apellido}"></option>
                       </select>
@@ -64,14 +64,14 @@
                     <div class="col-6">
                         <label for="codBarras" class="form-label">Precio</label>
                         <div class="input-group mb-3">
-                            <input type="text" th:name="precio" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input type="text" th:name="precio" class="form-control" aria-label="Amount (to the nearest dollar)" required>
                             <span class="input-group-text">€</span>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="portada" class="form-label">Portada</label>
-                            <input type="text" th:name="portada" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <input type="text" th:name="portada" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                         </div>
                     </div>
                 </div>
@@ -79,8 +79,8 @@
                   <div class="col-6">
                     <div class="mb-3">
                       <label for="disabledSelect" class="form-label">Destacada</label>
-                      <select class="form-select" aria-label="Default select example" th:name="destacada">
-                        <option th:selected>Selecciona...</option>
+                      <select class="form-select" aria-label="Default select example" th:name="destacada" required>
+                        <option th:selected th:value=null>Selecciona...</option>
                         <option th:value=true>Sí</option>
                         <option th:value=false>No</option>
                       </select>
@@ -89,7 +89,7 @@
                   <div class="col-6">
                     <div class="mb-3">
                         <label for="unidades" class="form-label">Unidades</label>
-                        <input type="text" th:name="unidades" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <input type="text" th:name="unidades" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                     </div>
                   </div>
                 </div>
@@ -97,7 +97,7 @@
                   <div class="col-6">
                     <div class="mb-3">
                         <label for="disabledSelect" class="form-label">Género</label>
-                        <select class="form-select" aria-label="Default select example" th:name="genero">
+                        <select class="form-select" aria-label="Default select example" th:name="genero" required>
                           <option selected th:value=null>Selecciona...</option>
                           <option th:each="genero : ${generos}" th:value="${genero}" th:text="${genero}"></option>
                         </select>
@@ -106,7 +106,7 @@
                   <div class="col-6">
                     <div class="mb-3">
                       <label for="disabledSelect" class="form-label">Formato</label>
-                      <select class="form-select" aria-label="Default select example" th:name="formato">
+                      <select class="form-select" aria-label="Default select example" th:name="formato" required>
                         <option selected th:value=null>Selecciona...</option>
                         <option th:each="formato : ${formatos}" th:value="${formato}" th:text="${formato}"></option>
                       </select>
@@ -116,7 +116,7 @@
                 <div class="row mt-2">
                     <div class="col-12">
                         <div class="form-floating mb-3">
-                            <textarea class="form-control" th:name="sinopsis" id="floatingTextarea2" style="height: 100px"></textarea>
+                            <textarea class="form-control" th:name="sinopsis" id="floatingTextarea2" style="height: 100px" required></textarea>
                             <label for="floatingTextarea2">Sinopsis</label>
                           </div>
                     </div>

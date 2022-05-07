@@ -64,22 +64,6 @@ public class PedidosRestController {
 		return pedidoService.buscarTodos();
 	}
 	
-	@GetMapping("/listarPorUsuario/{id}")
-	public List<Pedido> listarPorUsuario(@PathVariable int id) {
-		
-		Usuario usu = usuarioService.buscarPorId(id);
-		return pedidoService.filtrarPorUsuario(usu);
-		
-	}
-	
-	@GetMapping("/listarEntregadosPorUsuario/{id}")
-	public List<Pedido> listarEntregadosPorUsuario(@PathVariable int id) {
-		
-		Usuario usu = usuarioService.buscarPorId(id);
-		return pedidoService.filtrarEntregados(usu);
-		
-	}
-	
 	@GetMapping("/buscar/{id}")
 	public Pedido buscarPedido(@PathVariable int id) {
 		return pedidoService.buscarPorId(id);

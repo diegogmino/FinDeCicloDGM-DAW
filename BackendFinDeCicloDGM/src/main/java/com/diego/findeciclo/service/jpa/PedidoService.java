@@ -3,6 +3,7 @@ package com.diego.findeciclo.service.jpa;
 import java.sql.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import com.diego.findeciclo.model.Pedido;
 import com.diego.findeciclo.model.Usuario;
@@ -36,18 +37,8 @@ public class PedidoService implements IPedidoService {
 	}
 
 	@Override
-	public List<Pedido> filtrarEntregados(Usuario usuario) {
-		return pedidoRepo.filtrarEntregadosPorUsuario(usuario);
-	}
-
-	@Override
-	public List<Pedido> filtrarFechas(Date minFecha, Date maxFecha) {
-		return pedidoRepo.filtrarFecha(minFecha, maxFecha);
-	}
-
-	@Override
-	public List<Pedido> filtrarPorUsuario(Usuario usuario) {
-		return pedidoRepo.filtrarUsuario(usuario);
+	public List<Pedido> filtrar(Specification<Pedido> spec) {
+		return pedidoRepo.findAll(spec);
 	}
 	
 }

@@ -3,11 +3,12 @@ package com.diego.findeciclo.repository;
 import java.sql.Date;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import com.diego.findeciclo.model.Pedido;
 import com.diego.findeciclo.model.Usuario;
 
-public interface PedidoRepository extends JpaRepository<Pedido, Integer> {
+public interface PedidoRepository extends JpaRepository<Pedido, Integer>, JpaSpecificationExecutor<Pedido> {
 	
 	@Query("SELECT p FROM Pedido p WHERE p.fechaPedido BETWEEN ?1 AND ?2")
 	public List<Pedido> filtrarFecha(Date fechaMin, Date fechaMax);

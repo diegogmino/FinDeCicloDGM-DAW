@@ -32,7 +32,15 @@
           <a class="nav-link" href="#">Usuarios</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pedidos</a>
+
+          <div th:if="${#strings.contains(#httpServletRequest.requestURI, 'pedidos')}">
+            <a class="nav-link active" th:href="@{/admin/pedidos/index}">Pedidos</a>
+          </div>
+
+          <div th:if="${!#strings.contains(#httpServletRequest.requestURI, 'pedidos')}">
+            <a class="nav-link" th:href="@{/admin/pedidos/index}">Pedidos</a> 
+          </div>
+
         </li>
         <li class="nav-item">
 

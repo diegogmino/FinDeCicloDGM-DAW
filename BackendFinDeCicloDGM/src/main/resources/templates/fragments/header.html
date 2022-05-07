@@ -29,7 +29,15 @@
           
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Usuarios</a>
+
+          <div th:if="${#strings.contains(#httpServletRequest.requestURI, 'usuarios')}">
+            <a class="nav-link active" th:href="@{/admin/usuarios/index}">Usuarios</a>
+          </div>
+
+          <div th:if="${!#strings.contains(#httpServletRequest.requestURI, 'usuarios')}">
+            <a class="nav-link" th:href="@{/admin/usuarios/index}">Usuarios</a> 
+          </div>
+
         </li>
         <li class="nav-item">
 

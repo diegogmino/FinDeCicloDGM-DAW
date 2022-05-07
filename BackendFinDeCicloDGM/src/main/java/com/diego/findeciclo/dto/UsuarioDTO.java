@@ -1,20 +1,22 @@
 package com.diego.findeciclo.dto;
 
+import com.diego.findeciclo.model.Perfil;
+
 public class UsuarioDTO {
 
 	private Integer id;
 	private String nombre;
 	private String apellido;
 	private String email;
-
 	private String telefono;
 	private String direccion;
 	private String pais;
+	private Perfil perfil;
 	
 	public UsuarioDTO() {}
 
 	public UsuarioDTO(Integer id, String nombre, String apellido, String email, String telefono, String direccion,
-			String pais) {
+			String pais, Perfil perfil) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -22,6 +24,7 @@ public class UsuarioDTO {
 		this.telefono = telefono;
 		this.direccion = direccion;
 		this.pais = pais;
+		this.perfil = perfil;
 	}
 
 	public Integer getId() {
@@ -78,6 +81,14 @@ public class UsuarioDTO {
 
 	public void setPais(String pais) {
 		this.pais = pais;
+	}
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
 	}
 	
 }

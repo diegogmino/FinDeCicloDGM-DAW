@@ -5,9 +5,6 @@ import java.util.List;
 import com.diego.findeciclo.model.Pedido;
 import com.diego.findeciclo.service.IPedidoService;
 import com.diego.findeciclo.specification.PedidoSpecification;
-
-import java.math.BigDecimal;
-import java.sql.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;

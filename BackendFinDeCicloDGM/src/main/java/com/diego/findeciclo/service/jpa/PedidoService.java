@@ -1,12 +1,10 @@
 package com.diego.findeciclo.service.jpa;
 
-import java.sql.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import com.diego.findeciclo.model.Pedido;
-import com.diego.findeciclo.model.Usuario;
 import com.diego.findeciclo.repository.PedidoRepository;
 import com.diego.findeciclo.service.IPedidoService;
 

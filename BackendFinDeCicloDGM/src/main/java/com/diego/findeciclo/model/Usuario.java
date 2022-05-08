@@ -28,6 +28,7 @@ public class Usuario {
 	private String direccion;
 	private String pais;
 	private Date fechaRegistro;
+	private Integer estatus;
 	
 	@ManyToOne
     @JoinColumn(name="idPerfil")
@@ -43,9 +44,10 @@ public class Usuario {
 		super();
 	}
 
-	public Usuario(String nombre, String apellido, String email, String contrasena, String telefono, String direccion, String pais,
-			Date fechaRegistro, Perfil perfil, List<MetodoPago> metodoDePago, List<Pedido> pedidos) {
-		super();
+	public Usuario(Integer id, String nombre, String apellido, String email, String contrasena, String telefono,
+			String direccion, String pais, Date fechaRegistro, Integer estatus, Perfil perfil,
+			List<MetodoPago> metodoDePago, List<Pedido> pedidos) {
+		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
@@ -54,6 +56,7 @@ public class Usuario {
 		this.direccion = direccion;
 		this.pais = pais;
 		this.fechaRegistro = fechaRegistro;
+		this.estatus = estatus;
 		this.perfil = perfil;
 		this.metodoDePago = metodoDePago;
 		this.pedidos = pedidos;
@@ -153,6 +156,14 @@ public class Usuario {
 
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
+	}
+
+	public Integer getEstatus() {
+		return estatus;
+	}
+
+	public void setEstatus(Integer estatus) {
+		this.estatus = estatus;
 	}
 
 }

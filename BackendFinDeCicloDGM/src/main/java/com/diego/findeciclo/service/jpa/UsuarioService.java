@@ -1,6 +1,8 @@
 package com.diego.findeciclo.service.jpa;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.diego.findeciclo.model.Usuario;
@@ -54,7 +56,9 @@ public class UsuarioService implements IUsuarioService {
 	@Override
 	public Boolean buscarEmail(String email) {
 
-		if(usuarioRepo.buscarEmail(email) != null) {
+		Optional<Usuario> usuario = usuarioRepo.buscarEmail(email);
+
+		if(usuario.isEmpty()) {
 			return false;
 		} else {
 			return true;

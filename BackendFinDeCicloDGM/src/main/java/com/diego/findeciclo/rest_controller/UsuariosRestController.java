@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,9 @@ public class UsuariosRestController {
 
 	@Autowired
 	private IPerfilService perfilService;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	// Métodos CRUD
 
@@ -48,6 +52,9 @@ public class UsuariosRestController {
 		
 		java.sql.Date fechaRegistro = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 		usuario.setFechaRegistro(fechaRegistro);
+		usuario.setEstatus(1);
+
+		usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
 
 		Perfil perfil = perfilService.buscarPerfil(2);
 		usuario.setPerfil(perfil);

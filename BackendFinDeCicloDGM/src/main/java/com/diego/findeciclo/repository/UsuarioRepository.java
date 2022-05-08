@@ -2,6 +2,9 @@ package com.diego.findeciclo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
+import java.util.Optional;
+
 import com.diego.findeciclo.model.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
@@ -10,6 +13,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 	public Usuario buscarUsuario(String email, String contrasena);
 
 	@Query("SELECT u FROM Usuario u WHERE u.email LIKE ?1")
-	public Usuario buscarEmail(String email);
+	public Optional<Usuario> buscarEmail(String email);
 	
 }

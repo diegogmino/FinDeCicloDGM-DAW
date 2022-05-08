@@ -34,7 +34,7 @@ public class HomeController {
 	}
 
 	@GetMapping("/bcrypt/{texto}")
-	@ResponseBody
+	@ResponseBody 
 	public String encriptar(@PathVariable("texto") String texto) {
 		return texto + " Encriptado en BCrypt: " + passwordEncoder.encode(texto);
 	}

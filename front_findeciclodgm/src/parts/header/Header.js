@@ -24,7 +24,7 @@ const navigation = {
         {
           name: 'Contacta con nosotros',
           description: 'Queremos saber tu opinión',
-          href: 'contacto',
+          href: '/contacto',
           imageSrc: contacto,
           imageAlt: 'Contacta con nosotros',
         },

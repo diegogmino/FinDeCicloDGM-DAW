@@ -1,5 +1,6 @@
 import './App.css';
 import MainPage from './pages/mainPage/MainPage';
+import AboutUs from './pages/aboutUs/AboutUs';
 
 import {
   BrowserRouter as Router,
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage/>}/>
         <Route path="/index" element={<MainPage/>}/>
+        <Route path="/quienes-somos" element={<AboutUs/>}/>
       </Routes>
     </Router>  
     </div>

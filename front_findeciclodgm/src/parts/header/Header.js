@@ -19,61 +19,44 @@ const navigation = {
           description: 'Conócenos ya',
           href: '/quienes-somos',
           imageSrc: somos,
-          imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
+          imageAlt: 'Quiénes somos',
         },
         {
           name: 'Contacta con nosotros',
           description: 'Queremos saber tu opinión',
           href: 'contacto',
           imageSrc: contacto,
-          imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
+          imageAlt: 'Contacta con nosotros',
         },
       ],
       sections: [
         {
-          id: 'clothing',
-          name: 'Clothing',
+          id: 'generos',
+          name: 'Géneros',
           items: [
-            { name: 'Tops', href: '#' },
-            { name: 'Dresses', href: '#' },
-            { name: 'Pants', href: '#' },
-            { name: 'Denim', href: '#' },
-            { name: 'Sweaters', href: '#' },
-            { name: 'T-Shirts', href: '#' },
-            { name: 'Jackets', href: '#' },
-            { name: 'Activewear', href: '#' },
-            { name: 'Browse All', href: '#' },
+            { name: 'Acción', href: '#' },
+            { name: 'Animación', href: '#' },
+            { name: 'Anime', href: '#' },
+            { name: 'Aventuras', href: '#' },
+            { name: 'Bélico', href: '#' },
+            { name: 'Ciencia ficción', href: '#' },
+            { name: 'Comedia', href: '#' },
+            { name: 'Drama', href: '#' },
+            { name: 'Fantástico', href: '#' },
+            { name: 'Histórico', href: '#' },
+            { name: 'Policíaco', href: '#' },
+            { name: 'Suspense', href: '#' },
+            { name: 'Terror', href: '#' },
+            { name: 'Thiller', href: '#' },
+            { name: 'Western', href: '#' },
           ],
-        },
-        {
-          id: 'accessories',
-          name: 'Accessories',
-          items: [
-            { name: 'Watches', href: '#' },
-            { name: 'Wallets', href: '#' },
-            { name: 'Bags', href: '#' },
-            { name: 'Sunglasses', href: '#' },
-            { name: 'Hats', href: '#' },
-            { name: 'Belts', href: '#' },
-          ],
-        },
-        {
-          id: 'brands',
-          name: 'Brands',
-          items: [
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' },
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Significant Other', href: '#' },
-          ],
-        },
+        }
       ],
     }
   ],
   pages: [
-    { name: 'Company', href: '#' },
-    { name: 'Stores', href: '#' },
+    { name: 'Quiénes somos', href: '/quienes-somos' },
+    { name: 'Contacta con nosotros', href: '/contacto' },
   ],
 }
 
@@ -173,9 +156,9 @@ export default function Header(props) {
                               >
                                 {section.items.map((item) => (
                                   <li key={item.name} className="flow-root">
-                                    <a href={item.href} className="-m-2 p-2 block text-gray-500">
+                                    <Link to={item.href} className="-m-2 p-2 block text-gray-500">
                                       {item.name}
-                                    </a>
+                                    </Link>
                                   </li>
                                 ))}
                               </ul>
@@ -189,34 +172,34 @@ export default function Header(props) {
                   <div className="border-t border-gray-200 py-6 px-4 space-y-6">
                     {navigation.pages.map((page) => (
                       <div key={page.name} className="flow-root">
-                        <a href={page.href} className="-m-2 p-2 block font-medium text-gray-900">
+                        <Link to={page.href} className="-m-2 p-2 block font-medium text-gray-900">
                           {page.name}
-                        </a>
+                        </Link>
                       </div>
                     ))}
                   </div>
 
                   <div className="border-t border-gray-200 py-6 px-4 space-y-6">
                     <div className="flow-root">
-                      <a href="#" className="-m-2 p-2 block font-medium text-gray-900">
-                        Sign in
-                      </a>
+                      <Link to="/login" className="-m-2 p-2 block font-medium text-gray-900">
+                        Inicia sesión
+                      </Link>
                     </div>
                     <div className="flow-root">
-                      <a href="#" className="-m-2 p-2 block font-medium text-gray-900">
-                        Create account
-                      </a>
+                      <Link to="/signup" className="-m-2 p-2 block font-medium text-gray-900">
+                        Crea una cuenta con nosotros
+                      </Link>
                     </div>
                   </div>
 
                   <div className="border-t border-gray-200 py-6 px-4">
                     <a href="#" className="-m-2 p-2 flex items-center">
                       <img
-                        src="https://tailwindui.com/img/flags/flag-canada.svg"
-                        alt=""
+                        src={bandera}
+                        alt="Bandera española"
                         className="w-5 h-auto block flex-shrink-0"
                       />
-                      <span className="ml-3 block text-base font-medium text-gray-900">CAD</span>
+                      <span className="ml-3 block text-base font-medium text-gray-900">ESP</span>
                       <span className="sr-only">, change currency</span>
                     </a>
                   </div>
@@ -239,7 +222,7 @@ export default function Header(props) {
                   className="bg-white p-2 rounded-md text-gray-400 lg:hidden"
                   onClick={() => setOpen(true)}
                 >
-                  <span className="sr-only">Open menu</span>
+                  <span className="sr-only">Abrir menú</span>
                   <MenuIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
 
@@ -262,14 +245,14 @@ export default function Header(props) {
                         to='/peliculas'
                         className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
                     >
-                      Peliculas
+                      Películas
                     </Link>
                     <Link
                         key='quines-somos'
                         to='/quienes-somos'
                         className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
                     >
-                      Quienes somos
+                      Quiénes somos
                     </Link>
                     <Link
                         key='contacto'
@@ -296,7 +279,7 @@ export default function Header(props) {
                     <a href="#" className="text-gray-700 hover:text-gray-800 flex items-center">
                       <img
                         src={bandera}
-                        alt=""
+                        alt="Bandera española"
                         className="w-5 h-auto block flex-shrink-0"
                       />
                       <span className="ml-3 block text-sm font-medium">ESP</span>

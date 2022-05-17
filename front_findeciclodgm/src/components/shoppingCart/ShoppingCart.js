@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
+import { Link } from 'react-router-dom';
 
 const products = [
   {
@@ -125,12 +126,12 @@ export default function ShoppingCart(props) {
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">El envío y las tasas serán calculados más adelante.</p>
                       <div className="mt-6">
-                        <a
-                          href="#"
+                        <Link
+                          to="/checkout"
                           className="flex items-center justify-center rounded-md border border-transparent bg-principal px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-gris-oscuro"
                         >
                           Pagar
-                        </a>
+                        </Link>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>

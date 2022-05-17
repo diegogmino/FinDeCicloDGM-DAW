@@ -6,6 +6,7 @@ import Login from './pages/login/Login';
 import Signup from './pages/singup/Signup';
 import FilmsPage from './pages/filmsPage/FilmsPage';
 import DetailPage from './pages/detailPage/DetailPage';
+import Checkout from './components/checkout/Checkout';
 
 import {
   BrowserRouter as Router,
@@ -27,6 +28,7 @@ function App() {
         <Route path="/contacto" element={<ContactPage/>}/>
         <Route path="/peliculas" element={<FilmsPage/>}/>
         <Route path="/detalle/:id" element={<DetailPage/>}/>
+        <Route path="/checkout" element={<Checkout/>}/>
       </Routes>
     </Router>  
     </div>

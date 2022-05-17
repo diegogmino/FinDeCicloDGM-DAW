@@ -92,7 +92,7 @@ export default function Promo() {
                 </div>
   
                 <Link
-                  to="#"
+                  to="/peliculas"
                   className="inline-block text-center bg-principal border border-transparent rounded-md py-3 px-8 font-medium text-white hover:bg-gris-oscuro hover:text-white"
                 >
                   Compra ya

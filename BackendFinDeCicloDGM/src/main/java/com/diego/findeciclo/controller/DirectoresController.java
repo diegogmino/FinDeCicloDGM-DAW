@@ -1,11 +1,5 @@
 package com.diego.findeciclo.controller;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 import com.diego.findeciclo.model.Director;
 import com.diego.findeciclo.model.Pelicula;
@@ -89,16 +83,8 @@ public class DirectoresController {
         }
 
         if(!tienePelicula) {
-            // Eliminar la portada asociada a la pelicula
-            try {
-                String ruta = "src\\main\\resources\\static\\images\\fotos_directores\\"+ director.getFoto();
-                Files.delete(Paths.get(ruta));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
             directorService.eliminarDirector(id);
-
             return "redirect:/admin/directores/index";
 
         }
@@ -131,8 +117,7 @@ public class DirectoresController {
     public String guardar(@RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido, 
     @RequestParam("pais") String pais, @RequestParam(name="foto", required = false) String foto, Model model) {
 
-        String fotoGuardada = descargarImagen(foto, nombre, apellido);
-        Director director = new Director(nombre, apellido, pais, fotoGuardada);
+        Director director = new Director(nombre, apellido, pais, foto);
         directorService.guardarDirector(director);
 
 		return "redirect:/admin/directores/index";
@@ -148,21 +133,7 @@ public class DirectoresController {
         directorBBDD.setNombre(nombre);
         directorBBDD.setApellido(apellido);
         directorBBDD.setPais(pais);
-
-        // Trabajamos con la fotografía para ver si se ha cambiado o no
-        if(directorBBDD.getFoto().equals(foto)) {
-            directorBBDD.setFoto(foto);
-        } else {
-            // Eliminar la portada asociada a la pelicula
-            try {
-                String ruta = "src\\main\\resources\\static\\images\\fotos_directores\\"+ directorBBDD.getFoto();
-                Files.delete(Paths.get(ruta));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String nuevaFoto = descargarImagen(foto, nombre, apellido);
-            directorBBDD.setFoto(nuevaFoto);
-        }
+        directorBBDD.setFoto(foto);
 
         directorService.guardarDirector(directorBBDD);
 
@@ -171,23 +142,6 @@ public class DirectoresController {
 	}
 
     // Métodos privados
-    private String descargarImagen(String url, String nombre, String apellido) {
-		
-        nombre = nombre.toLowerCase();
-        apellido = apellido.toLowerCase();
-
-		String ruta = "src\\main\\resources\\static\\images\\fotos_directores\\"+ apellido + "_" + nombre +".jpeg";
-		
-		try {
-			InputStream in = new URL(url).openStream();
-			Files.copy(in, Paths.get(ruta), StandardCopyOption.REPLACE_EXISTING);
-			return apellido+"_"+nombre+".jpeg";
-		} catch (IOException e) {
-			return null;
-		}
-		
-	}
-
     private Specification<Director> construirSpecification(String nombre, String apellido, String pais) {
 		
 		// Seteamos el objeto spec con la cláusula where a null para que de forma predeterminada haga un findAll normal

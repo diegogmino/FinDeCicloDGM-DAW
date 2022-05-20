@@ -1,12 +1,6 @@
 package com.diego.findeciclo.controller;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigDecimal;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import com.diego.findeciclo.model.Director;
@@ -100,16 +94,6 @@ public class PeliculasController {
     @RequestMapping(value = "/eliminar/{id}", method = RequestMethod.GET)
     public String eliminarPelicula(@PathVariable int id, Model model) {
 
-        Pelicula peli = peliculaService.buscarPorId(id);
-
-        // Eliminar la portada asociada a la pelicula
-        try {
-            String ruta = "src\\main\\resources\\static\\images\\portadas_pelis\\"+peli.getPortada();
-            Files.delete(Paths.get(ruta));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         peliculaService.eliminarPeli(id);
 
         return "redirect:/admin/peliculas/index";
@@ -152,8 +136,7 @@ public class PeliculasController {
             directores.add(directorService.buscarPorId(dire2));
         }
 
-        String portadaGuardada = descargarImagen(portada, titulo, codigoBarras);
-        Pelicula pelicula = new Pelicula(codigoBarras, titulo, precio, portadaGuardada, destacada, unidades, genero, formato, sinopsis, directores);
+        Pelicula pelicula = new Pelicula(codigoBarras, titulo, precio, portada, destacada, unidades, genero, formato, sinopsis, directores);
         peliculaService.guardarPeli(pelicula);
 
 		return "redirect:/admin/peliculas/index";
@@ -182,21 +165,7 @@ public class PeliculasController {
         peliculaBBDD.setTitulo(titulo);
         peliculaBBDD.setDirectores(directores);
         peliculaBBDD.setPrecio(precio);
-
-        // Trabajamos con la portada para ver si se ha cambiado o no
-        if(peliculaBBDD.getPortada().equals(portada)) {
-            peliculaBBDD.setPortada(portada);
-        } else {
-            // Eliminar la portada asociada a la pelicula
-            try {
-                String ruta = "src\\main\\resources\\static\\images\\portadas_pelis\\"+peliculaBBDD.getPortada();
-                Files.delete(Paths.get(ruta));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String portadaNueva = descargarImagen(portada, titulo, codigoBarras);
-            peliculaBBDD.setPortada(portadaNueva);
-        }
+        peliculaBBDD.setPortada(portada);
 
         peliculaBBDD.setDestacada(destacada);
         peliculaBBDD.setUnidades(unidades);
@@ -208,24 +177,6 @@ public class PeliculasController {
 
 		return "redirect:/admin/peliculas/index";
 
-	}
-
-    // Métodos privados
-    private String descargarImagen(String url, String titulo, long codigoBarras) {
-		
-        titulo = titulo.toLowerCase();
-        titulo = titulo.replaceAll("\\s+","");
-
-		String ruta = "src\\main\\resources\\static\\images\\portadas_pelis\\"+codigoBarras+".jpeg";
-		
-		try {
-			InputStream in = new URL(url).openStream();
-			Files.copy(in, Paths.get(ruta), StandardCopyOption.REPLACE_EXISTING);
-			return codigoBarras+".jpeg";
-		} catch (IOException e) {
-			return null;
-		}
-		
 	}
 
     private List<String> crearListaGeneros() {

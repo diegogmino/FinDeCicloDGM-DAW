@@ -2,6 +2,8 @@ package com.diego.findeciclo.service.jpa;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import com.diego.findeciclo.model.Pelicula;
@@ -43,6 +45,11 @@ public class PeliculaService implements IPeliculaService {
 	@Override
 	public List<Pelicula> filtrar(Specification<Pelicula> spec) {
 		return peliRepo.findAll(spec);
+	}
+
+	@Override
+	public Page<Pelicula> filtrarPaginado(Specification<Pelicula> spec, Pageable pageable) {
+		return peliRepo.findAll(spec, pageable);
 	}
 	
 	

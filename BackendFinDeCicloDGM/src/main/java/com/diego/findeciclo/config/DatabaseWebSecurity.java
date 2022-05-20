@@ -1,4 +1,4 @@
-package com.diego.findeciclo.security;
+package com.diego.findeciclo.config;
 
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;

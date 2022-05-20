@@ -22,7 +22,7 @@ import PaginationComponent from "../pagination/PaginationComponent"
                 <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm text-gray-700">
-                      <Link to={'/' + film.id}>
+                      <Link to={'/detalle/' + film.id}>
                         <span aria-hidden="true" className="absolute inset-0" />
                         {film.titulo}
                       </Link>

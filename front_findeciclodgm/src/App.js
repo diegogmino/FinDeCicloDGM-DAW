@@ -5,6 +5,7 @@ import ContactPage from './pages/contact/ContactPage';
 import Login from './pages/login/Login';
 import Signup from './pages/singup/Signup';
 import FilmsPage from './pages/filmsPage/FilmsPage';
+import FilmsPageFilter from './pages/filmsPageFilter/FilmsPageFilter';
 import DetailPage from './pages/detailPage/DetailPage';
 import Checkout from './components/checkout/Checkout';
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/quienes-somos" element={<AboutUs/>}/>
         <Route path="/contacto" element={<ContactPage/>}/>
         <Route path="/peliculas" element={<FilmsPage/>}/>
+        <Route path="/peliculas/filtrar" element={<FilmsPageFilter/>}/>
         <Route path="/detalle/:id" element={<DetailPage/>}/>
         <Route path="/checkout" element={<Checkout/>}/>
       </Routes>

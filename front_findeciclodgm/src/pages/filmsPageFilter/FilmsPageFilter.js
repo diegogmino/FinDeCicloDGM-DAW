@@ -6,14 +6,13 @@ import FilmsGallery from "../../components/filmsGallery/FilmsGallery";
 import React, { useState, useEffect } from "react";
 import FilmsApi from "../../api/filmsApi";
 import { useParams, useLocation } from "react-router-dom";
+import Filter from './../../components/filter/Filter';
 
 export default function FilmsPage() {
 
   const search = useLocation().search;
 
   const title = new URLSearchParams(search).get("titulo");
-  const maxPrice = new URLSearchParams(search).get("precioMax");
-  const minPrice = new URLSearchParams(search).get("precioMin");
   const featured = new URLSearchParams(search).get("destacada");
   const format = new URLSearchParams(search).get("formato");
   const genre = new URLSearchParams(search).get("genero");
@@ -30,24 +29,25 @@ export default function FilmsPage() {
 
     let filter = {
         titulo: title == null ? '' : title,
-        precioMax: maxPrice == null ? '' : maxPrice,
-        precioMin: minPrice == null ? '' : minPrice,
         destacada: featured == null ? '' : featured,
         formato: format == null ? '' : format,
         genero: genre == null ? '' : genre,
     }
+
+    console.log(filter);
 
     FilmsApi.getFiltered(filter, page, size).then((res) => {
       setFilms(res.content);
       setNumberPages(res.totalPages);
       setFilmsNumber(res.totalElements);
     });
-  }, [page, genre]);
+  }, [page, title, featured, format, genre]);
 
   return (
     <div>
       <Header openCart={openCart} setOpenCart={setOpenCart} />
       <FilterButtons />
+      <Filter/>
       <ShoppingCart openCart={openCart} setOpenCart={setOpenCart} />
       <FilmsGallery
         films={films}

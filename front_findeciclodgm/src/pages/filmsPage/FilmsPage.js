@@ -5,6 +5,7 @@ import FilterButtons from '../../components/filterButtons/FilterButtons';
 import FilmsGallery from '../../components/filmsGallery/FilmsGallery';
 import React, { useState, useEffect } from 'react'
 import FilmsApi from '../../api/filmsApi';
+import Filter from './../../components/filter/Filter';
 
 export default function FilmsPage() {
 
@@ -33,6 +34,7 @@ export default function FilmsPage() {
     <div>
         <Header openCart={openCart} setOpenCart={setOpenCart}/>
         <FilterButtons/>
+        <Filter/>
         <ShoppingCart openCart={openCart} setOpenCart={setOpenCart}/>
         <FilmsGallery films={films} setPage={setPage} numberPages={numberPages} filmsNumber={filmsNumber}/>
         <Footer/>

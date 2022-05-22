@@ -9,13 +9,13 @@ import AboutUsImage from '../../components/aboutUsImage/AboutUsImage';
 export default function AboutUs(props) {
 
     const [openCart, setOpenCart] = useState(false);
-    const {totalItemsCart} = props;
+    const {totalItemsCart, cart, totalCart, onRemove} = props;
 
     return (
         <div>
             <Header openCart={openCart} setOpenCart={setOpenCart} totalItemsCart={totalItemsCart}/>
             <AboutUsImage/>
-            <ShoppingCart openCart={openCart} setOpenCart={setOpenCart}/> 
+            <ShoppingCart openCart={openCart} setOpenCart={setOpenCart} cart={cart} totalCart={totalCart} onRemove={onRemove}/> 
             <AboutUsInfo/>
             <Footer/>
         </div>

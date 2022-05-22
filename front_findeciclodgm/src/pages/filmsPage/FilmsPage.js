@@ -15,7 +15,7 @@ export default function FilmsPage(props) {
   const [numberPages, setNumberPages] = useState(0)
   const [filmsNumber, setFilmsNumber] = useState(0);
 
-  const {totalItemsCart, cart} = props;
+  const {totalItemsCart, cart, totalCart, onRemove} = props;
 
   const size = 10;
 
@@ -37,7 +37,7 @@ export default function FilmsPage(props) {
         <Header openCart={openCart} setOpenCart={setOpenCart} totalItemsCart={totalItemsCart}/>
         <FilterButtons/>
         <Filter/>
-        <ShoppingCart openCart={openCart} setOpenCart={setOpenCart} cart={cart}/>
+        <ShoppingCart openCart={openCart} setOpenCart={setOpenCart} cart={cart} totalCart={totalCart} onRemove={onRemove}/>
         <FilmsGallery films={films} setPage={setPage} numberPages={numberPages} filmsNumber={filmsNumber}/>
         <Footer/>
     </div>

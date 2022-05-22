@@ -39,13 +39,13 @@ export default function Product(props) {
 
           {/* Options */}
           <div className="mt-4 lg:mt-0 lg:row-span-3">
-            <h2 className="sr-only">Product information</h2>
+            <h2 className="sr-only">Información de la película</h2>
             <p className="text-3xl text-gray-900">{film.precio} €</p>
 
             {/* Available */}
             <div>
-              {film.unidades > 0 && (
-                <div className="alert alert-success shadow-lg w-[9rem] mt-4">
+              {film.unidades > 5 && (
+                <div className="alert alert-success shadow-lg w-[9rem] mt-6">
                   <div>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -64,8 +64,28 @@ export default function Product(props) {
                   </div>
                 </div>
               )}
+              {(film.unidades <= 5 && film.unidades != 0) && (
+                <div className="alert alert-warning shadow-lg w-[12rem] mt-6">
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="stroke-current flex-shrink-0 h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                      />
+                    </svg>
+                    <span>Últimas unidades</span>
+                  </div>
+                </div>
+              )}
               {film.unidades == 0 && (
-                <div className="alert alert-error shadow-lg w-[10.5rem] mt-4">
+                <div className="alert alert-error shadow-lg w-[10.5rem] mt-6">
                   <div>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +108,7 @@ export default function Product(props) {
             {film.unidades > 0 && (
               <button
                 onClick={() => onAdd(film)}
-                className="mt-10 w-full bg-principal border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gris-oscuro focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="mt-8 w-full bg-principal border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gris-oscuro focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-principal"
               >
                 Añadir al carrito
               </button>

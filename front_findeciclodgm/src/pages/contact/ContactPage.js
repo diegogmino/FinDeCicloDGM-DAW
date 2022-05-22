@@ -8,12 +8,12 @@ import ContactImage from '../../components/contactImage/ContactImage';
 export default function ContactPage(props) {
 
     const [openCart, setOpenCart] = useState(false);
-    const {totalItemsCart} = props;
+    const {totalItemsCart, cart, totalCart, onRemove} = props;
 
     return (
         <div>
             <Header openCart={openCart} setOpenCart={setOpenCart} totalItemsCart={totalItemsCart}/>
-            <ShoppingCart openCart={openCart} setOpenCart={setOpenCart}/> 
+            <ShoppingCart openCart={openCart} setOpenCart={setOpenCart} cart={cart} totalCart={totalCart} onRemove={onRemove}/> 
             <ContactImage/>
             <ContactForm/>
             <Footer/>

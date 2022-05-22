@@ -7,14 +7,14 @@ import Product from "../../components/product/Product";
 
 export default function DetailPage(props) {
 
-    const { onAdd, totalItemsCart, cart } = props;
+    const { onAdd, totalItemsCart, cart, totalCart, onRemove } = props;
     const { id } = useParams()
     const [openCart, setOpenCart] = useState(false)
 
     return (
         <div>
             <Header openCart={openCart} setOpenCart={setOpenCart} totalItemsCart={totalItemsCart}/>
-            <ShoppingCart openCart={openCart} setOpenCart={setOpenCart} cart={cart}/>
+            <ShoppingCart openCart={openCart} setOpenCart={setOpenCart} cart={cart} totalCart={totalCart} onRemove={onRemove}/>
             <Product id={id} onAdd={onAdd}/>
             <Footer/>
         </div>

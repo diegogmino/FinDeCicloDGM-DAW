@@ -8,7 +8,7 @@ import { useState } from 'react'
 
 export default function MainPage(props) {
 
-  const {totalItemsCart, cart} = props;
+  const {totalItemsCart, cart, totalCart, onRemove} = props;
 
   const [openCart, setOpenCart] = useState(false)
 
@@ -16,7 +16,7 @@ export default function MainPage(props) {
     <div>
         <Header openCart={openCart} setOpenCart={setOpenCart} totalItemsCart={totalItemsCart}/>
         <Promo/>
-        <ShoppingCart openCart={openCart} setOpenCart={setOpenCart} cart={cart}/>
+        <ShoppingCart openCart={openCart} setOpenCart={setOpenCart} cart={cart} totalCart={totalCart} onRemove={onRemove}/>
         <FilterButtons/>     
         <Footer/>
     </div>

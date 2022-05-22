@@ -63,9 +63,10 @@ const theme = createTheme({
     },
   });
 
-export default function Checkout() {
+export default function Checkout(props) {
 
   const [activeStep, setActiveStep] = React.useState(0);
+  const {cart, totalCart} = props;
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);

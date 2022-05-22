@@ -1,4 +1,4 @@
-# ****DCine** - Tienda de cultura fílmica
+# **DCine** - Tienda de cultura fílmica
 
 <p align="center">
   <img src="./Documentación/5. Logo/DCine - Logo.png" width="35%"/>

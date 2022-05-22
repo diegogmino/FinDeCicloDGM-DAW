@@ -1,4 +1,4 @@
-# DCine - Tienda de cultura fílmica
+# ****DCine** - Tienda de cultura fílmica
 
 <p align="center">
   <img src="./Documentación/5. Logo/DCine - Logo.png" width="35%"/>
@@ -19,9 +19,9 @@ Para el desarrollo de este proyecto se ha usado **Visual Studio Code**, **XAMPP*
 ## Librerías usadas
 
 - Para la página de los administradores se ha optado por [Boostrap 5.1](https://getbootstrap.com/docs/5.1/getting-started/introduction/) y [Thymeleaf](https://www.thymeleaf.org/).
-- Las librerías de **React** utilizadas para desarrollar el *frontend* de la tienda han sido [TailwindCSS](https://tailwindcss.com/blog/tailwindcss-v3), [TailwindUI](https://tailwindui.com/) y [MUI](https://mui.com/); de las que se han sacado los componentes y plantillas que luego se han modificado y conforman el frontal de la tienda.
+- Las librerías de **React** utilizadas para desarrollar el *frontend* de la tienda han sido [TailwindCSS v.3.0](https://tailwindcss.com/blog/tailwindcss-v3), [TailwindUI](https://tailwindui.com/), [MUI](https://mui.com/) y [daisyUI](https://daisyui.com/); de las que se han sacado los componentes y plantillas que luego se han modificado y conforman el frontal de la tienda.
 
-## Cómo correr el backend de DCine
+## Cómo correr el backend de **DCine**
 
 En primer lugar será necesario ejecutar el script de la base de datos que se encuentra en la sección de documentación de este repositorio.
 
@@ -33,7 +33,7 @@ Una vez hecho será el momento de ejecutar el backend. Para hacerlo, si se cuent
 
 Una vez hecho esto, el *backend* debería estar corriendo sin problemas en el equipo.
 
-## Cómo correr el frontend de DCine
+## Cómo correr el frontend de **DCine**
 
 Teniendo en cuenta que se debería tener instalado **Node.js** en el equipo, lo primero que se debe hacer es, dentro de la carpeta del *frontend* lanzar el siguiente comando:
 

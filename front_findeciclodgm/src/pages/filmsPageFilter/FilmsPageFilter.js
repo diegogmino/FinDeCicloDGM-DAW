@@ -5,7 +5,7 @@ import FilterButtons from "../../components/filterButtons/FilterButtons";
 import FilmsGallery from "../../components/filmsGallery/FilmsGallery";
 import React, { useState, useEffect } from "react";
 import FilmsApi from "../../api/filmsApi";
-import { useParams, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Filter from './../../components/filter/Filter';
 
 export default function FilmsPage() {

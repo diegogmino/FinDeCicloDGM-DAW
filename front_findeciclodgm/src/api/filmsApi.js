@@ -7,7 +7,7 @@ const film = axios.create({
 const filmsApi = {
 
   get: async id => { 
-    const response = await film.get(`${id}`); 
+    const response = await film.get(`buscar/${id}`); 
     return response.data;
   },
 

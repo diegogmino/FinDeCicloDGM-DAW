@@ -6,15 +6,17 @@ import FilterButtons from '../../components/filterButtons/FilterButtons';
 
 import { useState } from 'react'
 
-export default function MainPage() {
+export default function MainPage(props) {
+
+  const {totalItemsCart, cart} = props;
 
   const [openCart, setOpenCart] = useState(false)
 
   return (
     <div>
-        <Header openCart={openCart} setOpenCart={setOpenCart}/>
+        <Header openCart={openCart} setOpenCart={setOpenCart} totalItemsCart={totalItemsCart}/>
         <Promo/>
-        <ShoppingCart openCart={openCart} setOpenCart={setOpenCart}/>
+        <ShoppingCart openCart={openCart} setOpenCart={setOpenCart} cart={cart}/>
         <FilterButtons/>     
         <Footer/>
     </div>

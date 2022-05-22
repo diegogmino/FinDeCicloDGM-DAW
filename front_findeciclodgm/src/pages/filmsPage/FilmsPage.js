@@ -7,13 +7,15 @@ import React, { useState, useEffect } from 'react'
 import FilmsApi from '../../api/filmsApi';
 import Filter from './../../components/filter/Filter';
 
-export default function FilmsPage() {
+export default function FilmsPage(props) {
 
   const [openCart, setOpenCart] = useState(false)
   const [films, setFilms] = useState([])
   const [page, setPage] = useState(0)
   const [numberPages, setNumberPages] = useState(0)
   const [filmsNumber, setFilmsNumber] = useState(0);
+
+  const {totalItemsCart, cart} = props;
 
   const size = 10;
 
@@ -32,10 +34,10 @@ export default function FilmsPage() {
   
   return (
     <div>
-        <Header openCart={openCart} setOpenCart={setOpenCart}/>
+        <Header openCart={openCart} setOpenCart={setOpenCart} totalItemsCart={totalItemsCart}/>
         <FilterButtons/>
         <Filter/>
-        <ShoppingCart openCart={openCart} setOpenCart={setOpenCart}/>
+        <ShoppingCart openCart={openCart} setOpenCart={setOpenCart} cart={cart}/>
         <FilmsGallery films={films} setPage={setPage} numberPages={numberPages} filmsNumber={filmsNumber}/>
         <Footer/>
     </div>

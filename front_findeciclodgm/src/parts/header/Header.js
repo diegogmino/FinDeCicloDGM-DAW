@@ -34,21 +34,21 @@ const navigation = {
           id: 'generos',
           name: 'Géneros',
           items: [
-            { name: 'Acción', href: '#' },
-            { name: 'Animación', href: '#' },
-            { name: 'Anime', href: '#' },
-            { name: 'Aventuras', href: '#' },
-            { name: 'Bélico', href: '#' },
-            { name: 'Ciencia ficción', href: '#' },
-            { name: 'Comedia', href: '#' },
-            { name: 'Drama', href: '#' },
-            { name: 'Fantástico', href: '#' },
-            { name: 'Histórico', href: '#' },
-            { name: 'Policíaco', href: '#' },
-            { name: 'Suspense', href: '#' },
-            { name: 'Terror', href: '#' },
-            { name: 'Thiller', href: '#' },
-            { name: 'Western', href: '#' },
+            { name: 'Acción', href: '/peliculas/filtrar?genero=Acción' },
+            { name: 'Animación', href: '/peliculas/filtrar?genero=Animación' },
+            { name: 'Anime', href: '/peliculas/filtrar?genero=Anime' },
+            { name: 'Aventuras', href: '/peliculas/filtrar?genero=Aventuras' },
+            { name: 'Bélico', href: '/peliculas/filtrar?genero=Bélico' },
+            { name: 'Ciencia ficción', href: '/peliculas/filtrar?genero=Ciencia ficción' },
+            { name: 'Comedia', href: '/peliculas/filtrar?genero=Comedia' },
+            { name: 'Drama', href: '/peliculas/filtrar?genero=Drama' },
+            { name: 'Fantástico', href: '/peliculas/filtrar?genero=Fantástico' },
+            { name: 'Histórico', href: '/peliculas/filtrar?genero=Histórico' },
+            { name: 'Policíaco', href: '/peliculas/filtrar?genero=Policíaco' },
+            { name: 'Suspense', href: '/peliculas/filtrar?genero=Suspense' },
+            { name: 'Terror', href: '/peliculas/filtrar?genero=Terror' },
+            { name: 'Thiller', href: '/peliculas/filtrar?genero=Thriller' },
+            { name: 'Western', href: '/peliculas/filtrar?genero=Western' },
           ],
         }
       ],
@@ -67,7 +67,7 @@ function classNames(...classes) {
 export default function Header(props) {
 
   const [open, setOpen] = useState(false)
-  const { setOpenCart } = props;
+  const { setOpenCart, totalItemsCart } = props;
 
   return (
       <div className="bg-white">
@@ -301,7 +301,7 @@ export default function Header(props) {
                         className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
                         aria-hidden="true"
                       />
-                      <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                      <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{totalItemsCart}</span>
                       <span className="sr-only">items in cart, view bag</span>
                     </button>
                   </div>

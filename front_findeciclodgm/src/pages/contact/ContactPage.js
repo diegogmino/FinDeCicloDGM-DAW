@@ -5,13 +5,14 @@ import ShoppingCart from '../../components/shoppingCart/ShoppingCart';
 import ContactForm from '../../components/contactForm/ContactForm';
 import ContactImage from '../../components/contactImage/ContactImage';
 
-export default function ContactPage() {
+export default function ContactPage(props) {
 
-    const [openCart, setOpenCart] = useState(false)
+    const [openCart, setOpenCart] = useState(false);
+    const {totalItemsCart} = props;
 
     return (
         <div>
-            <Header openCart={openCart} setOpenCart={setOpenCart}/>
+            <Header openCart={openCart} setOpenCart={setOpenCart} totalItemsCart={totalItemsCart}/>
             <ShoppingCart openCart={openCart} setOpenCart={setOpenCart}/> 
             <ContactImage/>
             <ContactForm/>

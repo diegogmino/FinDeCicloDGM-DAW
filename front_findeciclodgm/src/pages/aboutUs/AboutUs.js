@@ -6,13 +6,14 @@ import Footer from '../../parts/footer/Footer';
 import ShoppingCart from '../../components/shoppingCart/ShoppingCart';
 import AboutUsImage from '../../components/aboutUsImage/AboutUsImage';
 
-export default function AboutUs() {
+export default function AboutUs(props) {
 
-    const [openCart, setOpenCart] = useState(false)
+    const [openCart, setOpenCart] = useState(false);
+    const {totalItemsCart} = props;
 
     return (
         <div>
-            <Header openCart={openCart} setOpenCart={setOpenCart}/>
+            <Header openCart={openCart} setOpenCart={setOpenCart} totalItemsCart={totalItemsCart}/>
             <AboutUsImage/>
             <ShoppingCart openCart={openCart} setOpenCart={setOpenCart}/> 
             <AboutUsInfo/>

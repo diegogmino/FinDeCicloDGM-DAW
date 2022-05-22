@@ -8,7 +8,7 @@ import FilmsApi from "../../api/filmsApi";
 import { useLocation } from "react-router-dom";
 import Filter from './../../components/filter/Filter';
 
-export default function FilmsPage() {
+export default function FilmsPage(props) {
 
   const search = useLocation().search;
 
@@ -22,6 +22,8 @@ export default function FilmsPage() {
   const [page, setPage] = useState(0);
   const [numberPages, setNumberPages] = useState(0);
   const [filmsNumber, setFilmsNumber] = useState(0);
+
+  const {totalItemsCart} = props;
 
   const size = 10;
 
@@ -45,7 +47,7 @@ export default function FilmsPage() {
 
   return (
     <div>
-      <Header openCart={openCart} setOpenCart={setOpenCart} />
+      <Header openCart={openCart} setOpenCart={setOpenCart} totalItemsCart={totalItemsCart}/>
       <FilterButtons />
       <Filter/>
       <ShoppingCart openCart={openCart} setOpenCart={setOpenCart} />

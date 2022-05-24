@@ -4,7 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.diego.findeciclo.dto.UsuarioDTO;
+import com.diego.findeciclo.mapper.UsuarioMapper;
 import com.diego.findeciclo.model.Usuario;
 import com.diego.findeciclo.repository.UsuarioRepository;
 import com.diego.findeciclo.service.IUsuarioService;
@@ -14,6 +18,9 @@ public class UsuarioService implements IUsuarioService {
 
 	@Autowired
 	private UsuarioRepository usuarioRepo;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public Usuario guardarUsuario(Usuario usuario) {
@@ -31,14 +38,14 @@ public class UsuarioService implements IUsuarioService {
 	}
 
 	@Override
-	public Boolean usuarioEncontrado(String email, String contrasena) {
+	public UsuarioDTO usuarioEncontrado(String email, String contrasena) {
 		
-		Usuario usuario = usuarioRepo.buscarUsuario(email, contrasena);
-		
-		if(usuario.getNombre() != null) {
-			return true;
+		Optional<Usuario> usuario = usuarioRepo.buscarEmail(email);
+
+		if(passwordEncoder.matches(contrasena, usuario.get().getContrasena())) {
+			return UsuarioMapper.INSTANCE.toUsuarioDTO(usuario.get());
 		} else {
-			return false;
+			return null;
 		}
 		
 	}

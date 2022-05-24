@@ -8,13 +8,13 @@ import { useState } from 'react'
 
 export default function MainPage(props) {
 
-  const {totalItemsCart, cart, totalCart, onRemove} = props;
+  const {totalItemsCart, cart, totalCart, onRemove, user} = props;
 
   const [openCart, setOpenCart] = useState(false)
 
   return (
     <div>
-        <Header openCart={openCart} setOpenCart={setOpenCart} totalItemsCart={totalItemsCart}/>
+        <Header openCart={openCart} setOpenCart={setOpenCart} totalItemsCart={totalItemsCart} user={user}/>
         <Promo/>
         <ShoppingCart openCart={openCart} setOpenCart={setOpenCart} cart={cart} totalCart={totalCart} onRemove={onRemove}/>
         <FilterButtons/>     

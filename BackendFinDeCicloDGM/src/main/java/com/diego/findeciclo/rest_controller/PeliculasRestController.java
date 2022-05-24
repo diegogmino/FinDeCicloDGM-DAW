@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.diego.findeciclo.dto.PeliculaDTO;
+import com.diego.findeciclo.mapper.PeliculaMapper;
 import com.diego.findeciclo.model.Formato;
 import com.diego.findeciclo.model.Pelicula;
 import com.diego.findeciclo.service.IPeliculaService;
@@ -41,7 +44,7 @@ public class PeliculasRestController {
 
 	// Filtro
 	@GetMapping("/filtrar")
-	public Page<Pelicula> filtrarPaginado(@RequestParam(required = false) Long codigoBarras,
+	public Page<PeliculaDTO> filtrarPaginado(@RequestParam(required = false) Long codigoBarras,
 			@RequestParam(required = false) String titulo, @RequestParam(required = false) BigDecimal precioMax,
 			@RequestParam(required = false) BigDecimal precioMin, @RequestParam(required = false) String genero,
 			@RequestParam(required = false) Boolean destacada, @RequestParam(required = false) Formato formato,
@@ -49,8 +52,10 @@ public class PeliculasRestController {
 			@RequestParam("size") int pageSize) {
 
 		Specification<Pelicula> spec = construirSpec(codigoBarras, titulo, genero, precioMax, precioMin, destacada, formato);
+		Page<Pelicula> peliculasPage = peliculaService.filtrarPaginado(spec, PageRequest.of(pageIndex, pageSize));
+		List<PeliculaDTO> peliculasDTO = PeliculaMapper.INSTANCE.toListPeliculaDTO(peliculasPage.getContent());
 
-		return peliculaService.filtrarPaginado(spec, PageRequest.of(pageIndex, pageSize));
+		return new PageImpl<PeliculaDTO>(peliculasDTO, PageRequest.of(pageIndex, pageSize), peliculasPage.getTotalElements());
 
 	}
 

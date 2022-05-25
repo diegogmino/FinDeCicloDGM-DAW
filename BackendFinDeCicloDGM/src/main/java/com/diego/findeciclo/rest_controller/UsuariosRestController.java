@@ -24,6 +24,7 @@ import com.diego.findeciclo.model.Usuario;
 import com.diego.findeciclo.model.MetodoPago;
 import com.diego.findeciclo.model.Pedido;
 import com.diego.findeciclo.model.Perfil;
+import com.diego.findeciclo.service.IEnvioMailService;
 import com.diego.findeciclo.service.IPerfilService;
 import com.diego.findeciclo.service.IUsuarioService;
 
@@ -37,6 +38,9 @@ public class UsuariosRestController {
 
 	@Autowired
 	private IPerfilService perfilService;
+
+	@Autowired
+	private IEnvioMailService mailService;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -60,6 +64,12 @@ public class UsuariosRestController {
 
 		Perfil perfil = perfilService.buscarPerfil(2);
 		usuario.setPerfil(perfil);
+
+		String mensaje = "¡Bienvenid@ a la familia " + usuario.getNombre() + "!" + System.lineSeparator() + System.lineSeparator() +
+		"Te has registrado correctamente en DCine. Ahora puedes empezar a comprar el mejor cine al mejor precio, ¡nos vemos por los mundos fílmicos!" + System.lineSeparator() + System.lineSeparator() +
+		"El equipo de DCine :)";
+
+		mailService.sendEmail(usuario.getEmail(), "¡Registro completado!", mensaje);
 
 		return new ResponseEntity<UsuarioDTO>(UsuarioMapper.INSTANCE.toUsuarioDTO(usuarioService.guardarUsuario(usuario)), HttpStatus.OK);
 

@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ReturnButtonLogo from "../../components/returnButtonLogo/ReturnButtonLogo";
 import AlertComponent from "../../components/alert/AlertComponent";
+import CircularProgress from "@mui/material/CircularProgress";
 import UsersApi from "../../api/usersApi";
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +19,8 @@ const theme = createTheme();
 export default function Signup() {
   const [open, setOpen] = React.useState(false);
   const [type, setType] = React.useState("");
-  const [message, setMessage] = React.useState('');
+  const [message, setMessage] = React.useState("");
+  const [showProgress, setShowProgress] = React.useState(false);
 
   const navigate = useNavigate();
 
@@ -35,21 +37,25 @@ export default function Signup() {
       telefono: data.get("phone"),
     };
 
-    console.log("hola");
+    setShowProgress(true);
 
     UsersApi.signUp(user)
       .then(() => {
         setType("success");
-        setMessage('¡Registro completado! En un momento te redirigimos al inicio de sesión.');
+        setMessage(
+          "¡Registro completado! En un momento te redirigimos al inicio de sesión."
+        );
         setOpen(true);
         setTimeout(() => {
           navigate("/login");
         }, 4000);
+        setShowProgress(false);
       })
       .catch(function (error) {
         setType("error");
-        setMessage('¡Ooops, ha ocurrido un error!');
+        setMessage("¡Ooops, ha ocurrido un error!");
         setOpen(true);
+        setShowProgress(false);
       });
   };
 
@@ -73,11 +79,7 @@ export default function Signup() {
               Crear cuenta
             </Typography>
 
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              sx={{ mt: 3 }}
-            >
+            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -219,6 +221,11 @@ export default function Signup() {
                     Crea tu cuenta
                   </button>
                   <AlertComponent />
+                  {showProgress === true && (
+                    <div className="mt-4 flex justify-center">
+                      <CircularProgress color="inherit" />
+                    </div>
+                  )}
                 </Grid>
               </Grid>
             </Box>
@@ -241,7 +248,12 @@ export default function Signup() {
           }}
         />
       </Grid>
-      <AlertComponent type={type} open={open} setOpen={setOpen} message={message}/>
+      <AlertComponent
+        type={type}
+        open={open}
+        setOpen={setOpen}
+        message={message}
+      />
     </ThemeProvider>
   );
 }

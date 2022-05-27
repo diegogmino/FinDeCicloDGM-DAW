@@ -9,6 +9,7 @@ import FilmsPageFilter from './pages/filmsPageFilter/FilmsPageFilter';
 import DetailPage from './pages/detailPage/DetailPage';
 import Checkout from './components/checkout/Checkout';
 import { useState } from 'react'
+import AcountPage from './pages/accountPage/AccountPage';
 
 import {
   BrowserRouter as Router,
@@ -71,6 +72,7 @@ function App() {
         <Route path="/peliculas/filtrar" element={<FilmsPageFilter totalItemsCart={totalItemsCart} totalCart={totalCart} cart={cart} onRemove={onRemove}/>}/>
         <Route path="/detalle/:id" element={<DetailPage onAdd={onAdd} totalItemsCart={totalItemsCart} totalCart={totalCart} cart={cart} onRemove={onRemove}/>}/>
         <Route path="/checkout" element={<Checkout cart={cart} totalCart={totalCart}/>}/>
+        <Route path="/cuenta" element={<AcountPage totalItemsCart={totalItemsCart} cart={cart} totalCart={totalCart} onRemove={onRemove}/>}/>
       </Routes>
     </Router>  
     </div>

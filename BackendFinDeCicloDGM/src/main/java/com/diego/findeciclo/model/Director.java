@@ -19,17 +19,19 @@ public class Director {
 	private String apellido;
 	private String pais;
 	private String foto;
+	private String foto_id;
 	
 	public Director() {
 		super();
 	}
 
-	public Director(String nombre, String apellido, String pais, String foto) {
+	public Director(String nombre, String apellido, String pais, String foto, String foto_id) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.pais = pais;
 		this.foto = foto;
+		this.foto_id = foto_id;
 	}
 
 	public Integer getId() {
@@ -70,6 +72,14 @@ public class Director {
 
 	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	public String getFoto_id() {
+		return foto_id;
+	}
+
+	public void setFoto_id(String foto_id) {
+		this.foto_id = foto_id;
 	}
 
 	@Override

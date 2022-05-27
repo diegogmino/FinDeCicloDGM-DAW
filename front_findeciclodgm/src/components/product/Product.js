@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import FilmsApi from "../../api/filmsApi";
+import AlertComponent from "./../alert/AlertComponent";
+import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 
 export default function Product(props) {
   const { id, onAdd } = props;
   const [film, setFilm] = useState([]);
   const [firstDirector, setFirsDirector] = useState([]);
   const [secondDirector, setSecondDirector] = useState([]);
+  const [user, setUser] = useState("");
+
+  const [open, setOpen] = React.useState(false);
+  const [type, setType] = React.useState("");
+  const [message, setMessage] = React.useState("");
 
   useEffect(() => {
     FilmsApi.get(id).then((res) => {
@@ -13,7 +20,48 @@ export default function Product(props) {
       setFirsDirector(res.directores[0]);
       setSecondDirector(res.directores[1]);
     });
+    let user = JSON.parse(localStorage.getItem("user"));
+    if (user == null) {
+      setUser("");
+    } else {
+      setUser(user);
+    }
   }, []);
+
+  function checkFilm(filmId) {
+    return filmId === parseInt(id);
+  }
+
+  function addWishlist() {
+    let wishlist = JSON.parse(localStorage.getItem("wishlist"));
+    var wishlistArray = [];
+    var keys = Object.keys(wishlist);
+
+    keys.forEach(function(key) {
+      wishlistArray.push(wishlist[key]);
+    });
+
+    if (wishlistArray.find(checkFilm) === undefined) {
+      wishlistArray.push(film.id);
+      setType("success");
+      setMessage("Película añadida a tu lista de deseos");
+      setOpen(true);
+    } else {
+      setType("error");
+      setMessage("¡Ya has añadido esta película a tu lista de deseos!");
+      setOpen(true);
+    }
+
+    localStorage.setItem("wishlist", JSON.stringify(wishlistArray));
+
+    /*
+
+    wishlistArray.push(film.id);
+    localStorage.setItem('wishlist', JSON.stringify(wishlistArray));
+    wishlist = JSON.parse(localStorage.getItem("wishlist"));
+    console.log(wishlist);
+    */
+  }
 
   return (
     <div className="bg-white">
@@ -45,62 +93,98 @@ export default function Product(props) {
             {/* Available */}
             <div>
               {film.unidades > 5 && (
-                <div className="alert alert-success shadow-lg w-[9rem] mt-6">
+                <div className="flex items-center mt-6">
+                  <div className="alert alert-success shadow-lg w-[9rem] ">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="stroke-current flex-shrink-0 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span>Disponible</span>
+                    </div>
+                  </div>
                   <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="stroke-current flex-shrink-0 h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span>Disponible</span>
+                    {user !== "" && (
+                      <button
+                        onClick={() => addWishlist()}
+                        className=" ml-4 bg-principal border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gris-oscuro focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-principal"
+                      >
+                        <FavoriteOutlinedIcon />
+                      </button>
+                    )}
                   </div>
                 </div>
               )}
-              {(film.unidades <= 5 && film.unidades != 0) && (
-                <div className="alert alert-warning shadow-lg w-[12rem] mt-6">
+              {film.unidades <= 5 && film.unidades != 0 && (
+                <div className="flex items-center mt-6">
+                  <div className="alert alert-warning shadow-lg w-[12rem]">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="stroke-current flex-shrink-0 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                        />
+                      </svg>
+                      <span>Últimas unidades</span>
+                    </div>
+                  </div>
                   <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="stroke-current flex-shrink-0 h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                      />
-                    </svg>
-                    <span>Últimas unidades</span>
+                    {user !== "" && (
+                      <button
+                        onClick={() => addWishlist()}
+                        className=" ml-4 bg-principal border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gris-oscuro focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-principal"
+                      >
+                        <FavoriteOutlinedIcon />
+                      </button>
+                    )}
                   </div>
                 </div>
               )}
               {film.unidades == 0 && (
-                <div className="alert alert-error shadow-lg w-[10.5rem] mt-6">
+                <div className="flex items-center mt-6">
+                  <div className="alert alert-error shadow-lg w-[10.5rem]">
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="stroke-current flex-shrink-0 h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <span>No disponible</span>
+                    </div>
+                  </div>
                   <div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="stroke-current flex-shrink-0 h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span>No disponible</span>
+                    {user !== "" && (
+                      <button
+                        onClick={() => addWishlist()}
+                        className=" ml-4 bg-principal border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gris-oscuro focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-principal"
+                      >
+                        <FavoriteOutlinedIcon />
+                      </button>
+                    )}
                   </div>
                 </div>
               )}
@@ -154,6 +238,12 @@ export default function Product(props) {
                 </ul>
               </div>
             </div>
+            <AlertComponent
+              type={type}
+              open={open}
+              setOpen={setOpen}
+              message={message}
+            />
           </div>
         </div>
       </div>

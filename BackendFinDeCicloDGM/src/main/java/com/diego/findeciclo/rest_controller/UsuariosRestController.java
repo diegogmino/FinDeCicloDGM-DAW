@@ -100,6 +100,29 @@ public class UsuariosRestController {
 		return new ResponseEntity<UsuarioDTO>(UsuarioMapper.INSTANCE.toUsuarioDTO(usuario), HttpStatus.OK);
 		
 	}
+
+	@GetMapping("/buscarPedidos/{id}")
+	public ResponseEntity<List<Pedido>> listarPedidosPorUsuario(@PathVariable int id) {
+
+		Usuario usuario = usuarioService.buscarPorId(id);
+
+		if(usuario == null) {
+			return new ResponseEntity<List<Pedido>>(HttpStatus.NOT_FOUND);
+		}
+
+		List<Pedido> pedidosUsuario = usuario.getPedidos();
+
+		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+
+        for (Pedido pedido : pedidosUsuario) {
+            if (!pedidos.contains(pedido)) {
+                pedidos.add(pedido);
+            }
+        }
+
+		return new ResponseEntity<List<Pedido>>(pedidos, HttpStatus.OK);
+		
+	}
 	
 	@GetMapping("/listarTodos")
 	public List<UsuarioDTO> listarTodos() {

@@ -11,6 +11,7 @@ public interface IPeliculaService {
 
 	Pelicula guardarPeli(Pelicula pelicula);
 	List<Pelicula> buscarTodas();
+	List<Pelicula> buscarListaDeseos(List<Integer> lista);
 	Pelicula buscarPorId(int id);
 	Pelicula editarPeli(Pelicula peli);
 	void eliminarPeli(int id);

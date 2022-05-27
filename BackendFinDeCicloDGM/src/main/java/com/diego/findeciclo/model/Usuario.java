@@ -37,7 +37,7 @@ public class Usuario {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "metodosPagoUsuario")
 	private List<MetodoPago> metodoDePago;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidosUsuario", fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidosUsuario", fetch = FetchType.EAGER)
 	private List<Pedido> pedidos;
 
 	public Usuario() {

@@ -11,6 +11,11 @@ const filmsApi = {
     return response.data;
   },
 
+  getWishlist: async list => { 
+    const response = await film.get(`listarDeseos/${list}`); 
+    return response.data;
+  },
+
   getFiltered: async (filters, page, size) => { 
     let filterString = 'filtrar?';
     Object.keys(filters).forEach(

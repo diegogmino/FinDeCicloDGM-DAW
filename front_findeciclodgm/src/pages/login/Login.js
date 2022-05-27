@@ -30,6 +30,10 @@ export default function Login(props) {
 
     UsersApi.login(data.get('email'), data.get('password')).then((res) => {
       localStorage.setItem('user', JSON.stringify(res));
+      let wishlist = JSON.parse(localStorage.getItem("wishlist"));
+      if(wishlist == null) {
+        localStorage.setItem('wishlist', JSON.stringify(''));
+      }
       navigate('/index');
     }).catch(function (error) {
         setType("error");

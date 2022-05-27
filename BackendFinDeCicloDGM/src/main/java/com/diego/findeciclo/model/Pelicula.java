@@ -28,6 +28,7 @@ public class Pelicula {
 	private String titulo;
 	private BigDecimal precio;
 	private String portada;
+	private String portada_id;
 	private boolean destacada;
 	private int unidades;
 	private String genero;
@@ -49,13 +50,14 @@ public class Pelicula {
 		super();
 	}
 
-	public Pelicula(long codigoBarras, String titulo, BigDecimal precio, String portada, boolean destacada,
+	public Pelicula(long codigoBarras, String titulo, BigDecimal precio, String portada, String portada_id, boolean destacada,
 			int unidades, String genero, Formato formato, String sinopsis, List<Director> directores) {
 		super();
 		this.codigoBarras = codigoBarras;
 		this.titulo = titulo;
 		this.precio = precio;
 		this.portada = portada;
+		this.portada_id = portada_id;
 		this.destacada = destacada;
 		this.unidades = unidades;
 		this.genero = genero;
@@ -102,6 +104,14 @@ public class Pelicula {
 
 	public void setPortada(String portada) {
 		this.portada = portada;
+	}
+
+	public String getPortada_id() {
+		return portada_id;
+	}
+
+	public void setPortada_id(String portada_id) {
+		this.portada_id = portada_id;
 	}
 
 	public boolean isDestacada() {

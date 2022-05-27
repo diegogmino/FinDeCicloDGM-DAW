@@ -1,143 +1,295 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title th:text="'DCine - Editar: ' + ${pelicula.titulo}"></title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="'DCine - Editar: ' + ${pelicula.titulo}"></title>
 
-  <link th:href="@{/static/css/styles.css}" rel="stylesheet">
+    <link th:href="@{/static/css/styles.css}" rel="stylesheet" />
 
-  <!-- Bootstrap CSS -->
-  <link th:href="@{/static//bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-  <!-- Fontawesome -->
-  <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
-  <link  rel="icon"   href="/static/images/Favicon.png" type="image/png" />
+    <!-- Bootstrap CSS -->
+    <link
+      th:href="@{/static//bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
+    <!-- Fontawesome -->
+    <link
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/static/images/Favicon.png" type="image/png" />
+  </head>
 
-</head>
+  <body>
+    <header th:insert="fragments/header::menu"></header>
 
-<body>
-  
-  <header th:insert="fragments/header::menu"></header>
-
-  <div class="container-fluid">
-    <div class="row d.flex justify-content-center mt-4">
+    <div class="container-fluid">
+      <div class="row d.flex justify-content-center mt-4">
         <div class="col-10">
-            <div class="row justify-content-center mb-4">
-                <a type="button" class="btn btn-outline-dark" href="/admin/peliculas/index">Volver a películas</a>
+          <div class="row justify-content-center mb-4">
+            <a
+              type="button"
+              class="btn btn-outline-dark"
+              href="/admin/peliculas/index"
+              >Volver a películas</a
+            >
+          </div>
+          <form
+            th:action="@{/admin/peliculas/actualizar}"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <div class="row">
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="codBarras" class="form-label"
+                    >Código de barras</label
+                  >
+                  <input
+                    type="hidden"
+                    th:name="id"
+                    th:value="${pelicula.id}"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                  />
+                  <input
+                    type="text"
+                    th:name="codigoBarras"
+                    th:value="${pelicula.codigoBarras}"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="codBarras" class="form-label">Título</label>
+                  <input
+                    type="text"
+                    th:name="titulo"
+                    th:value="${pelicula.titulo}"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    required
+                  />
+                </div>
+              </div>
             </div>
-            <form th:action="@{/admin/peliculas/actualizar}" method="post">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="mb-3">
-                            <label for="codBarras" class="form-label">Código de barras</label>
-                            <input type="hidden" th:name="id" th:value="${pelicula.id}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <input type="text" th:name="codigoBarras" th:value="${pelicula.codigoBarras}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="mb-3">
-                            <label for="codBarras" class="form-label">Título</label>
-                            <input type="text" th:name="titulo" th:value="${pelicula.titulo}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
-                        </div>
-                    </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="disabledSelect" class="form-label"
+                    >Director</label
+                  >
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                    th:name="director1"
+                    required
+                  >
+                    <option
+                      selected
+                      th:value="${pelicula.directores[0].id}"
+                      th:text="${pelicula.directores[0].nombre} + ' ' + ${pelicula.directores[0].apellido}"
+                    ></option>
+                    <option
+                      th:each="director : ${directores}"
+                      th:value="${director.id}"
+                      th:text="${director.nombre} + ' ' + ${director.apellido}"
+                    ></option>
+                  </select>
                 </div>
-                <div class="row">
-                  <div class="col-6">
-                    <div class="mb-3">
-                      <label for="disabledSelect" class="form-label">Director</label>
-                      <select class="form-select" aria-label="Default select example" th:name="director1" required>
-                        <option selected th:value="${pelicula.directores[0].id}" th:text="${pelicula.directores[0].nombre} + ' ' + ${pelicula.directores[0].apellido}"></option>
-                        <option th:each="director : ${directores}" th:value="${director.id}" th:text="${director.nombre} + ' ' + ${director.apellido}"></option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="mb-3">
-                      <label for="disabledSelect" class="form-label">Segundo director (opcional)</label>
-                      <select class="form-select" aria-label="Default select example" th:name="director2">
-                        <option selected th:if="${pelicula.directores.size == 1}" th:value=null>Selecciona...</option>
-                        <option selected th:if="${pelicula.directores.size > 1}" th:value="${pelicula.directores[1].id}" th:text="${pelicula.directores[1].nombre} + ' ' + ${pelicula.directores[1].apellido}"></option>
-                        <option th:each="director : ${directores}" th:value="${director.id}" th:text="${director.nombre} + ' ' + ${director.apellido}"></option>
-                      </select>
-                    </div>
-                  </div>
+              </div>
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="disabledSelect" class="form-label"
+                    >Segundo director (opcional)</label
+                  >
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                    th:name="director2"
+                  >
+                    <option
+                      selected
+                      th:if="${pelicula.directores.size == 1}"
+                      th:value="null"
+                    >
+                      Selecciona...
+                    </option>
+                    <option
+                      selected
+                      th:if="${pelicula.directores.size > 1}"
+                      th:value="${pelicula.directores[1].id}"
+                      th:text="${pelicula.directores[1].nombre} + ' ' + ${pelicula.directores[1].apellido}"
+                    ></option>
+                    <option
+                      th:each="director : ${directores}"
+                      th:value="${director.id}"
+                      th:text="${director.nombre} + ' ' + ${director.apellido}"
+                    ></option>
+                  </select>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                        <label for="codBarras" class="form-label">Precio</label>
-                        <div class="input-group mb-3">
-                            <input type="text" th:name="precio" th:value="${pelicula.precio}" class="form-control" aria-label="Amount (to the nearest dollar)" required>
-                            <span class="input-group-text">€</span>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="mb-3">
-                            <label for="portada" class="form-label">Portada</label>
-                            <input type="text" th:name="portada" th:value="${pelicula.portada}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
-                        </div>
-                    </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label for="codBarras" class="form-label">Precio</label>
+                <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    th:name="precio"
+                    th:value="${pelicula.precio}"
+                    class="form-control"
+                    aria-label="Amount (to the nearest dollar)"
+                    required
+                  />
+                  <span class="input-group-text">€</span>
                 </div>
-                <div class="row">
-                  <div class="col-6">
-                    <div class="mb-3">
-                      <label for="disabledSelect" class="form-label">Destacada</label>
-                      <select class="form-select" aria-label="Default select example" th:name="destacada" required>
-                        <option selected th:if="${pelicula.destacada == true}" th:value=true th:text="Sí"></option>
-                        <option th:if="${pelicula.destacada == true}" th:value=false th:text="No"></option>
+              </div>
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Portada</label>
+                  <input
+                    class="form-control"
+                    type="file"
+                    th:name="portada"
+                    id="portada"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="disabledSelect" class="form-label"
+                    >Destacada</label
+                  >
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                    th:name="destacada"
+                    required
+                  >
+                    <option
+                      selected
+                      th:if="${pelicula.destacada == true}"
+                      th:value="true"
+                      th:text="Sí"
+                    ></option>
+                    <option
+                      th:if="${pelicula.destacada == true}"
+                      th:value="false"
+                      th:text="No"
+                    ></option>
 
-                        <option selected th:if="${pelicula.destacada == false}" th:value=false th:text="No"></option>
-                        <option th:if="${pelicula.destacada == false}" th:value=true th:text="Sí"></option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="mb-3">
-                        <label for="unidades" class="form-label">Unidades</label>
-                        <input type="text" th:name="unidades" th:value="${pelicula.unidades}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
-                    </div>
-                  </div>
+                    <option
+                      selected
+                      th:if="${pelicula.destacada == false}"
+                      th:value="false"
+                      th:text="No"
+                    ></option>
+                    <option
+                      th:if="${pelicula.destacada == false}"
+                      th:value="true"
+                      th:text="Sí"
+                    ></option>
+                  </select>
                 </div>
-                <div class="row">
-                  <div class="col-6">
-                    <div class="mb-3">
-                        <label for="disabledSelect" class="form-label">Género</label>
-                        <select class="form-select" aria-label="Default select example" th:name="genero" required>
-                          <option selected th:value="${pelicula.genero}" th:text="${pelicula.genero}"></option>
-                          <option th:each="genero : ${generos}" th:value="${genero}" th:text="${genero}"></option>
-                        </select>
-                      </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="mb-3">
-                      <label for="disabledSelect" class="form-label">Formato</label>
-                      <select class="form-select" aria-label="Default select example" th:name="formato" required>
-                        <option selected th:value="${pelicula.formato}" th:text="${pelicula.formato}"></option>
-                        <option th:each="formato : ${formatos}" th:value="${formato}" th:text="${formato}"></option>
-                      </select>
-                    </div>
-                  </div>
+              </div>
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="unidades" class="form-label">Unidades</label>
+                  <input
+                    type="text"
+                    th:name="unidades"
+                    th:value="${pelicula.unidades}"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    required
+                  />
                 </div>
-                <div class="row mt-2">
-                    <div class="col-12">
-                        <div class="form-floating mb-3">
-                            <textarea class="form-control" th:name="sinopsis" th:text="${pelicula.sinopsis}" id="floatingTextarea2" style="height: 100px" required></textarea>
-                            <label for="floatingTextarea2">Sinopsis</label>
-                          </div>
-                    </div>
-                  </div>
-                <button type="submit" class="btn btn-outline-dark mb-3">Actualizar</button>
-              </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="disabledSelect" class="form-label">Género</label>
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                    th:name="genero"
+                    required
+                  >
+                    <option
+                      selected
+                      th:value="${pelicula.genero}"
+                      th:text="${pelicula.genero}"
+                    ></option>
+                    <option
+                      th:each="genero : ${generos}"
+                      th:value="${genero}"
+                      th:text="${genero}"
+                    ></option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="mb-3">
+                  <label for="disabledSelect" class="form-label">Formato</label>
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                    th:name="formato"
+                    required
+                  >
+                    <option
+                      selected
+                      th:value="${pelicula.formato}"
+                      th:text="${pelicula.formato}"
+                    ></option>
+                    <option
+                      th:each="formato : ${formatos}"
+                      th:value="${formato}"
+                      th:text="${formato}"
+                    ></option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-12">
+                <div class="form-floating mb-3">
+                  <textarea
+                    class="form-control"
+                    th:name="sinopsis"
+                    th:text="${pelicula.sinopsis}"
+                    id="floatingTextarea2"
+                    style="height: 100px"
+                    required
+                  ></textarea>
+                  <label for="floatingTextarea2">Sinopsis</label>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-outline-dark mb-3">
+              Actualizar
+            </button>
+          </form>
         </div>
-        
+      </div>
     </div>
-  </div>
 
-  <!-- Bootstrap core JavaScript
+    <!-- Bootstrap core JavaScript
   ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script> 
-
-</body>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script>
+  </body>
 </html>

@@ -30,10 +30,9 @@ public class PeliculasRestController {
 	private IPeliculaService peliculaService;
 
 	// Métodos CRUD
-
-	@GetMapping("listarTodas")
-	public List<Pelicula> listarTodas() {
-		return peliculaService.buscarTodas();
+	@GetMapping("listarDeseos/{lista}")
+	public List<Pelicula> listarTodas(@PathVariable List<Integer>lista) {
+		return peliculaService.buscarListaDeseos(lista);
 	}
 
 	@GetMapping("/buscar/{id}")

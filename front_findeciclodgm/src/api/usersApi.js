@@ -16,6 +16,11 @@ const usersApi = {
     return response.data;
   },
 
+  getOrders: async (id) => {
+    const response = await user.get(`buscarPedidos/${id}`);
+    return response.data;
+  },
+
 }  
 
 export default usersApi;

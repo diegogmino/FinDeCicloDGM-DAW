@@ -1,13 +1,20 @@
 package com.diego.findeciclo.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import javax.imageio.ImageIO;
+
 import com.diego.findeciclo.model.Director;
 import com.diego.findeciclo.model.Formato;
 import com.diego.findeciclo.model.Pelicula;
 import com.diego.findeciclo.service.IDirectorService;
 import com.diego.findeciclo.service.IPeliculaService;
+import com.diego.findeciclo.service.cloudinary.CloudinaryService;
 import com.diego.findeciclo.specification.PeliculaSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -17,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping(value = "/admin/peliculas")
@@ -27,6 +35,9 @@ public class PeliculasController {
 
     @Autowired
     private IDirectorService directorService;
+
+    @Autowired
+    private CloudinaryService cloudinaryService;
 
     // MÉTODOS GET
     @RequestMapping(value = "/index", method = RequestMethod.GET)
@@ -52,6 +63,7 @@ public class PeliculasController {
         List<String> generos = crearListaGeneros();
         List<String> formatos = crearListaFormatos();
 
+        model.addAttribute("alerta", false);
         model.addAttribute("generos", generos);
         model.addAttribute("formatos", formatos);
         model.addAttribute("directores", directores);
@@ -92,8 +104,11 @@ public class PeliculasController {
     }
 
     @RequestMapping(value = "/eliminar/{id}", method = RequestMethod.GET)
-    public String eliminarPelicula(@PathVariable int id, Model model) {
+    public String eliminarPelicula(@PathVariable int id, Model model) throws IOException {
 
+        Pelicula pelicula = peliculaService.buscarPorId(id);
+
+        cloudinaryService.delete(pelicula.getPortada_id());
         peliculaService.eliminarPeli(id);
 
         return "redirect:/admin/peliculas/index";
@@ -123,8 +138,15 @@ public class PeliculasController {
     @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     public String guardar(@RequestParam("codigoBarras") long codigoBarras, @RequestParam("titulo") String titulo, 
     @RequestParam("director1") Integer dire1, @RequestParam(name="director2", required = false) Integer dire2, @RequestParam("precio") BigDecimal precio,
-    @RequestParam("portada") String portada, @RequestParam("destacada") boolean destacada, @RequestParam("unidades") Integer unidades, 
-    @RequestParam("genero") String genero, @RequestParam("formato") Formato formato, @RequestParam("sinopsis") String sinopsis, Model model) {
+    @RequestParam("portada") MultipartFile portada, @RequestParam("destacada") boolean destacada, @RequestParam("unidades") Integer unidades, 
+    @RequestParam("genero") String genero, @RequestParam("formato") Formato formato, @RequestParam("sinopsis") String sinopsis, Model model) throws IOException {
+
+        BufferedImage bufferedImage = ImageIO.read(portada.getInputStream());
+
+        if(bufferedImage == null) {
+            model.addAttribute("alerta", true);
+            return "peliculas/formularioPelicula";
+        }
 
         List<Director> directores = new ArrayList<Director>();
 
@@ -136,7 +158,11 @@ public class PeliculasController {
             directores.add(directorService.buscarPorId(dire2));
         }
 
-        Pelicula pelicula = new Pelicula(codigoBarras, titulo, precio, portada, destacada, unidades, genero, formato, sinopsis, directores);
+        Map result = cloudinaryService.upload(portada);
+        String portadaCloudinary = (String) result.get("url");
+        String portada_id = (String) result.get("public_id");
+
+        Pelicula pelicula = new Pelicula(codigoBarras, titulo, precio, portadaCloudinary, portada_id, destacada, unidades, genero, formato, sinopsis, directores);
         peliculaService.guardarPeli(pelicula);
 
 		return "redirect:/admin/peliculas/index";
@@ -146,8 +172,8 @@ public class PeliculasController {
     @RequestMapping(value = "/actualizar", method = RequestMethod.POST)
     public String actualizar(@RequestParam("id") int id, @RequestParam("codigoBarras") long codigoBarras, @RequestParam("titulo") String titulo, 
     @RequestParam("director1") Integer dire1, @RequestParam(name="director2", required = false) Integer dire2, @RequestParam("precio") BigDecimal precio,
-    @RequestParam("portada") String portada, @RequestParam("destacada") boolean destacada, @RequestParam("unidades") Integer unidades, 
-    @RequestParam("genero") String genero, @RequestParam("formato") Formato formato, @RequestParam("sinopsis") String sinopsis, Model model) {
+    @RequestParam(name="portada",  required = false) MultipartFile portada, @RequestParam("destacada") boolean destacada, @RequestParam("unidades") Integer unidades, 
+    @RequestParam("genero") String genero, @RequestParam("formato") Formato formato, @RequestParam("sinopsis") String sinopsis, Model model) throws IOException {
 
         Pelicula peliculaBBDD = peliculaService.buscarPorId(id);
 
@@ -165,7 +191,24 @@ public class PeliculasController {
         peliculaBBDD.setTitulo(titulo);
         peliculaBBDD.setDirectores(directores);
         peliculaBBDD.setPrecio(precio);
-        peliculaBBDD.setPortada(portada);
+
+        if(!portada.isEmpty()) {
+
+            System.out.println(peliculaBBDD.getPortada_id());
+
+            if(peliculaBBDD.getPortada_id() != null) {
+                cloudinaryService.delete(peliculaBBDD.getPortada_id());
+            }
+
+            Map result = cloudinaryService.upload(portada);
+
+            String portadaCloudinary = (String) result.get("url");
+            String portada_id = (String) result.get("public_id");
+
+            peliculaBBDD.setPortada(portadaCloudinary);
+            peliculaBBDD.setPortada_id(portada_id);
+
+        }
 
         peliculaBBDD.setDestacada(destacada);
         peliculaBBDD.setUnidades(unidades);

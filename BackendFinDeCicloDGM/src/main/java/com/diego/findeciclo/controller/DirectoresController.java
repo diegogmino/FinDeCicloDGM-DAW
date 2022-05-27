@@ -1,10 +1,14 @@
 package com.diego.findeciclo.controller;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+
 import com.diego.findeciclo.model.Director;
 import com.diego.findeciclo.model.Pelicula;
 import com.diego.findeciclo.service.IDirectorService;
 import com.diego.findeciclo.service.IPeliculaService;
+import com.diego.findeciclo.service.cloudinary.CloudinaryService;
 import com.diego.findeciclo.specification.DirectorSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping(value = "/admin/directores")
@@ -24,6 +29,9 @@ public class DirectoresController {
 
     @Autowired
     private IPeliculaService peliculaService;
+
+    @Autowired
+    private CloudinaryService cloudinaryService;
 
 
     // MÉTODOS GET
@@ -115,9 +123,13 @@ public class DirectoresController {
     // MÉTODOS POST
     @RequestMapping(value = "/guardar", method = RequestMethod.POST)
     public String guardar(@RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido, 
-    @RequestParam("pais") String pais, @RequestParam(name="foto", required = false) String foto, Model model) {
+    @RequestParam("pais") String pais, @RequestParam("foto") MultipartFile foto, Model model) throws IOException {
 
-        Director director = new Director(nombre, apellido, pais, foto);
+        Map result = cloudinaryService.upload(foto);
+        String fotoCloudinary = (String) result.get("url");
+        String foto_id = (String) result.get("public_id");
+
+        Director director = new Director(nombre, apellido, pais, fotoCloudinary, foto_id);
         directorService.guardarDirector(director);
 
 		return "redirect:/admin/directores/index";
@@ -126,14 +138,29 @@ public class DirectoresController {
 
     @RequestMapping(value = "/actualizar", method = RequestMethod.POST)
     public String actualizar(@RequestParam("id") int id, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido, 
-    @RequestParam("pais") String pais, @RequestParam(name="foto", required = false) String foto, Model model) {
+    @RequestParam("pais") String pais, @RequestParam(name="foto", required = false) MultipartFile foto, Model model) throws IOException {
 
         Director directorBBDD = directorService.buscarPorId(id);
 
         directorBBDD.setNombre(nombre);
         directorBBDD.setApellido(apellido);
         directorBBDD.setPais(pais);
-        directorBBDD.setFoto(foto);
+
+        if(!foto.isEmpty()) {
+
+            if(directorBBDD.getFoto_id() != null) {
+                cloudinaryService.delete(directorBBDD.getFoto_id());
+            }
+
+            Map result = cloudinaryService.upload(foto);
+
+            String fotoCloudinary = (String) result.get("url");
+            String foto_id = (String) result.get("public_id");
+
+            directorBBDD.setFoto(fotoCloudinary);
+            directorBBDD.setFoto_id(foto_id);
+
+        }
 
         directorService.guardarDirector(directorBBDD);
 

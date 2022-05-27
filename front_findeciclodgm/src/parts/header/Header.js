@@ -347,7 +347,7 @@ export default function Header(props) {
                   )}
                   {user !== "" && (
                     <Link
-                      to=""
+                      to="/login"
                       className="text-sm font-medium text-gray-700 hover:text-gray-800"
                       onClick={() => logout()}
                     >

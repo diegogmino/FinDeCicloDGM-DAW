@@ -21,6 +21,11 @@ const usersApi = {
     return response.data;
   },
 
+  postOrder: async (films, userId) => {
+    const response = await user.post(`nuevoPedido/${userId}`, films);
+    return response.data;
+  },
+
 }  
 
 export default usersApi;

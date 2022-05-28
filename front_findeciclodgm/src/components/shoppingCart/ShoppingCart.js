@@ -1,11 +1,11 @@
-import { Fragment } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { XIcon } from '@heroicons/react/outline'
-import { Link } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { XIcon } from "@heroicons/react/outline";
+import { useNavigate } from "react-router-dom";
 
 export default function ShoppingCart(props) {
-
   const { openCart, setOpenCart, cart, totalCart, onRemove } = props;
+  const navigate = useNavigate();
 
   return (
     <Transition.Root show={openCart} as={Fragment}>
@@ -38,7 +38,10 @@ export default function ShoppingCart(props) {
                   <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                     <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
                       <div className="flex items-start justify-between">
-                        <Dialog.Title className="text-lg font-medium text-gray-900"> Carrito</Dialog.Title>
+                        <Dialog.Title className="text-lg font-medium text-gray-900">
+                          {" "}
+                          Carrito
+                        </Dialog.Title>
                         <div className="ml-3 flex h-7 items-center">
                           <button
                             type="button"
@@ -53,7 +56,10 @@ export default function ShoppingCart(props) {
 
                       <div className="mt-8">
                         <div className="flow-root">
-                          <ul role="list" className="-my-6 divide-y divide-gray-200">
+                          <ul
+                            role="list"
+                            className="-my-6 divide-y divide-gray-200"
+                          >
                             {cart.map((film) => (
                               <li key={film.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200 aspect-w-6 aspect-h-2">
@@ -72,10 +78,14 @@ export default function ShoppingCart(props) {
                                       </h3>
                                       <p className="ml-4">{film.precio} €</p>
                                     </div>
-                                    <p className="mt-1 text-sm text-gray-500">Formato: {film.formato}</p>
+                                    <p className="mt-1 text-sm text-gray-500">
+                                      Formato: {film.formato}
+                                    </p>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">Cantidad: {film.qty}</p>
+                                    <p className="text-gray-500">
+                                      Cantidad: {film.qty}
+                                    </p>
 
                                     <div className="flex">
                                       <button
@@ -100,24 +110,40 @@ export default function ShoppingCart(props) {
                         <p>Subtotal</p>
                         <p>{totalCart} €</p>
                       </div>
-                      <p className="mt-0.5 text-sm text-gray-500">El envío y las tasas serán calculados más adelante.</p>
+                      <p className="mt-0.5 text-sm text-gray-500">
+                        El envío y las tasas serán calculados más adelante.
+                      </p>
                       <div className="mt-6">
-                        <Link
-                          to="/checkout"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-principal px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-gris-oscuro"
+                        <button
+                          className=" w-full flex items-center justify-center rounded-md border border-transparent bg-principal px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-gris-oscuro"
+                          onClick={() => {
+                            let activeUser = JSON.parse(
+                              localStorage.getItem("user")
+                            );
+                            if (activeUser == "") {
+                              navigate("/login");
+                            } else {
+                              if (cart.length === 0) {
+                                setOpenCart(false);
+                              } else {
+                                navigate('/checkout');
+                              }
+                            }
+                          }}
                         >
                           Pagar
-                        </Link>
+                        </button>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
-                          or{' '}
+                          or{" "}
                           <button
                             type="button"
                             className="font-medium text-principal hover:text-gris-oscuro"
                             onClick={() => setOpenCart(false)}
                           >
-                            Continúa comprando<span aria-hidden="true"> &rarr;</span>
+                            Continúa comprando
+                            <span aria-hidden="true"> &rarr;</span>
                           </button>
                         </p>
                       </div>
@@ -130,5 +156,5 @@ export default function ShoppingCart(props) {
         </div>
       </Dialog>
     </Transition.Root>
-  )
+  );
 }

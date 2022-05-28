@@ -71,7 +71,7 @@ function App() {
         <Route path="/peliculas" element={<FilmsPage totalItemsCart={totalItemsCart} cart={cart} totalCart={totalCart} onRemove={onRemove}/>}/>
         <Route path="/peliculas/filtrar" element={<FilmsPageFilter totalItemsCart={totalItemsCart} totalCart={totalCart} cart={cart} onRemove={onRemove}/>}/>
         <Route path="/detalle/:id" element={<DetailPage onAdd={onAdd} totalItemsCart={totalItemsCart} totalCart={totalCart} cart={cart} onRemove={onRemove}/>}/>
-        <Route path="/checkout" element={<Checkout cart={cart} totalCart={totalCart}/>}/>
+        <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} totalCart={totalCart} setTotalItemsCart={setTotalItemsCart} setTotalCart={setTotalCart}/>}/>
         <Route path="/cuenta" element={<AcountPage totalItemsCart={totalItemsCart} cart={cart} totalCart={totalCart} onRemove={onRemove}/>}/>
       </Routes>
     </Router>  

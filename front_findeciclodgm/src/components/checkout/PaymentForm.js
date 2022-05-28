@@ -5,7 +5,10 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
-export default function PaymentForm() {
+export default function PaymentForm(props) {
+
+  const {paymentData, setPaymentData} = props;
+
   return (
     <React.Fragment>
       <Grid container spacing={3}>
@@ -17,6 +20,10 @@ export default function PaymentForm() {
             fullWidth
             autoComplete="cc-name"
             variant="standard"
+            onChange={(e) => {
+              setPaymentData({...paymentData, cardName: e.target.value});
+            }}
+            value={paymentData.cardName}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -27,6 +34,10 @@ export default function PaymentForm() {
             fullWidth
             autoComplete="cc-number"
             variant="standard"
+            onChange={(e) => {
+              setPaymentData({...paymentData, cardNumber: e.target.value});
+            }}
+            value={paymentData.cardNumber}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -37,6 +48,10 @@ export default function PaymentForm() {
             fullWidth
             autoComplete="cc-exp"
             variant="standard"
+            onChange={(e) => {
+              setPaymentData({...paymentData, expDate: e.target.value});
+            }}
+            value={paymentData.expDate}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -47,6 +62,10 @@ export default function PaymentForm() {
             fullWidth
             autoComplete="cc-csc"
             variant="standard"
+            onChange={(e) => {
+              setPaymentData({...paymentData, cvv: e.target.value});
+            }}
+            value={paymentData.cvv}
           />
         </Grid>
       </Grid>

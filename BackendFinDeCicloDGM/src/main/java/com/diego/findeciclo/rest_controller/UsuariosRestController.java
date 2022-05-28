@@ -1,5 +1,6 @@
 package com.diego.findeciclo.rest_controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -17,14 +18,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.diego.findeciclo.dto.CreateUsuarioDTO;
+import com.diego.findeciclo.dto.PeliculaPedidoDTO;
 import com.diego.findeciclo.dto.UpdateUsuarioDTO;
 import com.diego.findeciclo.dto.UsuarioDTO;
+import com.diego.findeciclo.mapper.PeliculaMapper;
 import com.diego.findeciclo.mapper.UsuarioMapper;
 import com.diego.findeciclo.model.Usuario;
 import com.diego.findeciclo.model.MetodoPago;
 import com.diego.findeciclo.model.Pedido;
+import com.diego.findeciclo.model.Pelicula;
 import com.diego.findeciclo.model.Perfil;
 import com.diego.findeciclo.service.IEnvioMailService;
+import com.diego.findeciclo.service.IPeliculaService;
 import com.diego.findeciclo.service.IPerfilService;
 import com.diego.findeciclo.service.IUsuarioService;
 
@@ -35,6 +40,9 @@ public class UsuariosRestController {
 
 	@Autowired
 	private IUsuarioService usuarioService;
+
+	@Autowired
+	private IPeliculaService peliculaService;
 
 	@Autowired
 	private IPerfilService perfilService;
@@ -65,7 +73,7 @@ public class UsuariosRestController {
 		Perfil perfil = perfilService.buscarPerfil(2);
 		usuario.setPerfil(perfil);
 
-		String mensaje = "¡Bienvenid@ a la familia " + usuario.getNombre() + "!" + System.lineSeparator() + System.lineSeparator() +
+		String mensaje = "¡Bienvenid@ a la familia, " + usuario.getNombre() + "!" + System.lineSeparator() + System.lineSeparator() +
 		"Te has registrado correctamente en DCine. Ahora puedes empezar a comprar el mejor cine al mejor precio, ¡nos vemos por los mundos fílmicos!" + System.lineSeparator() + System.lineSeparator() +
 		"El equipo de DCine :)";
 
@@ -168,21 +176,52 @@ public class UsuariosRestController {
 	// Operaciones de los usuarios
 
 	@PostMapping("/nuevoPedido/{id}")
-	public ResponseEntity<Void> anhadirPedidoUsuario(@RequestBody Pedido pedido, int id) {
+	public ResponseEntity<Pedido> anhadirPedidoUsuario(@RequestBody List<PeliculaPedidoDTO> peliculas, @PathVariable int id) {
 
 		Usuario usuario = usuarioService.buscarPorId(id);
 
 		if(usuario == null) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<Pedido>(new Pedido(), HttpStatus.NOT_FOUND);
 		}
+
+		Pedido pedido = new Pedido();
+		pedido.setDireccionEnvio(usuario.getDireccion());
+		pedido.setEntregado(false);
+		pedido.setFechaPedido(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+		pedido.setPedidosUsuario(usuario);
+		pedido.setPeliculas(PeliculaMapper.INSTANCE.toListPelicula(peliculas));
+
+		for(PeliculaPedidoDTO pelicula : peliculas) {
+
+			Pelicula peli = peliculaService.buscarPorId(pelicula.getId());
+			int unidades = peli.getUnidades();
+			unidades = unidades - pelicula.getQty();
+			peli.setUnidades(unidades);
+			peliculaService.guardarPeli(peli);
+
+		}
+		
+		float precioTotal = 0;
+
+		for(PeliculaPedidoDTO pelicula : peliculas) {
+			precioTotal = precioTotal + (pelicula.getPrecio().floatValue() * pelicula.getQty());
+		}
+
+		if(precioTotal < 40) {
+			precioTotal = (float) (precioTotal + 3.99);
+		}
+
+		pedido.setPrecioTotal(new BigDecimal(precioTotal));
 
 		List<Pedido> pedidos = usuario.getPedidos();
 		pedidos.add(pedido);
 		usuario.setPedidos(pedidos);
 
-		usuarioService.guardarUsuario(usuario);
+		usuario = usuarioService.guardarUsuario(usuario);
 
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		pedido = usuario.getPedidos().get(usuario.getPedidos().size() - 1);
+
+		return new ResponseEntity<Pedido>(pedido, HttpStatus.OK);
 
 	}
 

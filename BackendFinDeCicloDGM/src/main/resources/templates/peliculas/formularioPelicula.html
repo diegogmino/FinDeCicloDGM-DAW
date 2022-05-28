@@ -35,12 +35,6 @@
               >Volver a películas</a
             >
           </div>
-          <div th:if="${alerta == true}" class="row justify-content-center mt-4">
-            <div class="col-10">
-              <div class="alert alert-danger" role="alert" th:text="Imagen no válida">
-              </div>
-            </div>
-          </div>
           <form th:action="@{/admin/peliculas/guardar}" method="post" enctype="multipart/form-data">
             <div class="row">
               <div class="col-6">

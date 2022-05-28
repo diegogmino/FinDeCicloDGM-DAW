@@ -141,13 +141,6 @@ public class PeliculasController {
     @RequestParam("portada") MultipartFile portada, @RequestParam("destacada") boolean destacada, @RequestParam("unidades") Integer unidades, 
     @RequestParam("genero") String genero, @RequestParam("formato") Formato formato, @RequestParam("sinopsis") String sinopsis, Model model) throws IOException {
 
-        BufferedImage bufferedImage = ImageIO.read(portada.getInputStream());
-
-        if(bufferedImage == null) {
-            model.addAttribute("alerta", true);
-            return "peliculas/formularioPelicula";
-        }
-
         List<Director> directores = new ArrayList<Director>();
 
         if(dire1 != null) {

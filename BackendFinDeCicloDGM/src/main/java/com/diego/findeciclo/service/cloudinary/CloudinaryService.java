@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,10 +45,19 @@ public class CloudinaryService {
     }
 
     private File convert(MultipartFile multipartFile) throws IOException {
-        File file = new File(multipartFile.getOriginalFilename());
-        FileOutputStream fo = new FileOutputStream(file);
-        fo.write(multipartFile.getBytes());
+
+        InputStream initialStream = multipartFile.getInputStream();
+        byte[] buffer = new byte[initialStream.available()];
+        initialStream.read(buffer);
+
+        File file = new File("src/main/resources/targetFile.tmp");
+
+        try (OutputStream outStream = new FileOutputStream(file)) {
+            outStream.write(buffer);
+        }
+
         return file;
     }
-    
+
+
 }

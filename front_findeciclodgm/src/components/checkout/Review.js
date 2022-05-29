@@ -5,49 +5,39 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 
-const products = [
-  {
-    name: "El cuervo",
-    price: "9.99€",
-  },
-  {
-    name: "El padrino",
-    price: "9.99€",
-  },
-  {
-    name: "Blade Runner",
-    price: "15.99€",
-  },
-  { name: "Envío", price: "3.99€" },
-];
 
-const addresses = ["1 MUI Drive", "Reactville", "Anytown", "99999", "USA"];
-const payments = [
-  { name: "Card type", detail: "Visa" },
-  { name: "Card holder", detail: "Mr John Smith" },
-  { name: "Card number", detail: "xxxx-xxxx-xxxx-1234" },
-  { name: "Expiry date", detail: "04/2024" },
-];
+
 
 export default function Review(props) {
   const { cart, totalCart } = props;
+  const [addresses, setAdresses] = React.useState([]);
+  const [userData, setUserData] = React.useState({});
+
+  React.useEffect(() => {
+    let user = JSON.parse(localStorage.getItem("user"));
+    setUserData({
+      name: user.nombre,
+      lastname: user.apellido,
+      mail: user.email
+    })
+    setAdresses([user.direccion, user.pais]);
+    console.log(user);
+  }, []);
 
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Resumen del pedido
-      </Typography>
+      <h1 className="text-center text-2xl mb-4">Resumen del pedido</h1>
       <List disablePadding>
         {cart.map((film) => (
           <ListItem key={film.id} sx={{ py: 1, px: 0 }}>
             <ListItemText
               primary={
                 <Typography type="body2" style={{ color: "#000000" }}>
-                  {film.titulo} x{film.qty}
+                  {film.titulo} x {film.qty}
                 </Typography>
               }
             />
-            <Typography variant="body2">{film.precio} €</Typography>
+            <Typography variant="body2">{film.precio * film.qty} €</Typography>
           </ListItem>
         ))}
 
@@ -63,7 +53,7 @@ export default function Review(props) {
             <ListItem sx={{ py: 1, px: 0 }}>
               <ListItemText primary="Total" />
               <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-                {totalCart + 3.99} €
+                {Math.round(((totalCart + 3.99) + Number.EPSILON) * 100) / 100} €
               </Typography>
             </ListItem>
           </div>
@@ -87,6 +77,16 @@ export default function Review(props) {
           </div>
         )}
       </List>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={12}>
+          <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
+            Envío a
+          </Typography>
+          <p className="font-bold">{userData.name} {userData.lastname}</p>
+          <p className="font-bold">{addresses.join(", ")}</p>
+          <Typography gutterBottom>{userData.mail}</Typography>
+        </Grid>
+      </Grid>
     </React.Fragment>
   );
 }

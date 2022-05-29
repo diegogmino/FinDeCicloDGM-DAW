@@ -1,18 +1,22 @@
+import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import Paper from "@mui/material/Paper";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import AddressForm from "./AddressForm";
+import PaymentForm from "./PaymentForm";
 import Review from "./Review";
 import { useNavigate } from "react-router-dom";
 import UsersApi from "../../api/usersApi";
-
-import React from "react";
-import ReactDOM from "react-dom";
-const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
 function Copyright() {
   return (
@@ -45,58 +49,13 @@ const theme = createTheme({
   },
 });
 
-export default function Checkout(props) {
-  const {
-    cart,
-    setCart,
-    totalCart,
-    setTotalItemsCart,
-    setTotalCart,
-    setOrderID,
-  } = props;
+export default function OrderCompleted(props) {
+  const { orderID } = props;
 
   const navigate = useNavigate();
 
-  const finish = () => {
-    navigate("/checkout/completed");
-  };
-
-  const createOrder = (data, actions) => {
-    let totalOrder = 0;
-
-    if (totalCart < 40) {
-      totalOrder = Math.round((totalCart + 3.99 + Number.EPSILON) * 100) / 100;
-    } else {
-      totalOrder = totalCart;
-    }
-
-    return actions.order.create({
-      purchase_units: [
-        {
-          amount: {
-            value: totalOrder,
-          },
-        },
-      ],
-    });
-  };
-
-  function saveOrder() {
-    let user = JSON.parse(localStorage.getItem("user"));
-    UsersApi.postOrder(cart, user.id).then((res) => {
-      if (res !== null) {
-        console.log(res);
-        setCart([]);
-        setTotalItemsCart(0);
-        setTotalCart(0);
-        setOrderID(res.id);
-        finish();
-      }
-    });
-  }
-
-  const onApprove = (data, actions) => {
-    return actions.order.capture(saveOrder());
+  const returnHome = () => {
+    navigate("/index");
   };
 
   return (
@@ -112,7 +71,7 @@ export default function Checkout(props) {
         }}
       >
         <Toolbar>
-          <Typography variant="h5" color="inherit" noWrap>
+          <Typography variant="h6" color="inherit" noWrap>
             DCine - Tienda de cultura fílmica
           </Typography>
         </Toolbar>
@@ -122,14 +81,17 @@ export default function Checkout(props) {
           variant="outlined"
           sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
         >
-          <Review cart={cart} totalCart={totalCart} />
-          <Typography variant="h6" gutterBottom sx={{ mt: 2, mb: 2 }}>
-            Método de pago
-          </Typography>
-          <PayPalButton
-            createOrder={(data, actions) => createOrder(data, actions)}
-            onApprove={(data, actions) => onApprove(data, actions)}
-          />
+          <React.Fragment>
+            <Typography variant="h5" gutterBottom>
+              Gracias por confiar en nosotros
+            </Typography>
+            <Typography variant="subtitle1">
+              Tu número de pedido es #{orderID}. Muy pronto tendrás noticias nuestras.
+            </Typography>
+            <Button onClick={returnHome} variant="contained" sx={{ mt: 3 }}>
+              Volver a la tienda
+            </Button>
+          </React.Fragment>
         </Paper>
         <Copyright />
       </Container>

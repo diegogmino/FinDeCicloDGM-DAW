@@ -1,74 +1,36 @@
-import * as React from 'react';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import React, {useState} from "react";
+import ReactDOM from "react-dom";
+const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
-export default function PaymentForm(props) {
+export default function PaymentForm() {
+  const [price, setPrice] = useState(0);
+  const createOrder = (data, actions) => {
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            value: price,
+          },
+        },
+      ],
+    });
+  };
+  const onApprove = (data, actions) => {
+    return actions.order.capture();
+  };
 
-  const {paymentData, setPaymentData} = props;
+  function handleChange(e) {
+    setPrice(e.target.value);
+  }
 
   return (
     <React.Fragment>
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="cardName"
-            label="Nombre de la tarjeta"
-            fullWidth
-            autoComplete="cc-name"
-            variant="standard"
-            onChange={(e) => {
-              setPaymentData({...paymentData, cardName: e.target.value});
-            }}
-            value={paymentData.cardName}
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="cardNumber"
-            label="Número de la tarjeta"
-            fullWidth
-            autoComplete="cc-number"
-            variant="standard"
-            onChange={(e) => {
-              setPaymentData({...paymentData, cardNumber: e.target.value});
-            }}
-            value={paymentData.cardNumber}
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="expDate"
-            label="Fecha de expiración"
-            fullWidth
-            autoComplete="cc-exp"
-            variant="standard"
-            onChange={(e) => {
-              setPaymentData({...paymentData, expDate: e.target.value});
-            }}
-            value={paymentData.expDate}
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            required
-            id="cvv"
-            label="CVV"
-            fullWidth
-            autoComplete="cc-csc"
-            variant="standard"
-            onChange={(e) => {
-              setPaymentData({...paymentData, cvv: e.target.value});
-            }}
-            value={paymentData.cvv}
-          />
-        </Grid>
-      </Grid>
+      <input type="text" onChange={handleChange} value={price}></input>
+      <h1>El monto es: {price}</h1>
+      <PayPalButton
+        createOrder={(data, actions) => createOrder(data, actions)}
+        onApprove={(data, actions) => onApprove(data, actions)}
+      />
     </React.Fragment>
   );
 }

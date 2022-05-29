@@ -10,6 +10,7 @@ import DetailPage from './pages/detailPage/DetailPage';
 import Checkout from './components/checkout/Checkout';
 import { useState } from 'react'
 import AcountPage from './pages/accountPage/AccountPage';
+import OrderCompleted from './components/checkout/OrderCompleted';
 
 import {
   BrowserRouter as Router,
@@ -22,6 +23,7 @@ function App() {
   const [cart, setCart] = useState([]);
   const [totalItemsCart, setTotalItemsCart] = useState(0);
   const [totalCart, setTotalCart] = useState(0);
+  const [orderID, setOrderID] = useState(0);
 
   const onAdd = (film) => {
     const exist = cart.find((x) => x.id === film.id);
@@ -71,7 +73,8 @@ function App() {
         <Route path="/peliculas" element={<FilmsPage totalItemsCart={totalItemsCart} cart={cart} totalCart={totalCart} onRemove={onRemove}/>}/>
         <Route path="/peliculas/filtrar" element={<FilmsPageFilter totalItemsCart={totalItemsCart} totalCart={totalCart} cart={cart} onRemove={onRemove}/>}/>
         <Route path="/detalle/:id" element={<DetailPage onAdd={onAdd} totalItemsCart={totalItemsCart} totalCart={totalCart} cart={cart} onRemove={onRemove}/>}/>
-        <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} totalCart={totalCart} setTotalItemsCart={setTotalItemsCart} setTotalCart={setTotalCart}/>}/>
+        <Route path="/checkout" element={<Checkout cart={cart} setCart={setCart} totalCart={totalCart} setTotalItemsCart={setTotalItemsCart} setTotalCart={setTotalCart} setOrderID={setOrderID}/>}/>
+        <Route path="/checkout/completed" element={<OrderCompleted orderID={orderID}/>}/>
         <Route path="/cuenta" element={<AcountPage totalItemsCart={totalItemsCart} cart={cart} totalCart={totalCart} onRemove={onRemove}/>}/>
       </Routes>
     </Router>  

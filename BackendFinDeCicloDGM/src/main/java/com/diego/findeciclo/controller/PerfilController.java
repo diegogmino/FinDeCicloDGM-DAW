@@ -1,12 +1,10 @@
 package com.diego.findeciclo.controller;
 
 import java.util.List;
-
 import com.diego.findeciclo.model.Perfil;
 import com.diego.findeciclo.model.Usuario;
 import com.diego.findeciclo.service.IPerfilService;
 import com.diego.findeciclo.service.IUsuarioService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

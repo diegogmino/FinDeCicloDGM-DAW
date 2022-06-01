@@ -2,7 +2,6 @@ package com.diego.findeciclo.specification;
 
 import java.math.BigDecimal;
 import org.springframework.data.jpa.domain.Specification;
-
 import com.diego.findeciclo.model.Formato;
 import com.diego.findeciclo.model.Pelicula;
 

@@ -112,19 +112,6 @@ public class UsuariosRestController {
 		return new ResponseEntity<UsuarioDTO>(usuario, HttpStatus.OK);
 
 	}
-	
-	@GetMapping("/buscar/{id}")
-	public ResponseEntity<UsuarioDTO> listarPorId(@PathVariable int id) {
-
-		Usuario usuario = usuarioService.buscarPorId(id);
-
-		if(usuario == null) {
-			return new ResponseEntity<UsuarioDTO>(HttpStatus.NOT_FOUND);
-		}
-
-		return new ResponseEntity<UsuarioDTO>(UsuarioMapper.INSTANCE.toUsuarioDTO(usuario), HttpStatus.OK);
-		
-	}
 
 	@GetMapping("/buscarPedidos/{id}")
 	public ResponseEntity<List<Pedido>> listarPedidosPorUsuario(@PathVariable int id) {
@@ -146,14 +133,6 @@ public class UsuariosRestController {
         }
 
 		return new ResponseEntity<List<Pedido>>(pedidos, HttpStatus.OK);
-		
-	}
-	
-	@GetMapping("/listarTodos")
-	public List<UsuarioDTO> listarTodos() {
-		
-		List<Usuario> usuarios = usuarioService.buscarTodos();
-		return UsuarioMapper.INSTANCE.toListUsuarioDTO(usuarios);
 		
 	}
 	

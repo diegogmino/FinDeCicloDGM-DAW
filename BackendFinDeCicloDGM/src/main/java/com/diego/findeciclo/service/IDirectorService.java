@@ -1,9 +1,7 @@
 package com.diego.findeciclo.service;
 
 import java.util.List;
-
 import org.springframework.data.jpa.domain.Specification;
-
 import com.diego.findeciclo.model.Director;
 
 public interface IDirectorService {

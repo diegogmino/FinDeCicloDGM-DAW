@@ -1,10 +1,8 @@
 package com.diego.findeciclo.service.jpa;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.diego.findeciclo.model.Perfil;
 import com.diego.findeciclo.repository.PerfilRepository;
 import com.diego.findeciclo.service.IPerfilService;

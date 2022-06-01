@@ -1,7 +1,6 @@
 package com.diego.findeciclo.specification;
 
 import org.springframework.data.jpa.domain.Specification;
-
 import com.diego.findeciclo.model.Director;
 
 public class DirectorSpecification {

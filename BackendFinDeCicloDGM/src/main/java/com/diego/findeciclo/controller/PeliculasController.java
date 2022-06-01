@@ -1,14 +1,10 @@
 package com.diego.findeciclo.controller;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
-
 import com.diego.findeciclo.model.Director;
 import com.diego.findeciclo.model.Formato;
 import com.diego.findeciclo.model.Pelicula;

@@ -2,7 +2,6 @@ package com.diego.findeciclo.dto;
 
 import java.math.BigDecimal;
 import java.util.List;
-
 import com.diego.findeciclo.model.Director;
 import com.diego.findeciclo.model.Formato;
 

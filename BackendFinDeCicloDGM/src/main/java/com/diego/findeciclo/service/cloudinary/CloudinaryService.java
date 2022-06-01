@@ -1,6 +1,5 @@
 package com.diego.findeciclo.service.cloudinary;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,19 +7,15 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
-
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class CloudinaryService {
 
-    Cloudinary cloudinary;
+    private Cloudinary cloudinary;
 
     private Map<String, String> valuesMap = new HashMap<String, String>();
 

@@ -26,6 +26,11 @@ const usersApi = {
     return response.data;
   },
 
+  postMessage: async (message) => {
+    const response = await user.post('mailContacto', message);
+    return response.data;
+  },
+
 }  
 
 export default usersApi;

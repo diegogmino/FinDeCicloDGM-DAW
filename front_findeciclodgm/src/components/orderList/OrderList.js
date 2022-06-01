@@ -60,7 +60,7 @@ function Row(props) {
             {order.entregado == true && 'Sí'}
             {order.entregado == false && 'No'}
         </TableCell>
-        <TableCell align="left">{order.precioTotal}</TableCell>
+        <TableCell align="left">{order.precioTotal} €</TableCell>
         <TableCell align="left">{DateTime.fromMillis(order.fechaPedido).toLocaleString()}
             </TableCell>
       </TableRow>
@@ -88,7 +88,7 @@ function Row(props) {
                       <TableCell align="left">
                         {films.titulo}
                       </TableCell>
-                      <TableCell align="left">{films.precio}</TableCell>
+                      <TableCell align="left">{films.precio} €</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

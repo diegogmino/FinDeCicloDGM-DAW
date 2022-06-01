@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.diego.findeciclo.dto.CreateUsuarioDTO;
+import com.diego.findeciclo.dto.MailContacto;
 import com.diego.findeciclo.dto.PeliculaPedidoDTO;
 import com.diego.findeciclo.dto.UpdateUsuarioDTO;
 import com.diego.findeciclo.dto.UsuarioDTO;
@@ -80,6 +81,23 @@ public class UsuariosRestController {
 		mailService.sendEmail(usuario.getEmail(), "¡Registro completado!", mensaje);
 
 		return new ResponseEntity<UsuarioDTO>(UsuarioMapper.INSTANCE.toUsuarioDTO(usuarioService.guardarUsuario(usuario)), HttpStatus.OK);
+
+	}
+
+	@PostMapping("/mailContacto")
+	public ResponseEntity<Boolean> enviarMailContacto(@RequestBody MailContacto mail) {
+
+		String mensaje = "-------- Datos del usuario --------" + System.lineSeparator() +
+		"Nombre:" + mail.getNombre() + System.lineSeparator() +
+		"Apellidos: " + mail.getApellidos() + System.lineSeparator() +
+		"Correo: " + mail.getMail() + System.lineSeparator() +
+		"País del usuario: " + mail.getPais() + System.lineSeparator() +
+		"-------- Fin de datos del usuario --------" + System.lineSeparator() + System.lineSeparator() +
+		"Mensaje: "+ System.lineSeparator() + System.lineSeparator() + mail.getMensaje();
+
+		mailService.sendEmail("contacto.dcine@gmail.com", "Mensaje de contacto de " + mail.getMail(), mensaje);
+
+		return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 
 	}
 

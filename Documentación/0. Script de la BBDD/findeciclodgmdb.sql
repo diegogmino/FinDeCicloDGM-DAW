@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-06-2022 a las 14:03:12
+-- Tiempo de generación: 01-06-2022 a las 16:15:56
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -57,21 +57,8 @@ INSERT INTO `directores` (`id`, `nombre`, `apellido`, `pais`, `foto`, `foto_id`)
 (19, 'Lana ', 'Wachowski', 'Estados Unidos', 'http://res.cloudinary.com/diegogmino/image/upload/v1653668925/ge6rbxbaxumlu4p6srao.jpg', 'ge6rbxbaxumlu4p6srao'),
 (20, 'Satoshi', 'Kon', 'Japón', 'http://res.cloudinary.com/diegogmino/image/upload/v1653668934/vptv4xx8uzowh2ey4uxk.jpg', 'vptv4xx8uzowh2ey4uxk'),
 (21, 'Hayao', 'Miyazaki', 'Japón', 'http://res.cloudinary.com/diegogmino/image/upload/v1653668944/mdg9zcpv1orf7ogwohiw.jpg', 'mdg9zcpv1orf7ogwohiw'),
-(22, 'Mamoru', 'Hosoda', 'Japón', 'http://res.cloudinary.com/diegogmino/image/upload/v1653668055/enatrzh5pzxbeaiqm7bm.jpg', 'enatrzh5pzxbeaiqm7bm');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `metodos_pago`
---
-
-CREATE TABLE `metodos_pago` (
-  `id` int(5) NOT NULL,
-  `numeroTarjeta` int(16) NOT NULL,
-  `fechaCaducidad` date NOT NULL,
-  `cvv` int(3) NOT NULL,
-  `idUsuario` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(22, 'Mamoru', 'Hosoda', 'Japón', 'http://res.cloudinary.com/diegogmino/image/upload/v1653668055/enatrzh5pzxbeaiqm7bm.jpg', 'enatrzh5pzxbeaiqm7bm'),
+(23, 'Tomohiko', 'Ito', 'Japón', 'http://res.cloudinary.com/diegogmino/image/upload/v1654092354/d5shg6eymcxqjaermxbs.jpg', 'd5shg6eymcxqjaermxbs');
 
 -- --------------------------------------------------------
 
@@ -140,7 +127,10 @@ INSERT INTO `peliculas` (`id`, `codigoBarras`, `titulo`, `precio`, `portada`, `p
 (29, 8412569874301, 'Matrix', '19.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1653666875/omjug99gqyao0h6nie4j.jpg', 'omjug99gqyao0h6nie4j', 0, 0, 'Ciencia ficción', 'UHD4K', 'PERCEPCIÓN: Nuestro mundo es real. REALIDAD: Ese mundo es un sueño, una complicada trampa elaborada por un programa de un ordenador de inteligencia artificial que controla nuestra vida. Keanu Reeves y Laurence Fishburne lideran la lucha para liberar a la humanidad en este cautivador ciberthriller.'),
 (30, 8456325978154, 'Perfect Blue', '9.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1653666885/ni7a1ppdzo4j2atykfhi.jpg', 'ni7a1ppdzo4j2atykfhi', 1, 9, 'Anime', 'Bluray', 'Mima es la cantante de un famoso grupo musical japonés. Debido al fracaso de ventas de sus discos, su mánager decide apartarla del grupo y darle un papel en una serie de televisión. Mima cae entonces en una profunda depresión que la lleva a replantearse su vida y su carrera, pero su crisis se agrava cuando descubre que su vida está al alcance de cualquiera en Internet y que alguien la está vigilando. Cuando la serie empieza a emitirse por televisión, Mima comprueba que la ficción se reproduce en su vida real: sueño y realidad se confunden hasta el punto de cuestionarse su propia identidad. El desarrollo de los acontecimientos y su propia intuición llevarán a la protagonista a un desenlace absolutamente inesperado...'),
 (31, 8456259781036, 'Mi vecino Totoro', '9.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1653666895/ldl7yqu5jtaopu01kzwi.jpg', 'ldl7yqu5jtaopu01kzwi', 1, 4, 'Anime', 'Bluray', 'En los años 50, una familia japonesa se traslada al campo. Las dos hijas, Satsuki y Mei, entablan amistad con Totoro, un espíritu del bosque. El padre es un profesor universitario que estimula la imaginación de sus hijas relatándoles fábulas e historias mágicas sobre duendes, fantasmas y espíritus protectores de los hogares, mientras la madre se encuentra enferma en el hospital.'),
-(34, 8412569854236, 'Terciopelo Azul', '9.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1653667112/cmto903thvwjaevlb2er.jpg', 'cmto903thvwjaevlb2er', 1, 9, 'Thriller', 'Bluray', 'Una mañana, Jeffrey Beaumont (Kyle MacLachlan), después de visitar a su padre en el hospital, encuentra entre unos arbustos una oreja humana. La guarda en una bolsa de papel y la lleva a la comisaría de policía, donde le atiende el detective Williams (George Dickerson), que es vecino suyo. Comienza así una misteriosa intriga que desvelará extraños sucesos acontecidos en una pequeña localidad de Carolina del Norte.');
+(34, 8412569854236, 'Terciopelo Azul', '9.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1653667112/cmto903thvwjaevlb2er.jpg', 'cmto903thvwjaevlb2er', 1, 9, 'Thriller', 'Bluray', 'Una mañana, Jeffrey Beaumont (Kyle MacLachlan), después de visitar a su padre en el hospital, encuentra entre unos arbustos una oreja humana. La guarda en una bolsa de papel y la lleva a la comisaría de policía, donde le atiende el detective Williams (George Dickerson), que es vecino suyo. Comienza así una misteriosa intriga que desvelará extraños sucesos acontecidos en una pequeña localidad de Carolina del Norte.'),
+(43, 8412549651238, 'El viaje de Chihiro', '14.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1654092271/gixi7ub44pfkjezgq20a.jpg', 'gixi7ub44pfkjezgq20a', 0, 15, 'Anime', 'Bluray', 'Chihiro es una niña de diez años que viaja en coche con sus padres. Después de atravesar un túnel, llegan a un mundo fantástico, en el que no hay lugar para los seres humanos, sólo para los dioses de primera y segunda clase. Cuando descubre que sus padres han sido convertidos en cerdos, Chihiro se siente muy sola y asustada.'),
+(44, 8412795412065, 'Hello World', '9.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1654092428/wc9nz5l3s9ysriooqje5.jpg', 'wc9nz5l3s9ysriooqje5', 1, 10, 'Anime', 'Bluray', 'En el año 2027, Naomi Katagaki se encuentra con su yo de 10 años en el futuro. Ambos tendrán que salvar a la joven Ruri Ichigyō, con quien Naomi empezará a salir en los tres meses siguientes, y así cambiar su destino.'),
+(45, 8412465897416, 'Mirai, mi hermana pequeña', '29.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1654092581/t7jalaionltu2zlxscpl.jpg', 't7jalaionltu2zlxscpl', 0, 5, 'Anime', 'UHD4K', 'Kun, un niño mimado y consentido de cuatro años al que sus padres dejan de prestar atención cuando nace su hermana Mirai, empieza a sufrir situaciones en casa que nunca había vivido. Pero entonces, la versión adolescente de su hermana viaja en el tiempo desde el futuro para vivir junto a Kun una aventura extraordinaria más allá de lo imaginable.');
 
 -- --------------------------------------------------------
 
@@ -177,7 +167,10 @@ INSERT INTO `peliculas_directores` (`idPelicula`, `idDirector`) VALUES
 (29, 19),
 (30, 20),
 (31, 21),
-(34, 16);
+(34, 16),
+(43, 21),
+(44, 23),
+(45, 22);
 
 -- --------------------------------------------------------
 
@@ -260,13 +253,6 @@ ALTER TABLE `directores`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `metodos_pago`
---
-ALTER TABLE `metodos_pago`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `metodos_pagoToUsuarios` (`idUsuario`);
-
---
 -- Indices de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
@@ -317,13 +303,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `directores`
 --
 ALTER TABLE `directores`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
---
--- AUTO_INCREMENT de la tabla `metodos_pago`
---
-ALTER TABLE `metodos_pago`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
@@ -335,7 +315,7 @@ ALTER TABLE `pedidos`
 -- AUTO_INCREMENT de la tabla `peliculas`
 --
 ALTER TABLE `peliculas`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de la tabla `peliculas_pedidos`
@@ -358,12 +338,6 @@ ALTER TABLE `usuarios`
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `metodos_pago`
---
-ALTER TABLE `metodos_pago`
-  ADD CONSTRAINT `metodos_pagoToUsuarios` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`);
 
 --
 -- Filtros para la tabla `pedidos`

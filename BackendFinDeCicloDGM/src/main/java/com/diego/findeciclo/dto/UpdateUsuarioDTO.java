@@ -1,12 +1,5 @@
 package com.diego.findeciclo.dto;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
-
-import com.diego.findeciclo.model.MetodoPago;
-
 public class UpdateUsuarioDTO {
     
     private String nombre;
@@ -17,14 +10,11 @@ public class UpdateUsuarioDTO {
 	private String direccion;
 	private String pais;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "metodosPagoUsuario")
-	private List<MetodoPago> metodoDePago;
-
     public UpdateUsuarioDTO() {
     }
 
     public UpdateUsuarioDTO(String nombre, String apellido, String email, String contrasena, String telefono,
-            String direccion, String pais, List<MetodoPago> metodoDePago) {
+            String direccion, String pais) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
@@ -32,7 +22,6 @@ public class UpdateUsuarioDTO {
         this.telefono = telefono;
         this.direccion = direccion;
         this.pais = pais;
-        this.metodoDePago = metodoDePago;
     }
 
     public String getNombre() {
@@ -90,15 +79,5 @@ public class UpdateUsuarioDTO {
     public void setPais(String pais) {
         this.pais = pais;
     }
-
-    public List<MetodoPago> getMetodoDePago() {
-        return metodoDePago;
-    }
-
-    public void setMetodoDePago(List<MetodoPago> metodoDePago) {
-        this.metodoDePago = metodoDePago;
-    }
-
-    
 
 }

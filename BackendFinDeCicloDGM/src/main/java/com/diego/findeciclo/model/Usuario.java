@@ -34,9 +34,6 @@ public class Usuario {
     @JoinColumn(name="idPerfil")
 	private Perfil perfil;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "metodosPagoUsuario")
-	private List<MetodoPago> metodoDePago;
-	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidosUsuario", fetch = FetchType.EAGER)
 	private List<Pedido> pedidos;
 
@@ -45,8 +42,7 @@ public class Usuario {
 	}
 
 	public Usuario(Integer id, String nombre, String apellido, String email, String contrasena, String telefono,
-			String direccion, String pais, Date fechaRegistro, Integer estatus, Perfil perfil,
-			List<MetodoPago> metodoDePago, List<Pedido> pedidos) {
+			String direccion, String pais, Date fechaRegistro, Integer estatus, Perfil perfil, List<Pedido> pedidos) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -58,7 +54,6 @@ public class Usuario {
 		this.fechaRegistro = fechaRegistro;
 		this.estatus = estatus;
 		this.perfil = perfil;
-		this.metodoDePago = metodoDePago;
 		this.pedidos = pedidos;
 	}
 
@@ -140,14 +135,6 @@ public class Usuario {
 
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
-	}
-
-	public List<MetodoPago> getMetodoDePago() {
-		return metodoDePago;
-	}
-
-	public void setMetodoDePago(List<MetodoPago> metodoDePago) {
-		this.metodoDePago = metodoDePago;
 	}
 
 	public List<Pedido> getPedidos() {

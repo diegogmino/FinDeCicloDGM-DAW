@@ -57,7 +57,7 @@ export default function Checkout(props) {
 
   const navigate = useNavigate();
 
-  const finish = () => {
+  const redirect = () => {
     navigate("/checkout/completed");
   };
 
@@ -85,12 +85,29 @@ export default function Checkout(props) {
     let user = JSON.parse(localStorage.getItem("user"));
     UsersApi.postOrder(cart, user.id).then((res) => {
       if (res !== null) {
-        console.log(res);
+        let wishlist = JSON.parse(localStorage.getItem("wishlist"));
+        var wishlistArray = [];
+        var keys = Object.keys(wishlist);
+
+        keys.forEach(function (key) {
+          wishlistArray.push(wishlist[key]);
+        });
+
+        //Eliminar las peliculas de la lista de deseos, en el caso de que estén
+        cart.map((film) => {
+          const index = wishlistArray.indexOf(film.id);
+          if (index > -1) {
+            wishlistArray.splice(index, 1);
+          }
+        });
+
+        localStorage.setItem("wishlist", JSON.stringify(wishlistArray));
+
         setCart([]);
         setTotalItemsCart(0);
         setTotalCart(0);
         setOrderID(res.id);
-        finish();
+        redirect();
       }
     });
   }

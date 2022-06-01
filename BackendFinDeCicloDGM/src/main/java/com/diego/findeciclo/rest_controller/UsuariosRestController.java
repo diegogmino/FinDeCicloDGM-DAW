@@ -88,7 +88,7 @@ public class UsuariosRestController {
 	public ResponseEntity<Boolean> enviarMailContacto(@RequestBody MailContacto mail) {
 
 		String mensaje = "-------- Datos del usuario --------" + System.lineSeparator() +
-		"Nombre:" + mail.getNombre() + System.lineSeparator() +
+		"Nombre: " + mail.getNombre() + System.lineSeparator() +
 		"Apellidos: " + mail.getApellidos() + System.lineSeparator() +
 		"Correo: " + mail.getMail() + System.lineSeparator() +
 		"País del usuario: " + mail.getPais() + System.lineSeparator() +

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import FilmsApi from "../../api/filmsApi";
 import AlertComponent from "./../alert/AlertComponent";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
+import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
 
 export default function Product(props) {
   const { id, onAdd } = props;
@@ -14,11 +15,24 @@ export default function Product(props) {
   const [type, setType] = React.useState("");
   const [message, setMessage] = React.useState("");
 
+  const [isOnWishlist, setIsOnWishlist] = React.useState(true);
+
   useEffect(() => {
     FilmsApi.get(id).then((res) => {
       setFilm(res);
       setFirsDirector(res.directores[0]);
       setSecondDirector(res.directores[1]);
+
+      let wishlist = JSON.parse(localStorage.getItem("wishlist"));
+      let wishlistArray = [];
+      let keys = Object.keys(wishlist);
+
+      keys.forEach(function (key) {
+        wishlistArray.push(wishlist[key]);
+      });
+
+      setIsOnWishlist(wishlistArray.includes(res.id));
+      console.log(wishlistArray.includes(res.id));
     });
     let user = JSON.parse(localStorage.getItem("user"));
     if (user == null) {
@@ -37,30 +51,38 @@ export default function Product(props) {
     var wishlistArray = [];
     var keys = Object.keys(wishlist);
 
-    keys.forEach(function(key) {
+    keys.forEach(function (key) {
       wishlistArray.push(wishlist[key]);
     });
 
-    if (wishlistArray.find(checkFilm) === undefined) {
-      wishlistArray.push(film.id);
-      setType("success");
-      setMessage("Película añadida a tu lista de deseos");
-      setOpen(true);
-    } else {
-      setType("error");
-      setMessage("¡Ya has añadido esta película a tu lista de deseos!");
-      setOpen(true);
+    wishlistArray.push(film.id);
+    setType("success");
+    setMessage("Película añadida a tu lista de deseos");
+    setOpen(true);
+    setIsOnWishlist(true);
+
+    localStorage.setItem("wishlist", JSON.stringify(wishlistArray));
+  }
+
+  function deleteWishlist() {
+    let wishlist = JSON.parse(localStorage.getItem("wishlist"));
+    var wishlistArray = [];
+    var keys = Object.keys(wishlist);
+
+    keys.forEach(function (key) {
+      wishlistArray.push(wishlist[key]);
+    });
+
+    const index = wishlistArray.indexOf(film.id);
+    if (index > -1) {
+      wishlistArray.splice(index, 1);
     }
 
     localStorage.setItem("wishlist", JSON.stringify(wishlistArray));
-
-    /*
-
-    wishlistArray.push(film.id);
-    localStorage.setItem('wishlist', JSON.stringify(wishlistArray));
-    wishlist = JSON.parse(localStorage.getItem("wishlist"));
-    console.log(wishlist);
-    */
+    setIsOnWishlist(false);
+    setType("error");
+    setMessage("¡Película eliminada de tu lista de deseos!");
+    setOpen(true);
   }
 
   return (
@@ -114,12 +136,24 @@ export default function Product(props) {
                   </div>
                   <div>
                     {user !== "" && (
-                      <button
-                        onClick={() => addWishlist()}
-                        className=" ml-4 bg-principal border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gris-oscuro focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-principal"
-                      >
-                        <FavoriteOutlinedIcon />
-                      </button>
+                      <div>
+                        {isOnWishlist === false && (
+                          <button
+                            onClick={() => addWishlist()}
+                            className=" ml-4 bg-principal border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gris-oscuro focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-principal"
+                          >
+                            <FavoriteOutlinedIcon />
+                          </button>
+                        )}
+                        {isOnWishlist === true && (
+                          <button
+                            onClick={() => deleteWishlist()}
+                            className=" ml-4 bg-principal border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gris-oscuro focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-principal"
+                          >
+                            <HeartBrokenIcon />
+                          </button>
+                        )}
+                      </div>
                     )}
                   </div>
                 </div>
@@ -130,14 +164,14 @@ export default function Product(props) {
                     <div>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="stroke-current flex-shrink-0 h-6 w-6"
+                        className="stroke-current flex-shrink-0 h-6 w-6"
                         fill="none"
                         viewBox="0 0 24 24"
                       >
                         <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
                           d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                         />
                       </svg>
@@ -146,12 +180,24 @@ export default function Product(props) {
                   </div>
                   <div>
                     {user !== "" && (
-                      <button
-                        onClick={() => addWishlist()}
-                        className=" ml-4 bg-principal border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gris-oscuro focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-principal"
-                      >
-                        <FavoriteOutlinedIcon />
-                      </button>
+                      <div>
+                        {isOnWishlist === false && (
+                          <button
+                            onClick={() => addWishlist()}
+                            className=" ml-4 bg-principal border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gris-oscuro focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-principal"
+                          >
+                            <FavoriteOutlinedIcon />
+                          </button>
+                        )}
+                        {isOnWishlist === true && (
+                          <button
+                            onClick={() => deleteWishlist()}
+                            className=" ml-4 bg-principal border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gris-oscuro focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-principal"
+                          >
+                            <HeartBrokenIcon />
+                          </button>
+                        )}
+                      </div>
                     )}
                   </div>
                 </div>
@@ -178,12 +224,24 @@ export default function Product(props) {
                   </div>
                   <div>
                     {user !== "" && (
-                      <button
-                        onClick={() => addWishlist()}
-                        className=" ml-4 bg-principal border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gris-oscuro focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-principal"
-                      >
-                        <FavoriteOutlinedIcon />
-                      </button>
+                      <div>
+                        {isOnWishlist === false && (
+                          <button
+                            onClick={() => addWishlist()}
+                            className=" ml-4 bg-principal border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gris-oscuro focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-principal"
+                          >
+                            <FavoriteOutlinedIcon />
+                          </button>
+                        )}
+                        {isOnWishlist === true && (
+                          <button
+                            onClick={() => deleteWishlist()}
+                            className=" ml-4 bg-principal border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-gris-oscuro focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-principal"
+                          >
+                            <HeartBrokenIcon />
+                          </button>
+                        )}
+                      </div>
                     )}
                   </div>
                 </div>

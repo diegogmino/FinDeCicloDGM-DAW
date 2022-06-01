@@ -21,7 +21,6 @@ export default function Review(props) {
       mail: user.email
     })
     setAdresses([user.direccion, user.pais]);
-    console.log(user);
   }, []);
 
   return (

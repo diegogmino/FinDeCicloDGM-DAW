@@ -46,14 +46,14 @@ public class DirectoresController {
     }
 
     @RequestMapping(value = "/nuevo", method = RequestMethod.GET)
-    public String mostrarFormularioPelicula() {
+    public String mostrarFormularioDirector() {
 
         return "directores/formularioDirector";
     
     }
     
     @RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
-    public String mostrarFormularioEditarPelicula(Model model, @PathVariable int id) {
+    public String mostrarFormularioEditarDirectores(Model model, @PathVariable int id) {
 
         Director director = directorService.buscarPorId(id);
         

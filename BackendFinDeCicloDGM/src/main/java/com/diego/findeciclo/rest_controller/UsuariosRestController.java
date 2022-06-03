@@ -172,7 +172,7 @@ public class UsuariosRestController {
 	// Operaciones de los usuarios
 
 	@PostMapping("/nuevoPedido/{id}")
-	public ResponseEntity<Pedido> anhadirPedidoUsuario(@RequestBody List<PeliculaPedidoDTO> peliculas, @PathVariable int id) {
+	public ResponseEntity<Pedido> anhadirPedidoUsuario(@RequestBody List<PeliculaPedidoDTO> peliculasPedidoDTO, @PathVariable int id) {
 
 		Usuario usuario = usuarioService.buscarPorId(id);
 
@@ -185,9 +185,11 @@ public class UsuariosRestController {
 		pedido.setEntregado(false);
 		pedido.setFechaPedido(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 		pedido.setPedidosUsuario(usuario);
-		pedido.setPeliculas(PeliculaMapper.INSTANCE.toListPelicula(peliculas));
+		pedido.setPeliculas(PeliculaMapper.INSTANCE.toListPelicula(peliculasPedidoDTO));
 
-		for(PeliculaPedidoDTO pelicula : peliculas) {
+		float precioTotal = 0;
+
+		for(PeliculaPedidoDTO pelicula : peliculasPedidoDTO) {
 
 			Pelicula peli = peliculaService.buscarPorId(pelicula.getId());
 			int unidades = peli.getUnidades();
@@ -195,12 +197,8 @@ public class UsuariosRestController {
 			peli.setUnidades(unidades);
 			peliculaService.guardarPeli(peli);
 
-		}
-		
-		float precioTotal = 0;
-
-		for(PeliculaPedidoDTO pelicula : peliculas) {
 			precioTotal = precioTotal + (pelicula.getPrecio().floatValue() * pelicula.getQty());
+
 		}
 
 		if(precioTotal < 40) {

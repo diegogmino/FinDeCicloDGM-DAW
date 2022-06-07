@@ -46,7 +46,7 @@ INSERT INTO `directores` (`id`, `nombre`, `apellido`, `pais`, `foto`, `foto_id`)
 (2, 'Alex', 'Garland', 'Reino Unido', 'http://res.cloudinary.com/diegogmino/image/upload/v1653668473/gbs2nuvshnrsqmcfcpig.webp', 'gbs2nuvshnrsqmcfcpig'),
 (3, 'Takeshi', 'Kitano', 'Japón', 'http://res.cloudinary.com/diegogmino/image/upload/v1653668827/a82k92ihqtrzaqbbtwvt.webp', 'a82k92ihqtrzaqbbtwvt'),
 (10, 'Kiyoshi', 'Kurosawa', 'Japón', 'http://res.cloudinary.com/diegogmino/image/upload/v1653668966/wx4cmcbk7qkfmyvrgj6y.webp', 'wx4cmcbk7qkfmyvrgj6y'),
-(11, 'Akira', 'Kurosawa', 'Jaón', 'http://res.cloudinary.com/diegogmino/image/upload/v1653668843/htfewd1qukmd9kj1bmmq.jpg', 'htfewd1qukmd9kj1bmmq'),
+(11, 'Akira', 'Kurosawa', 'Japón', 'http://res.cloudinary.com/diegogmino/image/upload/v1653668843/htfewd1qukmd9kj1bmmq.jpg', 'htfewd1qukmd9kj1bmmq'),
 (12, 'Quentin', 'Tarantino', 'Estados Unidos', 'http://res.cloudinary.com/diegogmino/image/upload/v1653668853/s87zn6avtqn4tuzbqvzn.jpg', 's87zn6avtqn4tuzbqvzn'),
 (13, 'Peter', 'Jackson', 'Nueva Zelanda', 'http://res.cloudinary.com/diegogmino/image/upload/v1653668864/s00ch2htvvrzhdmkix3z.jpg', 's00ch2htvvrzhdmkix3z'),
 (14, 'Tetsuya', 'Nakashima', 'Japón', 'http://res.cloudinary.com/diegogmino/image/upload/v1653668875/qcli64q1tbhmdwo0net2.webp', 'qcli64q1tbhmdwo0net2'),

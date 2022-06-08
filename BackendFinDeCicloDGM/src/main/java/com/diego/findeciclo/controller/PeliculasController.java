@@ -235,6 +235,7 @@ public class PeliculasController {
         generos.add("Fantástico");
         generos.add("Histórico");
         generos.add("Policíaca");
+        generos.add("Romance");
         generos.add("Suspense");
         generos.add("Terror");
         generos.add("Thriller");

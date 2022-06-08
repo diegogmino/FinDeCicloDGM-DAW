@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2022 a las 17:18:18
+-- Tiempo de generación: 08-06-2022 a las 13:23:48
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -58,7 +58,8 @@ INSERT INTO `directores` (`id`, `nombre`, `apellido`, `pais`, `foto`, `foto_id`)
 (20, 'Satoshi', 'Kon', 'Japón', 'http://res.cloudinary.com/diegogmino/image/upload/v1653668934/vptv4xx8uzowh2ey4uxk.jpg', 'vptv4xx8uzowh2ey4uxk'),
 (21, 'Hayao', 'Miyazaki', 'Japón', 'http://res.cloudinary.com/diegogmino/image/upload/v1653668944/mdg9zcpv1orf7ogwohiw.jpg', 'mdg9zcpv1orf7ogwohiw'),
 (22, 'Mamoru', 'Hosoda', 'Japón', 'http://res.cloudinary.com/diegogmino/image/upload/v1653668055/enatrzh5pzxbeaiqm7bm.jpg', 'enatrzh5pzxbeaiqm7bm'),
-(23, 'Tomohiko', 'Ito', 'Japón', 'http://res.cloudinary.com/diegogmino/image/upload/v1654092354/d5shg6eymcxqjaermxbs.jpg', 'd5shg6eymcxqjaermxbs');
+(23, 'Tomohiko', 'Ito', 'Japón', 'http://res.cloudinary.com/diegogmino/image/upload/v1654092354/d5shg6eymcxqjaermxbs.jpg', 'd5shg6eymcxqjaermxbs'),
+(24, 'Sydney', 'Pollack', 'Estados Unidos', 'http://res.cloudinary.com/diegogmino/image/upload/v1654684514/ax65cablgzcsi5oruznj.jpg', 'ax65cablgzcsi5oruznj');
 
 -- --------------------------------------------------------
 
@@ -84,7 +85,8 @@ INSERT INTO `pedidos` (`id`, `direccionEnvio`, `fechaPedido`, `precioTotal`, `en
 (32, 'Luis Freire García nº 8', '2022-06-01', '18.98', 0, 1),
 (33, '221B Baker Street', '2022-06-01', '30.97', 0, 28),
 (34, 'Monte del destino, ático', '2022-06-03', '47.97', 0, 29),
-(35, 'Luis Freire García nº 8', '2022-06-03', '31.97', 0, 1);
+(35, 'Luis Freire García nº 8', '2022-06-03', '31.97', 0, 1),
+(36, 'Luis Freire García nº 8', '2022-06-08', '23.97', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -122,7 +124,7 @@ INSERT INTO `peliculas` (`id`, `codigoBarras`, `titulo`, `precio`, `portada`, `p
 (22, 8436535545416, 'El Señor de los Anillos: La Comunidad del Anillo', '15.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1653666793/g5sggxyvlhefu25la7fl.jpg', 'g5sggxyvlhefu25la7fl', 0, 1, 'Fantástico', 'Bluray', 'Con la compañía de unos cuantos héroes, Frodo Bolsón se embarca en un peligroso viaje para llevar el místico Anillo Único hasta el Monte del Destino para que se destruyan tanto el anillo como sus poderes, y no caiga en manos del malvado Sauron. El asombroso viaje comienza en la primera entrega de la épica Trilogía del director y coguinista Peter Jackson con la que ha redefinido el Cine de Fantasía.'),
 (23, 8453247951648, 'El Señor de los Anillos 2: Las dos torres', '15.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1653666806/u1bwxmbanmanbt2bhmxe.jpg', 'u1bwxmbanmanbt2bhmxe', 0, 2, 'Fantástico', 'Bluray', 'Frodo y Sam prosiguen su camino a Mordor: Gollum insiste en ser su guía. ¿Se puede confiar en alguien tan corrompido por el Anillo? ¿Se puede confiar en Frodo, tan afectado por el poder del anillo? Mientras, Aragorn, cada vez más cerca de su destino regio, agrupa fuerzas del bien para las batallas que se avecinan.'),
 (24, 8456328974561, 'El Señor de los Anillos 3: El retorno del Rey', '15.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1653666815/lnq1ggur7zynbjmuyg9n.jpg', 'lnq1ggur7zynbjmuyg9n', 0, 1, 'Fantástico', 'Bluray', 'Ha llegado el momento de que Frodo se enfrente a la malicia de Gollum, al horrible ataque de Ella Laraña, y al atormentador encanto de un anillo que se resiste a su destrucción. De que Aragorn acepte la espada de sus antepasados y la corona que le pertenece por nacimiento.'),
-(25, 8456329784651, 'Carretera perdida', '9.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1653666832/h8ciijbpv32jqhybxzaa.jpg', 'h8ciijbpv32jqhybxzaa', 1, 50, 'Suspense', 'Bluray', 'Fred Madison (Bill Pullman), un músico de jazz que vive con su esposa Renee (Patricia Arquette), recibe unas misteriosas cintas de vídeo en las que aparece una grabación de él con su mujer dentro de su propia casa. Poco después, durante una fiesta, un misterioso hombre (Robert Blake) le dice que está precisamente en su casa en ese instante. Las sospechas de que algo raro está pasando se tornan terroríficas cuando ve la siguiente cinta de video...'),
+(25, 8456329784651, 'Carretera perdida', '9.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1653666832/h8ciijbpv32jqhybxzaa.jpg', 'h8ciijbpv32jqhybxzaa', 1, 49, 'Suspense', 'Bluray', 'Fred Madison (Bill Pullman), un músico de jazz que vive con su esposa Renee (Patricia Arquette), recibe unas misteriosas cintas de vídeo en las que aparece una grabación de él con su mujer dentro de su propia casa. Poco después, durante una fiesta, un misterioso hombre (Robert Blake) le dice que está precisamente en su casa en ese instante. Las sospechas de que algo raro está pasando se tornan terroríficas cuando ve la siguiente cinta de video...'),
 (26, 8462598451035, 'El hombre elefante', '9.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1653666842/oni1mx8iqinxhqblr8qf.jpg', 'oni1mx8iqinxhqblr8qf', 1, 4, 'Suspense', 'Bluray', 'A finales del siglo XIX, el doctor Frederick Treves descubre en un circo a un hombre llamado John Merrick. Se trata de un ciudadano británico con la cabeza monstruosamente deformada, que vive en una situación de constante humillación y sufrimiento al ser exhibido diariamente como una atracción de feria.'),
 (27, 8457963215648, 'Maligno', '15.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1653666852/by5xwci9urdga68jclf9.jpg', 'by5xwci9urdga68jclf9', 0, 22, 'Terror', 'Bluray', 'Madison está paralizada por visiones de asesinatos espeluznantes, y su tormento empeora cuando descubre que estos sueños de vigilia son, de hecho, realidades aterradoras.'),
 (28, 8414533133036, 'Ex Machina', '11.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1653666861/rnpzx3jh3wuttp1mwalr.jpg', 'rnpzx3jh3wuttp1mwalr', 0, 18, 'Ciencia ficción', 'Bluray', 'Ex-Machina, un intenso thriller psicológico del aclamado guionista y director Alex Garland (28 Días Después, Sunshine), supone una escalofriante visión de un futuro no tan distante de la inteligencia artificial. En la aislada mansión en las montañas de un multimillonario de Internet, un joven toma parte en un extraño experimento: poner a prueba una inteligencia artificial instalada dentro de una preciosa robot.'),
@@ -131,8 +133,9 @@ INSERT INTO `peliculas` (`id`, `codigoBarras`, `titulo`, `precio`, `portada`, `p
 (31, 8456259781036, 'Mi vecino Totoro', '9.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1653666895/ldl7yqu5jtaopu01kzwi.jpg', 'ldl7yqu5jtaopu01kzwi', 1, 4, 'Anime', 'Bluray', 'En los años 50, una familia japonesa se traslada al campo. Las dos hijas, Satsuki y Mei, entablan amistad con Totoro, un espíritu del bosque. El padre es un profesor universitario que estimula la imaginación de sus hijas relatándoles fábulas e historias mágicas sobre duendes, fantasmas y espíritus protectores de los hogares, mientras la madre se encuentra enferma en el hospital.'),
 (34, 8412569854236, 'Terciopelo Azul', '9.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1653667112/cmto903thvwjaevlb2er.jpg', 'cmto903thvwjaevlb2er', 1, 9, 'Thriller', 'Bluray', 'Una mañana, Jeffrey Beaumont (Kyle MacLachlan), después de visitar a su padre en el hospital, encuentra entre unos arbustos una oreja humana. La guarda en una bolsa de papel y la lleva a la comisaría de policía, donde le atiende el detective Williams (George Dickerson), que es vecino suyo. Comienza así una misteriosa intriga que desvelará extraños sucesos acontecidos en una pequeña localidad de Carolina del Norte.'),
 (43, 8412549651238, 'El viaje de Chihiro', '14.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1654092271/gixi7ub44pfkjezgq20a.jpg', 'gixi7ub44pfkjezgq20a', 0, 15, 'Anime', 'Bluray', 'Chihiro es una niña de diez años que viaja en coche con sus padres. Después de atravesar un túnel, llegan a un mundo fantástico, en el que no hay lugar para los seres humanos, sólo para los dioses de primera y segunda clase. Cuando descubre que sus padres han sido convertidos en cerdos, Chihiro se siente muy sola y asustada.'),
-(44, 8412795412065, 'Hello World', '9.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1654092428/wc9nz5l3s9ysriooqje5.jpg', 'wc9nz5l3s9ysriooqje5', 1, 10, 'Anime', 'Bluray', 'En el año 2027, Naomi Katagaki se encuentra con su yo de 10 años en el futuro. Ambos tendrán que salvar a la joven Ruri Ichigyō, con quien Naomi empezará a salir en los tres meses siguientes, y así cambiar su destino.'),
-(45, 8412465897416, 'Mirai, mi hermana pequeña', '29.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1654092581/t7jalaionltu2zlxscpl.jpg', 't7jalaionltu2zlxscpl', 0, 5, 'Anime', 'UHD4K', 'Kun, un niño mimado y consentido de cuatro años al que sus padres dejan de prestar atención cuando nace su hermana Mirai, empieza a sufrir situaciones en casa que nunca había vivido. Pero entonces, la versión adolescente de su hermana viaja en el tiempo desde el futuro para vivir junto a Kun una aventura extraordinaria más allá de lo imaginable.');
+(44, 8412795412065, 'Hello World', '9.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1654092428/wc9nz5l3s9ysriooqje5.jpg', 'wc9nz5l3s9ysriooqje5', 1, 9, 'Anime', 'Bluray', 'En el año 2027, Naomi Katagaki se encuentra con su yo de 10 años en el futuro. Ambos tendrán que salvar a la joven Ruri Ichigyō, con quien Naomi empezará a salir en los tres meses siguientes, y así cambiar su destino.'),
+(45, 8412465897416, 'Mirai, mi hermana pequeña', '29.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1654092581/t7jalaionltu2zlxscpl.jpg', 't7jalaionltu2zlxscpl', 0, 6, 'Anime', 'UHD4K', 'Kun, un niño mimado y consentido de cuatro años al que sus padres dejan de prestar atención cuando nace su hermana Mirai, empieza a sufrir situaciones en casa que nunca había vivido. Pero entonces, la versión adolescente de su hermana viaja en el tiempo desde el futuro para vivir junto a Kun una aventura extraordinaria más allá de lo imaginable.'),
+(46, 8421394001943, 'Memorias de África', '9.99', 'http://res.cloudinary.com/diegogmino/image/upload/v1654684764/puf01xm1qtxni6iaef6b.jpg', 'puf01xm1qtxni6iaef6b', 1, 5, 'Romance', 'Bluray', 'Libremente inspirada en la obra homónima de la escritora danesa Isak Dinesen. A principios del siglo XX, Karen (Streep) contrae un matrimonio de conveniencia con el barón Blixen (Brandauer), un mujeriego empedernido. Ambos se establecen en Kenia con el propósito de explotar una plantación de café. En Karen Blixen nace un apasionado amor por la tierra y por las gentes de Kenia. Pero también se enamora pérdidamente de Denys Finch-Hatton (Redford), un personaje aventurero y romántico a la antigua usanza, que ama la libertad por encima de todas las cosas.');
 
 -- --------------------------------------------------------
 
@@ -172,7 +175,8 @@ INSERT INTO `peliculas_directores` (`idPelicula`, `idDirector`) VALUES
 (34, 16),
 (43, 21),
 (44, 23),
-(45, 22);
+(45, 22),
+(46, 24);
 
 -- --------------------------------------------------------
 
@@ -200,7 +204,9 @@ INSERT INTO `peliculas_pedidos` (`id`, `idPelicula`, `idPedido`) VALUES
 (53, 23, 34),
 (54, 24, 34),
 (55, 17, 35),
-(56, 28, 35);
+(56, 28, 35),
+(57, 25, 36),
+(58, 44, 36);
 
 -- --------------------------------------------------------
 
@@ -311,31 +317,31 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `directores`
 --
 ALTER TABLE `directores`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `peliculas`
 --
 ALTER TABLE `peliculas`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `peliculas_pedidos`
 --
 ALTER TABLE `peliculas_pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT de la tabla `perfiles`
 --
 ALTER TABLE `perfiles`
-  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

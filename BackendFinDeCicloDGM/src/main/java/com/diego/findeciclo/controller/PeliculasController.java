@@ -25,9 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping(value = "/admin/peliculas")
 public class PeliculasController {
-    
+
     @Autowired
-	private IPeliculaService peliculaService;
+    private IPeliculaService peliculaService;
 
     @Autowired
     private IDirectorService directorService;
@@ -49,7 +49,7 @@ public class PeliculasController {
         model.addAttribute("formatos", formatos);
 
         return "peliculas/listadoPeliculas";
-    
+
     }
 
     @RequestMapping(value = "/nueva", method = RequestMethod.GET)
@@ -64,7 +64,7 @@ public class PeliculasController {
         model.addAttribute("formatos", formatos);
         model.addAttribute("directores", directores);
         return "peliculas/formularioPelicula";
-    
+
     }
 
     @RequestMapping(value = "/editar/{id}", method = RequestMethod.GET)
@@ -85,7 +85,7 @@ public class PeliculasController {
         model.addAttribute("directores", directores);
 
         return "peliculas/formularioEditarPelicula";
-    
+
     }
 
     @RequestMapping(value = "/detalle/{id}", method = RequestMethod.GET)
@@ -96,7 +96,7 @@ public class PeliculasController {
         model.addAttribute("pelicula", peli);
 
         return "peliculas/detallePelicula";
-    
+
     }
 
     @RequestMapping(value = "/eliminar/{id}", method = RequestMethod.GET)
@@ -108,42 +108,46 @@ public class PeliculasController {
         peliculaService.eliminarPeli(id);
 
         return "redirect:/admin/peliculas/index";
-    
+
     }
 
     // Filtro
-	@RequestMapping(value = "/filtrar", method = RequestMethod.GET)
-	public String filtrar(@RequestParam(required = false) Boolean destacada, @RequestParam(required = false) Formato formato, @RequestParam(required = false) String titulo, @RequestParam(required = false) String genero, Model model) {
+    @RequestMapping(value = "/filtrar", method = RequestMethod.GET)
+    public String filtrar(@RequestParam(required = false) Boolean destacada,
+            @RequestParam(required = false) Formato formato, @RequestParam(required = false) String titulo,
+            @RequestParam(required = false) String genero, Model model) {
 
-		Specification<Pelicula> spec = construirSpecification(destacada, formato, titulo, genero);
+        Specification<Pelicula> spec = construirSpecification(destacada, formato, titulo, genero);
         List<Pelicula> peliculas = peliculaService.filtrar(spec);
 
-		List<String> generos = crearListaGeneros();
+        List<String> generos = crearListaGeneros();
         List<String> formatos = crearListaFormatos();
 
         model.addAttribute("peliculas", peliculas);
         model.addAttribute("generos", generos);
         model.addAttribute("formatos", formatos);
 
+        return "peliculas/listadoPeliculas";
 
-		return "peliculas/listadoPeliculas";
-		
-	}
+    }
 
     // MÉTODOS POST
     @RequestMapping(value = "/guardar", method = RequestMethod.POST)
-    public String guardar(@RequestParam("codigoBarras") long codigoBarras, @RequestParam("titulo") String titulo, 
-    @RequestParam("director1") Integer dire1, @RequestParam(name="director2", required = false) Integer dire2, @RequestParam("precio") BigDecimal precio,
-    @RequestParam("portada") MultipartFile portada, @RequestParam("destacada") boolean destacada, @RequestParam("unidades") Integer unidades, 
-    @RequestParam("genero") String genero, @RequestParam("formato") Formato formato, @RequestParam("sinopsis") String sinopsis, Model model) throws IOException {
+    public String guardar(@RequestParam("codigoBarras") long codigoBarras, @RequestParam("titulo") String titulo,
+            @RequestParam("director1") Integer dire1, @RequestParam(name = "director2", required = false) Integer dire2,
+            @RequestParam("precio") BigDecimal precio,
+            @RequestParam("portada") MultipartFile portada, @RequestParam("destacada") boolean destacada,
+            @RequestParam("unidades") Integer unidades,
+            @RequestParam("genero") String genero, @RequestParam("formato") Formato formato,
+            @RequestParam("sinopsis") String sinopsis, Model model) throws IOException {
 
         List<Director> directores = new ArrayList<Director>();
 
-        if(dire1 != null) {
+        if (dire1 != null) {
             directores.add(directorService.buscarPorId(dire1));
         }
 
-        if(dire2 != null) {
+        if (dire2 != null) {
             directores.add(directorService.buscarPorId(dire2));
         }
 
@@ -151,28 +155,33 @@ public class PeliculasController {
         String portadaCloudinary = (String) result.get("url");
         String portada_id = (String) result.get("public_id");
 
-        Pelicula pelicula = new Pelicula(codigoBarras, titulo, precio, portadaCloudinary, portada_id, destacada, unidades, genero, formato, sinopsis, directores);
+        Pelicula pelicula = new Pelicula(codigoBarras, titulo, precio, portadaCloudinary, portada_id, destacada,
+                unidades, genero, formato, sinopsis, directores);
         peliculaService.guardarPeli(pelicula);
 
-		return "redirect:/admin/peliculas/index";
-        
-	}
+        return "redirect:/admin/peliculas/index";
+
+    }
 
     @RequestMapping(value = "/actualizar", method = RequestMethod.POST)
-    public String actualizar(@RequestParam("id") int id, @RequestParam("codigoBarras") long codigoBarras, @RequestParam("titulo") String titulo, 
-    @RequestParam("director1") Integer dire1, @RequestParam(name="director2", required = false) Integer dire2, @RequestParam("precio") BigDecimal precio,
-    @RequestParam(name="portada",  required = false) MultipartFile portada, @RequestParam("destacada") boolean destacada, @RequestParam("unidades") Integer unidades, 
-    @RequestParam("genero") String genero, @RequestParam("formato") Formato formato, @RequestParam("sinopsis") String sinopsis, Model model) throws IOException {
+    public String actualizar(@RequestParam("id") int id, @RequestParam("codigoBarras") long codigoBarras,
+            @RequestParam("titulo") String titulo,
+            @RequestParam("director1") Integer dire1, @RequestParam(name = "director2", required = false) Integer dire2,
+            @RequestParam("precio") BigDecimal precio,
+            @RequestParam(name = "portada", required = false) MultipartFile portada,
+            @RequestParam("destacada") boolean destacada, @RequestParam("unidades") Integer unidades,
+            @RequestParam("genero") String genero, @RequestParam("formato") Formato formato,
+            @RequestParam("sinopsis") String sinopsis, Model model) throws IOException {
 
         Pelicula peliculaBBDD = peliculaService.buscarPorId(id);
 
         List<Director> directores = new ArrayList<Director>();
 
-        if(dire1 != null) {
+        if (dire1 != null) {
             directores.add(directorService.buscarPorId(dire1));
         }
 
-        if(dire2 != null) {
+        if (dire2 != null) {
             directores.add(directorService.buscarPorId(dire2));
         }
 
@@ -181,11 +190,11 @@ public class PeliculasController {
         peliculaBBDD.setDirectores(directores);
         peliculaBBDD.setPrecio(precio);
 
-        if(!portada.isEmpty()) {
+        if (!portada.isEmpty()) {
 
             System.out.println(peliculaBBDD.getPortada_id());
 
-            if(peliculaBBDD.getPortada_id() != null) {
+            if (peliculaBBDD.getPortada_id() != null) {
                 cloudinaryService.delete(peliculaBBDD.getPortada_id());
             }
 
@@ -207,9 +216,9 @@ public class PeliculasController {
 
         peliculaService.guardarPeli(peliculaBBDD);
 
-		return "redirect:/admin/peliculas/index";
+        return "redirect:/admin/peliculas/index";
 
-	}
+    }
 
     private List<String> crearListaGeneros() {
 
@@ -247,28 +256,30 @@ public class PeliculasController {
 
     }
 
-    private Specification<Pelicula> construirSpecification(Boolean destacada, Formato formato, String titulo, String genero) {
-		
-		// Seteamos el objeto spec con la cláusula where a null para que de forma predeterminada haga un findAll normal
+    private Specification<Pelicula> construirSpecification(Boolean destacada, Formato formato, String titulo,
+            String genero) {
+
+        // Seteamos el objeto spec con la cláusula where a null para que de forma
+        // predeterminada haga un findAll normal
         Specification<Pelicula> spec = Specification.where(null);
 
-        if(destacada != null) {
+        if (destacada != null) {
             spec = spec.and(PeliculaSpecification.destacada(destacada));
         }
 
-        if(formato != null) {
+        if (formato != null) {
             spec = spec.and(PeliculaSpecification.formato(formato));
         }
-        
-        if(titulo != "") {
+
+        if (titulo != "") {
             spec = spec.and(PeliculaSpecification.titulo(titulo));
         }
 
-        if(genero != "") {
+        if (genero != "") {
             spec = spec.and(PeliculaSpecification.genero(genero));
         }
-        
-		return spec;
-	}
+
+        return spec;
+    }
 
 }

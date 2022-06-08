@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping(value = "/admin/pedidos")
 public class PedidosController {
-    
+
     @Autowired
     private IPedidoService pedidoService;
 
@@ -53,51 +53,55 @@ public class PedidosController {
 
     // Métodos POST
     @RequestMapping(value = "/actualizar", method = RequestMethod.POST)
-    public String actualizar(@RequestParam("id") int id, @RequestParam("direccionEnvio") String direccionEnvio, @RequestParam(name="entregado") boolean entregado, Model model) {
+    public String actualizar(@RequestParam("id") int id, @RequestParam("direccionEnvio") String direccionEnvio,
+            @RequestParam(name = "entregado") boolean entregado, Model model) {
 
         Pedido pedidoBBDD = pedidoService.buscarPorId(id);
         pedidoBBDD.setDireccionEnvio(direccionEnvio);
         pedidoBBDD.setEntregado(entregado);
         pedidoService.guardarPedido(pedidoBBDD);
 
-		return "redirect:/admin/pedidos/index";
+        return "redirect:/admin/pedidos/index";
 
-	}
+    }
 
     // Filtro
-	@RequestMapping(value = "/filtrar", method = RequestMethod.GET)
-	public String filtrar(@RequestParam(required = false) String nombre, @RequestParam(required = false) String apellido, @RequestParam(required = false) Boolean entregado, Model model) {
+    @RequestMapping(value = "/filtrar", method = RequestMethod.GET)
+    public String filtrar(@RequestParam(required = false) String nombre,
+            @RequestParam(required = false) String apellido, @RequestParam(required = false) Boolean entregado,
+            Model model) {
 
-		Specification<Pedido> spec = construirSpecification(nombre, apellido, entregado);
+        Specification<Pedido> spec = construirSpecification(nombre, apellido, entregado);
         List<Pedido> pedidos = pedidoService.filtrar(spec);
 
         System.out.println(pedidos.toString());
 
         model.addAttribute("pedidos", pedidos);
 
-		return "pedidos/listadoPedidos";
-		
-	}
+        return "pedidos/listadoPedidos";
+
+    }
 
     // Métodos privados
     private Specification<Pedido> construirSpecification(String nombre, String apellido, Boolean entregado) {
-		
-		// Seteamos el objeto spec con la cláusula where a null para que de forma predeterminada haga un findAll normal
+
+        // Seteamos el objeto spec con la cláusula where a null para que de forma
+        // predeterminada haga un findAll normal
         Specification<Pedido> spec = Specification.where(null);
 
-        if(nombre != "") {
+        if (nombre != "") {
             spec = spec.and(PedidoSpecification.nombre(nombre));
         }
 
-        if(apellido != "") {
+        if (apellido != "") {
             spec = spec.and(PedidoSpecification.apellido(apellido));
         }
-        
-        if(entregado != null) {
+
+        if (entregado != null) {
             spec = spec.and(PedidoSpecification.entregado(entregado));
         }
-        
-		return spec;
-	}
+
+        return spec;
+    }
 
 }

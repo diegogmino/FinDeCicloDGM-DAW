@@ -9,13 +9,13 @@ import com.diego.findeciclo.model.Pedido;
 import com.diego.findeciclo.model.Usuario;
 
 public interface PedidoRepository extends JpaRepository<Pedido, Integer>, JpaSpecificationExecutor<Pedido> {
-	
+
 	@Query("SELECT p FROM Pedido p WHERE p.fechaPedido BETWEEN ?1 AND ?2")
 	public List<Pedido> filtrarFecha(Date fechaMin, Date fechaMax);
-	
+
 	@Query("SELECT p FROM Pedido p WHERE p.pedidosUsuario = ?1")
 	public List<Pedido> filtrarUsuario(Usuario usuario);
-	
+
 	@Query("SELECT p FROM Pedido p WHERE p.pedidosUsuario = ?1 AND p.entregado = TRUE")
 	public List<Pedido> filtrarEntregadosPorUsuario(Usuario usuario);
 

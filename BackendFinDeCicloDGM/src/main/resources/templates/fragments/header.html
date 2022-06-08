@@ -1,65 +1,100 @@
-<nav th:fragment="menu" class="navbar navbar-expand-lg navbar-dark barra-navegacion">
+<nav
+  th:fragment="menu"
+  class="navbar navbar-expand-lg navbar-dark barra-navegacion"
+>
   <div class="container-fluid">
     <a class="navbar-brand" th:href="@{/admin/peliculas/index}">DCine</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-
-          <div th:if="${#strings.contains(#httpServletRequest.requestURI, 'peliculas')}">
-            <a class="nav-link active" th:href="@{/admin/peliculas/index}">Peliculas</a>
+          <div
+            th:if="${#strings.contains(#httpServletRequest.requestURI, 'peliculas')}"
+          >
+            <a class="nav-link active" th:href="@{/admin/peliculas/index}"
+              >Peliculas</a
+            >
           </div>
 
-          <div th:if="${!#strings.contains(#httpServletRequest.requestURI, 'peliculas')}">
-            <a class="nav-link" th:href="@{/admin/peliculas/index}">Peliculas</a> 
+          <div
+            th:if="${!#strings.contains(#httpServletRequest.requestURI, 'peliculas')}"
+          >
+            <a class="nav-link" th:href="@{/admin/peliculas/index}"
+              >Peliculas</a
+            >
           </div>
-            
         </li>
         <li class="nav-item">
-
-          <div th:if="${#strings.contains(#httpServletRequest.requestURI, 'directores')}">
-            <a class="nav-link active" th:href="@{/admin/directores/index}">Directores</a>
+          <div
+            th:if="${#strings.contains(#httpServletRequest.requestURI, 'directores')}"
+          >
+            <a class="nav-link active" th:href="@{/admin/directores/index}"
+              >Directores</a
+            >
           </div>
 
-          <div th:if="${!#strings.contains(#httpServletRequest.requestURI, 'directores')}">
-            <a class="nav-link" th:href="@{/admin/directores/index}">Directores</a> 
+          <div
+            th:if="${!#strings.contains(#httpServletRequest.requestURI, 'directores')}"
+          >
+            <a class="nav-link" th:href="@{/admin/directores/index}"
+              >Directores</a
+            >
           </div>
-          
         </li>
         <li class="nav-item">
-
-          <div th:if="${#strings.contains(#httpServletRequest.requestURI, 'usuarios')}">
-            <a class="nav-link active" th:href="@{/admin/usuarios/index}">Usuarios</a>
+          <div
+            th:if="${#strings.contains(#httpServletRequest.requestURI, 'usuarios')}"
+          >
+            <a class="nav-link active" th:href="@{/admin/usuarios/index}"
+              >Usuarios</a
+            >
           </div>
 
-          <div th:if="${!#strings.contains(#httpServletRequest.requestURI, 'usuarios')}">
-            <a class="nav-link" th:href="@{/admin/usuarios/index}">Usuarios</a> 
+          <div
+            th:if="${!#strings.contains(#httpServletRequest.requestURI, 'usuarios')}"
+          >
+            <a class="nav-link" th:href="@{/admin/usuarios/index}">Usuarios</a>
           </div>
-
         </li>
         <li class="nav-item">
-
-          <div th:if="${#strings.contains(#httpServletRequest.requestURI, 'pedidos')}">
-            <a class="nav-link active" th:href="@{/admin/pedidos/index}">Pedidos</a>
+          <div
+            th:if="${#strings.contains(#httpServletRequest.requestURI, 'pedidos')}"
+          >
+            <a class="nav-link active" th:href="@{/admin/pedidos/index}"
+              >Pedidos</a
+            >
           </div>
 
-          <div th:if="${!#strings.contains(#httpServletRequest.requestURI, 'pedidos')}">
-            <a class="nav-link" th:href="@{/admin/pedidos/index}">Pedidos</a> 
+          <div
+            th:if="${!#strings.contains(#httpServletRequest.requestURI, 'pedidos')}"
+          >
+            <a class="nav-link" th:href="@{/admin/pedidos/index}">Pedidos</a>
           </div>
-
         </li>
         <li class="nav-item">
-
-          <div th:if="${#strings.contains(#httpServletRequest.requestURI, 'perfiles')}">
-            <a class="nav-link active" th:href="@{/admin/perfiles/index}">Perfiles</a>
+          <div
+            th:if="${#strings.contains(#httpServletRequest.requestURI, 'perfiles')}"
+          >
+            <a class="nav-link active" th:href="@{/admin/perfiles/index}"
+              >Perfiles</a
+            >
           </div>
 
-          <div th:if="${!#strings.contains(#httpServletRequest.requestURI, 'perfiles')}">
-            <a class="nav-link" th:href="@{/admin/perfiles/index}">Perfiles</a> 
+          <div
+            th:if="${!#strings.contains(#httpServletRequest.requestURI, 'perfiles')}"
+          >
+            <a class="nav-link" th:href="@{/admin/perfiles/index}">Perfiles</a>
           </div>
-
         </li>
 
         <li class="nav-item" sec:authorize="isAuthenticated()">

@@ -14,26 +14,26 @@ public class HomeController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-    
-    @GetMapping("/login")
+
+	@GetMapping("/login")
 	public String mostrarLogin() {
 		return "formLogin";
 	}
-	
+
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
 		SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
 		logoutHandler.logout(request, null, null);
 		return "redirect:/login";
 	}
-	
+
 	@GetMapping("/")
 	public String peliculasUsuario() {
 		return "redirect:/admin/peliculas/index";
 	}
 
 	@GetMapping("/bcrypt/{texto}")
-	@ResponseBody 
+	@ResponseBody
 	public String encriptar(@PathVariable("texto") String texto) {
 		return texto + " Encriptado en BCrypt: " + passwordEncoder.encode(texto);
 	}

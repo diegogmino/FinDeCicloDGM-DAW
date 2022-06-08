@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "perfiles")
 public class Perfil {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -70,5 +70,4 @@ public class Perfil {
 		return true;
 	}
 
-	
 }

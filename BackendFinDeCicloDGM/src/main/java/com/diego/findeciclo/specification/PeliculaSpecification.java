@@ -7,7 +7,7 @@ import com.diego.findeciclo.model.Pelicula;
 
 public class PeliculaSpecification {
 
-	public static Specification<Pelicula> codigoBarras(Long codigoBarras) {
+    public static Specification<Pelicula> codigoBarras(Long codigoBarras) {
         return (root, query, builder) -> {
             return builder.equal(builder.lower(root.get("codigoBarras")), codigoBarras);
         };
@@ -27,22 +27,21 @@ public class PeliculaSpecification {
 
     public static Specification<Pelicula> titulo(String titulo) {
         return (root, query, builder) -> {
-            return builder.like(builder.lower(root.get("titulo")), "%"+titulo.toLowerCase()+"%");
+            return builder.like(builder.lower(root.get("titulo")), "%" + titulo.toLowerCase() + "%");
         };
     }
 
     public static Specification<Pelicula> genero(String genero) {
         return (root, query, builder) -> {
-            return builder.like(builder.lower(root.get("genero")), "%"+genero.toLowerCase()+"%");
+            return builder.like(builder.lower(root.get("genero")), "%" + genero.toLowerCase() + "%");
         };
     }
-    
+
     public static Specification<Pelicula> precioMinMax(BigDecimal min, BigDecimal max) {
         return (root, query, builder) -> {
             return builder.between(root.get("precio"), min, max);
         };
     }
-
 
     public static Specification<Pelicula> precioMin(BigDecimal min) {
         return (root, query, builder) -> {
@@ -55,5 +54,5 @@ public class PeliculaSpecification {
             return builder.lessThanOrEqualTo(root.get("precio"), max);
         };
     }
-	
+
 }

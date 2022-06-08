@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -29,11 +29,11 @@ public class Usuario {
 	private String pais;
 	private Date fechaRegistro;
 	private Integer estatus;
-	
+
 	@ManyToOne
-    @JoinColumn(name="idPerfil")
+	@JoinColumn(name = "idPerfil")
 	private Perfil perfil;
-	
+
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidosUsuario", fetch = FetchType.EAGER)
 	private List<Pedido> pedidos;
 

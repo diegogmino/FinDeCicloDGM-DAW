@@ -14,7 +14,7 @@ public class EnvioMailService implements IEnvioMailService {
 
     @Override
     public void sendEmail(String to, String subject, String content) {
-        
+
         SimpleMailMessage email = new SimpleMailMessage();
 
         email.setTo(to);
@@ -22,7 +22,7 @@ public class EnvioMailService implements IEnvioMailService {
         email.setText(content);
 
         mailSender.send(email);
-        
+
     }
-    
+
 }

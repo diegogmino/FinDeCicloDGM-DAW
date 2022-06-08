@@ -13,7 +13,7 @@ public class DirectorService implements IDirectorService {
 
 	@Autowired
 	private DirectorRepository direRepo;
-	
+
 	@Override
 	public Director guardarDirector(Director dire) {
 		return direRepo.save(dire);

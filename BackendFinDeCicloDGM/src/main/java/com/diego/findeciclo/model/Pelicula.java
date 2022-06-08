@@ -18,11 +18,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "peliculas")
 public class Pelicula {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private long codigoBarras;
 	private String titulo;
 	private BigDecimal precio;
@@ -33,23 +33,21 @@ public class Pelicula {
 	private String genero;
 
 	@Column(columnDefinition = "ENUM('DVD', 'Bluray', 'UHD4K')")
-    @Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING)
 	private Formato formato;
-	
+
 	private String sinopsis;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "peliculas_directores",
-			joinColumns = @JoinColumn(name="idPelicula"),
-			inverseJoinColumns = @JoinColumn(name="idDirector")
-	)
+	@JoinTable(name = "peliculas_directores", joinColumns = @JoinColumn(name = "idPelicula"), inverseJoinColumns = @JoinColumn(name = "idDirector"))
 	private List<Director> directores;
 
 	public Pelicula() {
 		super();
 	}
 
-	public Pelicula(long codigoBarras, String titulo, BigDecimal precio, String portada, String portada_id, boolean destacada,
+	public Pelicula(long codigoBarras, String titulo, BigDecimal precio, String portada, String portada_id,
+			boolean destacada,
 			int unidades, String genero, Formato formato, String sinopsis, List<Director> directores) {
 		super();
 		this.codigoBarras = codigoBarras;

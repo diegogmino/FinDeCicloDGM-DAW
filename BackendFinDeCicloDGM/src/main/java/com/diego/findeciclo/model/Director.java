@@ -9,18 +9,17 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "directores")
 public class Director {
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String nombre;
 	private String apellido;
 	private String pais;
 	private String foto;
 	private String foto_id;
-	
+
 	public Director() {
 		super();
 	}
@@ -130,7 +129,5 @@ public class Director {
 			return false;
 		return true;
 	}
-
-	
 
 }

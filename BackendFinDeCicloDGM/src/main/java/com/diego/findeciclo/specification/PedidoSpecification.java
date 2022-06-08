@@ -5,7 +5,7 @@ import com.diego.findeciclo.model.Pedido;
 
 public class PedidoSpecification {
 
-	public static Specification<Pedido> nombre(String nombre) {
+    public static Specification<Pedido> nombre(String nombre) {
         return (root, query, builder) -> {
             return builder.equal(builder.lower(root.get("pedidosUsuario").get("nombre")), nombre);
         };

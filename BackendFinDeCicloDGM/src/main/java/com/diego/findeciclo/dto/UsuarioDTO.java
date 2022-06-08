@@ -12,8 +12,9 @@ public class UsuarioDTO {
 	private String direccion;
 	private String pais;
 	private Perfil perfil;
-	
-	public UsuarioDTO() {}
+
+	public UsuarioDTO() {
+	}
 
 	public UsuarioDTO(Integer id, String nombre, String apellido, String email, String telefono, String direccion,
 			String pais, Perfil perfil) {
@@ -90,5 +91,5 @@ public class UsuarioDTO {
 	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}
-	
+
 }

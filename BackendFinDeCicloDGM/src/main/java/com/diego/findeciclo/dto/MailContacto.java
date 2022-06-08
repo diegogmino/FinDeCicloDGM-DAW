@@ -1,13 +1,13 @@
 package com.diego.findeciclo.dto;
 
 public class MailContacto {
-    
+
     private String nombre;
     private String apellidos;
     private String mail;
     private String pais;
     private String mensaje;
-    
+
     public MailContacto() {
     }
 

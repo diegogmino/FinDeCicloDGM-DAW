@@ -19,7 +19,7 @@ public class UsuarioService implements IUsuarioService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@Override
 	public Usuario guardarUsuario(Usuario usuario) {
 		return usuarioRepo.save(usuario);
@@ -37,15 +37,15 @@ public class UsuarioService implements IUsuarioService {
 
 	@Override
 	public UsuarioDTO usuarioEncontrado(String email, String contrasena) {
-		
+
 		Optional<Usuario> usuario = usuarioRepo.buscarEmail(email);
 
-		if(passwordEncoder.matches(contrasena, usuario.get().getContrasena())) {
+		if (passwordEncoder.matches(contrasena, usuario.get().getContrasena())) {
 			return UsuarioMapper.INSTANCE.toUsuarioDTO(usuario.get());
 		} else {
 			return null;
 		}
-		
+
 	}
 
 	@Override
@@ -63,12 +63,12 @@ public class UsuarioService implements IUsuarioService {
 
 		Optional<Usuario> usuario = usuarioRepo.buscarEmail(email);
 
-		if(usuario.isEmpty()) {
+		if (usuario.isEmpty()) {
 			return false;
 		} else {
 			return true;
 		}
-		
+
 	}
-	
+
 }

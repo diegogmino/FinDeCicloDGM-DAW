@@ -35,7 +35,11 @@
               >Volver a películas</a
             >
           </div>
-          <form th:action="@{/admin/peliculas/guardar}" method="post" enctype="multipart/form-data">
+          <form
+            th:action="@{/admin/peliculas/guardar}"
+            method="post"
+            enctype="multipart/form-data"
+          >
             <div class="row">
               <div class="col-6">
                 <div class="mb-3">
@@ -123,10 +127,14 @@
               </div>
               <div class="col-6">
                 <div class="mb-3">
-                  <label for="formFile" class="form-label"
-                    >Portada</label
-                  >
-                  <input class="form-control" type="file" th:name="portada" id="portada" required />
+                  <label for="formFile" class="form-label">Portada</label>
+                  <input
+                    class="form-control"
+                    type="file"
+                    th:name="portada"
+                    id="portada"
+                    required
+                  />
                 </div>
               </div>
             </div>

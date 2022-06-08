@@ -12,12 +12,12 @@ public class PerfilService implements IPerfilService {
 
 	@Autowired
 	private PerfilRepository perfilRepo;
-	
+
 	@Override
 	public Perfil guardarPerfil(Perfil perfil) {
 		return perfilRepo.save(perfil);
 	}
-	
+
 	@Override
 	public List<Perfil> buscarTodos() {
 		return perfilRepo.findAll();
@@ -38,5 +38,4 @@ public class PerfilService implements IPerfilService {
 		perfilRepo.deleteById(id);
 	}
 
-	
 }

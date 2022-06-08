@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping(value = "/admin/perfiles")
 public class PerfilController {
-    
+
     @Autowired
     private IPerfilService perfilService;
 
@@ -34,7 +34,7 @@ public class PerfilController {
         return "perfiles/listadoPerfiles";
 
     }
-    
+
     @RequestMapping(value = "/nuevo", method = RequestMethod.GET)
     public String mostrarFormularioPerfiles() {
 
@@ -58,14 +58,14 @@ public class PerfilController {
         Perfil perfil = perfilService.buscarPerfil(id);
 
         boolean tieneUsuario = false;
-        for(Usuario usuario : usuarios) {
-            if(usuario.getPerfil().equals(perfil)) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getPerfil().equals(perfil)) {
                 tieneUsuario = true;
                 break;
             }
         }
 
-        if(!tieneUsuario) {
+        if (!tieneUsuario) {
             perfilService.eliminarPerfil(id);
             return "redirect:/admin/perfiles/index";
         }
@@ -76,6 +76,7 @@ public class PerfilController {
         model.addAttribute("perfiles", perfiles);
         model.addAttribute("perfil", perfil);
         return "perfiles/listadoPerfiles";
+
     }
 
     // MÉTODOS POST
@@ -86,9 +87,9 @@ public class PerfilController {
 
         perfilService.guardarPerfil(perfilNuevo);
 
-		return "redirect:/admin/perfiles/index";
-        
-	}
+        return "redirect:/admin/perfiles/index";
+
+    }
 
     @RequestMapping(value = "/actualizar", method = RequestMethod.POST)
     public String actualizar(@RequestParam("id") int id, @RequestParam("perfil") String perfil, Model model) {
@@ -97,8 +98,8 @@ public class PerfilController {
         perfilBBDD.setPerfil(perfil);
         perfilService.guardarPerfil(perfilBBDD);
 
-		return "redirect:/admin/perfiles/index";
-        
-	}
+        return "redirect:/admin/perfiles/index";
+
+    }
 
 }

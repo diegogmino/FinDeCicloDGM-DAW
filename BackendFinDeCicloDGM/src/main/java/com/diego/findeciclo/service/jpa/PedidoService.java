@@ -13,7 +13,7 @@ public class PedidoService implements IPedidoService {
 
 	@Autowired
 	private PedidoRepository pedidoRepo;
-	
+
 	@Override
 	public Pedido guardarPedido(Pedido pedido) {
 		return pedidoRepo.save(pedido);
@@ -23,7 +23,7 @@ public class PedidoService implements IPedidoService {
 	public List<Pedido> buscarTodos() {
 		return pedidoRepo.findAll();
 	}
-	
+
 	@Override
 	public Pedido buscarPorId(int id) {
 		return pedidoRepo.findById(id).get();
@@ -38,5 +38,5 @@ public class PedidoService implements IPedidoService {
 	public List<Pedido> filtrar(Specification<Pedido> spec) {
 		return pedidoRepo.findAll(spec);
 	}
-	
+
 }

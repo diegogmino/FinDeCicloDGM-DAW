@@ -30,13 +30,17 @@ public class PeliculasRestController {
 
 	// Métodos CRUD
 	@GetMapping("listarDeseos/{lista}")
-	public List<Pelicula> listarTodas(@PathVariable List<Integer>lista) {
+	public List<Pelicula> listarTodas(@PathVariable List<Integer> lista) {
+
 		return peliculaService.buscarListaDeseos(lista);
+
 	}
 
 	@GetMapping("/buscar/{id}")
 	public Pelicula listarPorId(@PathVariable int id) {
+
 		return peliculaService.buscarPorId(id);
+
 	}
 
 	// Filtro
@@ -48,11 +52,13 @@ public class PeliculasRestController {
 			@RequestParam("page") int pageIndex,
 			@RequestParam("size") int pageSize) {
 
-		Specification<Pelicula> spec = construirSpec(codigoBarras, titulo, genero, precioMax, precioMin, destacada, formato);
+		Specification<Pelicula> spec = construirSpec(codigoBarras, titulo, genero, precioMax, precioMin, destacada,
+				formato);
 		Page<Pelicula> peliculasPage = peliculaService.filtrarPaginado(spec, PageRequest.of(pageIndex, pageSize));
 		List<PeliculaDTO> peliculasDTO = PeliculaMapper.INSTANCE.toListPeliculaDTO(peliculasPage.getContent());
 
-		return new PageImpl<PeliculaDTO>(peliculasDTO, PageRequest.of(pageIndex, pageSize), peliculasPage.getTotalElements());
+		return new PageImpl<PeliculaDTO>(peliculasDTO, PageRequest.of(pageIndex, pageSize),
+				peliculasPage.getTotalElements());
 
 	}
 
@@ -93,6 +99,7 @@ public class PeliculasRestController {
 		}
 
 		return spec;
+
 	}
 
 }

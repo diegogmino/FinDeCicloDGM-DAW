@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "pedidos")
 public class Pedido {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -26,16 +26,13 @@ public class Pedido {
 	private Date fechaPedido;
 	private BigDecimal precioTotal;
 	private boolean entregado;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "peliculas_pedidos",
-			joinColumns = @JoinColumn(name="idPedido"),
-			inverseJoinColumns = @JoinColumn(name="idPelicula")
-	)
+	@JoinTable(name = "peliculas_pedidos", joinColumns = @JoinColumn(name = "idPedido"), inverseJoinColumns = @JoinColumn(name = "idPelicula"))
 	private List<Pelicula> peliculas;
-	
+
 	@ManyToOne
-    @JoinColumn(name = "idUsuario", nullable = false)
+	@JoinColumn(name = "idUsuario", nullable = false)
 	@JsonIgnore
 	private Usuario pedidosUsuario;
 
@@ -109,6 +106,5 @@ public class Pedido {
 	public void setPedidosUsuario(Usuario pedidosUsuario) {
 		this.pedidosUsuario = pedidosUsuario;
 	}
-	
-	
+
 }

@@ -1,136 +1,199 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DCine - Pedidos</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DCine - Pedidos</title>
 
-  <link th:href="@{/static/css/styles.css}" rel="stylesheet">
+    <link th:href="@{/static/css/styles.css}" rel="stylesheet" />
 
-  <!-- Bootstrap CSS -->
-  <link th:href="@{/static//bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-  <!-- Fontawesome -->
-  <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
-  <link  rel="icon"   href="/static/images/Favicon.png" type="image/png" />
+    <!-- Bootstrap CSS -->
+    <link
+      th:href="@{/static//bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
+    <!-- Fontawesome -->
+    <link
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/static/images/Favicon.png" type="image/png" />
+  </head>
 
-</head>
+  <body>
+    <header th:insert="fragments/header::menu"></header>
 
-<body>
-  
-  <header th:insert="fragments/header::menu"></header>
-
-  <div class="container-fluid">
-
-    <div class="row d.flex justify-content-center mt-4">
-      <div class="col-10">
-        <div class="accordion" id="accordionExample">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Filtros
-              </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <form th:action="@{/admin/pedidos/filtrar}">
-                  <div class="row">
-                    
-                    <div class="col-6">
-                      <div class="mb-3">
-                        <label for="disabledSelect" class="form-label">Nombre del usuario</label>
-                        <input type="text" th:name="nombre" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <div class="container-fluid">
+      <div class="row d.flex justify-content-center mt-4">
+        <div class="col-10">
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                >
+                  Filtros
+                </button>
+              </h2>
+              <div
+                id="collapseTwo"
+                class="accordion-collapse collapse"
+                aria-labelledby="headingTwo"
+                data-bs-parent="#accordionExample"
+              >
+                <div class="accordion-body">
+                  <form th:action="@{/admin/pedidos/filtrar}">
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="mb-3">
+                          <label for="disabledSelect" class="form-label"
+                            >Nombre del usuario</label
+                          >
+                          <input
+                            type="text"
+                            th:name="nombre"
+                            class="form-control"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="mb-3">
+                          <label for="disabledSelect" class="form-label"
+                            >Apellido del usuario</label
+                          >
+                          <input
+                            type="text"
+                            th:name="apellido"
+                            class="form-control"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                          />
+                        </div>
                       </div>
                     </div>
-                    <div class="col-6">
-                      <div class="mb-3">
-                        <label for="disabledSelect" class="form-label">Apellido del usuario</label>
-                        <input type="text" th:name="apellido" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="mb-3">
+                          <label for="disabledSelect" class="form-label"
+                            >Entregado</label
+                          >
+                          <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            th:name="entregado"
+                          >
+                            <option selected th:value="null">
+                              Selecciona...
+                            </option>
+                            <option th:value="true">Sí</option>
+                            <option th:value="false">No</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-6">
-                      <div class="mb-3">
-                        <label for="disabledSelect" class="form-label">Entregado</label>
-                        <select class="form-select" aria-label="Default select example" th:name="entregado">
-                          <option selected th:value=null>Selecciona...</option>
-                          <option th:value=true>Sí</option>
-                          <option th:value=false>No</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <button type="submit" class="btn btn-outline-dark">Filtrar</button>
-                </form>
-                <div class="row">
-  
+                    <button type="submit" class="btn btn-outline-dark">
+                      Filtrar
+                    </button>
+                  </form>
+                  <div class="row"></div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  
-    <div class="row d-flex justify-content-center mt-3">
-      <div class="col-10">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Dirección de envío</th>
-              <th scope="col">Fecha de pedido</th>
-              <th scope="col">Precio total</th>
-              <th scope="col">Entregado</th>
-              <th scope="col">Usuario</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="pedido : ${pedidos}">
-              <td th:text="${pedido.id}"></td>
-              <td th:text="${pedido.direccionEnvio}"></td>                  
-              <td th:text="${pedido.fechaPedido}"></td>
-              <td th:text="${pedido.precioTotal} + '€'"></td>
-              <td th:text="${pedido.entregado == true ? 'Sí' : 'No'}"></td>
-              <td th:text="${pedido.pedidosUsuario.nombre} + ' '+ ${pedido.pedidosUsuario.apellido}"></td>
-              <td> <!-- Botón de detalle -->
-                <a class="btn btn-outline-dark" th:href="@{/admin/pedidos/detalle/{id} (id=${pedido.id}) }" role="button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-                  </svg>
-                </a>
-              </td>
-              <td> <!-- Botón de edición -->
-                <a class="btn btn-outline-dark" th:href="@{/admin/pedidos/editar/{id} (id=${pedido.id}) }" role="button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                  </svg>
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+
+      <div class="row d-flex justify-content-center mt-3">
+        <div class="col-10">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Dirección de envío</th>
+                <th scope="col">Fecha de pedido</th>
+                <th scope="col">Precio total</th>
+                <th scope="col">Entregado</th>
+                <th scope="col">Usuario</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="pedido : ${pedidos}">
+                <td th:text="${pedido.id}"></td>
+                <td th:text="${pedido.direccionEnvio}"></td>
+                <td th:text="${pedido.fechaPedido}"></td>
+                <td th:text="${pedido.precioTotal} + '€'"></td>
+                <td th:text="${pedido.entregado == true ? 'Sí' : 'No'}"></td>
+                <td
+                  th:text="${pedido.pedidosUsuario.nombre} + ' '+ ${pedido.pedidosUsuario.apellido}"
+                ></td>
+                <td>
+                  <!-- Botón de detalle -->
+                  <a
+                    class="btn btn-outline-dark"
+                    th:href="@{/admin/pedidos/detalle/{id} (id=${pedido.id}) }"
+                    role="button"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-eye-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                      <path
+                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"
+                      />
+                    </svg>
+                  </a>
+                </td>
+                <td>
+                  <!-- Botón de edición -->
+                  <a
+                    class="btn btn-outline-dark"
+                    th:href="@{/admin/pedidos/editar/{id} (id=${pedido.id}) }"
+                    role="button"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-pencil-square"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                      />
+                    </svg>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
-  </div>
-
-
-  
-
-  
-
-
-  <!-- Bootstrap core JavaScript
+    <!-- Bootstrap core JavaScript
   ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script> 
-
-</body>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script>
+  </body>
 </html>

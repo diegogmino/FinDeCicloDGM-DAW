@@ -30,7 +30,7 @@ public class PeliculaService implements IPeliculaService {
 	@Override
 	public List<Pelicula> buscarListaDeseos(List<Integer> lista) {
 		List<Pelicula> peliculas = new ArrayList<Pelicula>();
-		for(int i = 0; i < lista.size(); i++) {
+		for (int i = 0; i < lista.size(); i++) {
 			peliculas.add(peliRepo.findById(lista.get(i)).get());
 		}
 		return peliculas;
@@ -51,7 +51,6 @@ public class PeliculaService implements IPeliculaService {
 		peliRepo.deleteById(id);
 	}
 
-
 	@Override
 	public List<Pelicula> filtrar(Specification<Pelicula> spec) {
 		return peliRepo.findAll(spec);
@@ -61,9 +60,5 @@ public class PeliculaService implements IPeliculaService {
 	public Page<Pelicula> filtrarPaginado(Specification<Pelicula> spec, Pageable pageable) {
 		return peliRepo.findAll(spec, pageable);
 	}
-
-	
-	
-	
 
 }

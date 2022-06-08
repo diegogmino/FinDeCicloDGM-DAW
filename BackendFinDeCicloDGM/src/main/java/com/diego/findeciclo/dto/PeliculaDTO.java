@@ -3,7 +3,7 @@ package com.diego.findeciclo.dto;
 import java.math.BigDecimal;
 
 public class PeliculaDTO {
-    
+
     private Integer id;
     private String titulo;
     private String portada;

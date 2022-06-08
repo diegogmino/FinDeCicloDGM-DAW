@@ -1,139 +1,239 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title th:text="'DCine - Detalle del pedido: #' + ${pedido.id}"></title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="'DCine - Detalle del pedido: #' + ${pedido.id}"></title>
 
-  <link th:href="@{/static/css/styles.css}" rel="stylesheet">
+    <link th:href="@{/static/css/styles.css}" rel="stylesheet" />
 
-  <!-- Bootstrap CSS -->
-  <link th:href="@{/static//bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-  <!-- Fontawesome -->
-  <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
-  <link  rel="icon"   href="/static/images/Favicon.png" type="image/png" />
+    <!-- Bootstrap CSS -->
+    <link
+      th:href="@{/static//bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
+    <!-- Fontawesome -->
+    <link
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/static/images/Favicon.png" type="image/png" />
+  </head>
 
-</head>
+  <body>
+    <header th:insert="fragments/header::menu"></header>
 
-<body>
-  
-  <header th:insert="fragments/header::menu"></header>
-  
-  <div class="container-fluid">
-    <div class="row d.flex justify-content-center mt-4">
+    <div class="container-fluid">
+      <div class="row d.flex justify-content-center mt-4">
         <div class="col-10 mt-3">
-            <div class="row justify-content-center mb-4">
-                <a type="button" class="btn btn-outline-dark" href="/admin/pedidos/index">Volver a pedidos</a>
-            </div>
-            <form>
-              <fieldset disabled>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="mb-3">
-                            <label for="nombre" class="form-label">Dirección de envío</label>
-                            <input type="hidden" th:name="id" th:value="${pedido.id}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <input type="text" th:name="nombre" th:value="${pedido.direccionEnvio}" class="form-control disable" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="mb-3">
-                            <label for="codBarras" class="form-label">Fecha de pedido</label>
-                            <input type="text" th:name="apellido" th:value="${pedido.fechaPedido}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                    </div>
+          <div class="row justify-content-center mb-4">
+            <a
+              type="button"
+              class="btn btn-outline-dark"
+              href="/admin/pedidos/index"
+              >Volver a pedidos</a
+            >
+          </div>
+          <form>
+            <fieldset disabled>
+              <div class="row">
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="nombre" class="form-label"
+                      >Dirección de envío</label
+                    >
+                    <input
+                      type="hidden"
+                      th:name="id"
+                      th:value="${pedido.id}"
+                      class="form-control"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                    />
+                    <input
+                      type="text"
+                      th:name="nombre"
+                      th:value="${pedido.direccionEnvio}"
+                      class="form-control disable"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                    />
+                  </div>
                 </div>
-                <div class="row">
-                  <div class="col-6">
-                      <div class="mb-3">
-                          <label for="nombre" class="form-label">Precio total</label>
-                          <input type="text" th:name="pais" th:value="${pedido.precioTotal} + '€'" class="form-control disable" id="exampleInputEmail1" aria-describedby="emailHelp">
-                      </div>
-                  </div>
-                  <div class="col-6">
-                      <div class="mb-3">
-                          <label for="codBarras" class="form-label">Entregado</label>
-                          <input type="text" th:name="foto" th:value="${pedido.entregado == true ? 'Sí' : 'No'}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                      </div>
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="codBarras" class="form-label"
+                      >Fecha de pedido</label
+                    >
+                    <input
+                      type="text"
+                      th:name="apellido"
+                      th:value="${pedido.fechaPedido}"
+                      class="form-control"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                    />
                   </div>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="mb-3">
-                            <label for="nombre" class="form-label">Usuario que ha realizado el pedido</label>
-                            <input type="text" th:name="pais" th:value="${pedido.pedidosUsuario.nombre} + ' ' + ${pedido.pedidosUsuario.apellido}" class="form-control disable" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                    </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="nombre" class="form-label">Precio total</label>
+                    <input
+                      type="text"
+                      th:name="pais"
+                      th:value="${pedido.precioTotal} + '€'"
+                      class="form-control disable"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                    />
                   </div>
-                </fieldset>  
-              </form>
+                </div>
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="codBarras" class="form-label">Entregado</label>
+                    <input
+                      type="text"
+                      th:name="foto"
+                      th:value="${pedido.entregado == true ? 'Sí' : 'No'}"
+                      class="form-control"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <div class="mb-3">
+                    <label for="nombre" class="form-label"
+                      >Usuario que ha realizado el pedido</label
+                    >
+                    <input
+                      type="text"
+                      th:name="pais"
+                      th:value="${pedido.pedidosUsuario.nombre} + ' ' + ${pedido.pedidosUsuario.apellido}"
+                      class="form-control disable"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                    />
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </form>
         </div>
-    </div>
+      </div>
 
-    <div class="row d-flex justify-content-center mt-3">
-      <div class="col-10">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Código de barras</th>
-              <th scope="col">Título</th>
-              <th scope="col">Precio</th>
-              <th scope="col">Destacada</th>
-              <th scope="col">Unidades</th>
-              <th scope="col">Género</th>
-              <th scope="col">Formato</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="pelicula : ${pedido.peliculas}">
-              <td th:text="${pelicula.id}"></td>
-              <td th:text="${pelicula.codigoBarras}"></td>                  
-              <td th:text="${pelicula.titulo}"></td>
-              <td th:text="${pelicula.precio} + '€'"></td>
-              <td th:text="${pelicula.destacada == true ? 'Sí' : 'No'}"></td>
-              <td th:text="${pelicula.unidades}"></td>
-              <td th:text="${pelicula.genero}"></td>
-              <td th:text="${pelicula.formato}"></td>
-              <td> <!-- Botón de detalle -->
-                <a class="btn btn-outline-dark" th:href="@{/admin/peliculas/detalle/{id} (id=${pelicula.id}) }" role="button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-                  </svg>
-                </a>
-              </td>
-              <td> <!-- Botón de edición -->
-                <a class="btn btn-outline-dark" th:href="@{/admin/peliculas/editar/{id} (id=${pelicula.id}) }" role="button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                  </svg>
-                </a>
-              </td>
-              <td> <!-- Botón de eliminar -->
-                <a class="btn btn-outline-dark" th:href="@{/admin/peliculas/eliminar/{id} (id=${pelicula.id}) }" role="button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                  </svg>
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="row d-flex justify-content-center mt-3">
+        <div class="col-10">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Código de barras</th>
+                <th scope="col">Título</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Destacada</th>
+                <th scope="col">Unidades</th>
+                <th scope="col">Género</th>
+                <th scope="col">Formato</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="pelicula : ${pedido.peliculas}">
+                <td th:text="${pelicula.id}"></td>
+                <td th:text="${pelicula.codigoBarras}"></td>
+                <td th:text="${pelicula.titulo}"></td>
+                <td th:text="${pelicula.precio} + '€'"></td>
+                <td th:text="${pelicula.destacada == true ? 'Sí' : 'No'}"></td>
+                <td th:text="${pelicula.unidades}"></td>
+                <td th:text="${pelicula.genero}"></td>
+                <td th:text="${pelicula.formato}"></td>
+                <td>
+                  <!-- Botón de detalle -->
+                  <a
+                    class="btn btn-outline-dark"
+                    th:href="@{/admin/peliculas/detalle/{id} (id=${pelicula.id}) }"
+                    role="button"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-eye-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                      <path
+                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"
+                      />
+                    </svg>
+                  </a>
+                </td>
+                <td>
+                  <!-- Botón de edición -->
+                  <a
+                    class="btn btn-outline-dark"
+                    th:href="@{/admin/peliculas/editar/{id} (id=${pelicula.id}) }"
+                    role="button"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-pencil-square"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                      />
+                    </svg>
+                  </a>
+                </td>
+                <td>
+                  <!-- Botón de eliminar -->
+                  <a
+                    class="btn btn-outline-dark"
+                    th:href="@{/admin/peliculas/eliminar/{id} (id=${pelicula.id}) }"
+                    role="button"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-trash-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                      />
+                    </svg>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
 
-
-  <!-- Bootstrap core JavaScript
+    <!-- Bootstrap core JavaScript
   ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script> 
-
-</body>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script>
+  </body>
 </html>

@@ -52,18 +52,18 @@ public class UsuariosRestController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	// Métodos CRUD
 
 	@PostMapping("/guardar")
 	public ResponseEntity<UsuarioDTO> registro(@RequestBody CreateUsuarioDTO createUsuarioDTO) {
 
-		if(usuarioService.buscarEmail(createUsuarioDTO.getEmail())) {
+		if (usuarioService.buscarEmail(createUsuarioDTO.getEmail())) {
 			return new ResponseEntity<UsuarioDTO>(HttpStatus.BAD_REQUEST);
 		}
 
 		Usuario usuario = UsuarioMapper.INSTANCE.toUsuario(createUsuarioDTO);
-		
+
 		java.sql.Date fechaRegistro = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 		usuario.setFechaRegistro(fechaRegistro);
 		usuario.setEstatus(1);
@@ -73,13 +73,16 @@ public class UsuariosRestController {
 		Perfil perfil = perfilService.buscarPerfil(2);
 		usuario.setPerfil(perfil);
 
-		String mensaje = "¡Bienvenid@ a la familia, " + usuario.getNombre() + "!" + System.lineSeparator() + System.lineSeparator() +
-		"Te has registrado correctamente en DCine. Ahora puedes empezar a comprar el mejor cine al mejor precio, ¡nos vemos por los mundos fílmicos!" + System.lineSeparator() + System.lineSeparator() +
-		"El equipo de DCine :)";
+		String mensaje = "¡Bienvenid@ a la familia, " + usuario.getNombre() + "!" + System.lineSeparator()
+				+ System.lineSeparator() +
+				"Te has registrado correctamente en DCine. Ahora puedes empezar a comprar el mejor cine al mejor precio, ¡nos vemos por los mundos fílmicos!"
+				+ System.lineSeparator() + System.lineSeparator() +
+				"El equipo de DCine :)";
 
 		mailService.sendEmail(usuario.getEmail(), "¡Registro completado!", mensaje);
 
-		return new ResponseEntity<UsuarioDTO>(UsuarioMapper.INSTANCE.toUsuarioDTO(usuarioService.guardarUsuario(usuario)), HttpStatus.OK);
+		return new ResponseEntity<UsuarioDTO>(
+				UsuarioMapper.INSTANCE.toUsuarioDTO(usuarioService.guardarUsuario(usuario)), HttpStatus.OK);
 
 	}
 
@@ -87,12 +90,12 @@ public class UsuariosRestController {
 	public ResponseEntity<Boolean> enviarMailContacto(@RequestBody MailContacto mail) {
 
 		String mensaje = "-------- Datos del usuario --------" + System.lineSeparator() +
-		"Nombre: " + mail.getNombre() + System.lineSeparator() +
-		"Apellidos: " + mail.getApellidos() + System.lineSeparator() +
-		"Correo: " + mail.getMail() + System.lineSeparator() +
-		"País del usuario: " + mail.getPais() + System.lineSeparator() +
-		"-------- Fin de datos del usuario --------" + System.lineSeparator() + System.lineSeparator() +
-		"Mensaje: "+ System.lineSeparator() + System.lineSeparator() + mail.getMensaje();
+				"Nombre: " + mail.getNombre() + System.lineSeparator() +
+				"Apellidos: " + mail.getApellidos() + System.lineSeparator() +
+				"Correo: " + mail.getMail() + System.lineSeparator() +
+				"País del usuario: " + mail.getPais() + System.lineSeparator() +
+				"-------- Fin de datos del usuario --------" + System.lineSeparator() + System.lineSeparator() +
+				"Mensaje: " + System.lineSeparator() + System.lineSeparator() + mail.getMensaje();
 
 		mailService.sendEmail("contacto.dcine@gmail.com", "Mensaje de contacto de " + mail.getMail(), mensaje);
 
@@ -105,7 +108,7 @@ public class UsuariosRestController {
 
 		UsuarioDTO usuario = usuarioService.usuarioEncontrado(email, contrasena);
 
-		if(usuario == null) {
+		if (usuario == null) {
 			return new ResponseEntity<UsuarioDTO>(HttpStatus.NOT_FOUND);
 		}
 
@@ -118,7 +121,7 @@ public class UsuariosRestController {
 
 		Usuario usuario = usuarioService.buscarPorId(id);
 
-		if(usuario == null) {
+		if (usuario == null) {
 			return new ResponseEntity<List<Pedido>>(HttpStatus.NOT_FOUND);
 		}
 
@@ -126,22 +129,22 @@ public class UsuariosRestController {
 
 		ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
 
-        for (Pedido pedido : pedidosUsuario) {
-            if (!pedidos.contains(pedido)) {
-                pedidos.add(pedido);
-            }
-        }
+		for (Pedido pedido : pedidosUsuario) {
+			if (!pedidos.contains(pedido)) {
+				pedidos.add(pedido);
+			}
+		}
 
 		return new ResponseEntity<List<Pedido>>(pedidos, HttpStatus.OK);
-		
+
 	}
-	
+
 	@PutMapping("/actualizar/{id}")
 	public ResponseEntity<UsuarioDTO> actualizar(@RequestBody UpdateUsuarioDTO updateUsuarioDTO, @PathVariable int id) {
 
 		Usuario usuarioBBDD = usuarioService.buscarPorId(id);
 
-		if(usuarioBBDD == null) {
+		if (usuarioBBDD == null) {
 			return new ResponseEntity<UsuarioDTO>(HttpStatus.NOT_FOUND);
 		}
 
@@ -153,14 +156,15 @@ public class UsuariosRestController {
 		usuarioBBDD.setDireccion(updateUsuarioDTO.getDireccion());
 		usuarioBBDD.setPais(updateUsuarioDTO.getPais());
 
-		return new ResponseEntity<UsuarioDTO>(UsuarioMapper.INSTANCE.toUsuarioDTO(usuarioService.guardarUsuario(usuarioBBDD)), HttpStatus.OK);
+		return new ResponseEntity<UsuarioDTO>(
+				UsuarioMapper.INSTANCE.toUsuarioDTO(usuarioService.guardarUsuario(usuarioBBDD)), HttpStatus.OK);
 
 	}
-	
+
 	@DeleteMapping("/borrar/{id}")
 	public ResponseEntity<Void> borrar(@PathVariable int id) {
-		
-		if(usuarioService.buscarPorId(id) == null) {
+
+		if (usuarioService.buscarPorId(id) == null) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 
@@ -170,13 +174,13 @@ public class UsuariosRestController {
 	}
 
 	// Operaciones de los usuarios
-
 	@PostMapping("/nuevoPedido/{id}")
-	public ResponseEntity<Pedido> anhadirPedidoUsuario(@RequestBody List<PeliculaPedidoDTO> peliculasPedidoDTO, @PathVariable int id) {
+	public ResponseEntity<Pedido> anhadirPedidoUsuario(@RequestBody List<PeliculaPedidoDTO> peliculasPedidoDTO,
+			@PathVariable int id) {
 
 		Usuario usuario = usuarioService.buscarPorId(id);
 
-		if(usuario == null) {
+		if (usuario == null) {
 			return new ResponseEntity<Pedido>(new Pedido(), HttpStatus.NOT_FOUND);
 		}
 
@@ -189,7 +193,7 @@ public class UsuariosRestController {
 
 		float precioTotal = 0;
 
-		for(PeliculaPedidoDTO pelicula : peliculasPedidoDTO) {
+		for (PeliculaPedidoDTO pelicula : peliculasPedidoDTO) {
 
 			Pelicula peli = peliculaService.buscarPorId(pelicula.getId());
 			int unidades = peli.getUnidades();
@@ -201,7 +205,7 @@ public class UsuariosRestController {
 
 		}
 
-		if(precioTotal < 40) {
+		if (precioTotal < 40) {
 			precioTotal = (float) (precioTotal + 3.99);
 		}
 

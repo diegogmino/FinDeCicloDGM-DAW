@@ -27,5 +27,5 @@ public class UsuariosController {
         return "usuarios/listadoUsuarios";
 
     }
-    
+
 }

@@ -9,5 +9,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
 	@Query("SELECT u FROM Usuario u WHERE u.email LIKE ?1")
 	public Optional<Usuario> buscarEmail(String email);
-	
+
 }

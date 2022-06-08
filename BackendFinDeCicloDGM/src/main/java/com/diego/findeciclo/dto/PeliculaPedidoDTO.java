@@ -6,22 +6,22 @@ import com.diego.findeciclo.model.Director;
 import com.diego.findeciclo.model.Formato;
 
 public class PeliculaPedidoDTO {
-    
+
     private Integer id;
-	
-	private long codigoBarras;
-	private String titulo;
-	private BigDecimal precio;
-	private String portada;
-	private String portada_id;
-	private boolean destacada;
-	private int unidades;
-	private String genero;
-	private Formato formato;
-	private String sinopsis;
-	private List<Director> directores;
+
+    private long codigoBarras;
+    private String titulo;
+    private BigDecimal precio;
+    private String portada;
+    private String portada_id;
+    private boolean destacada;
+    private int unidades;
+    private String genero;
+    private Formato formato;
+    private String sinopsis;
+    private List<Director> directores;
     private int qty;
-    
+
     public PeliculaPedidoDTO() {
     }
 

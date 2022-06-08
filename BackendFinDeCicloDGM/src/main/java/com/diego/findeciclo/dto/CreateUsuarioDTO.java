@@ -1,15 +1,15 @@
 package com.diego.findeciclo.dto;
 
 public class CreateUsuarioDTO {
-    
+
     private String nombre;
-	private String apellido;
-	private String email;
+    private String apellido;
+    private String email;
     private String contrasena;
-	private String telefono;
-	private String direccion;
-	private String pais;
-    
+    private String telefono;
+    private String direccion;
+    private String pais;
+
     public CreateUsuarioDTO() {
     }
 
@@ -79,7 +79,5 @@ public class CreateUsuarioDTO {
     public void setPais(String pais) {
         this.pais = pais;
     }
-
-    
 
 }

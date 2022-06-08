@@ -1,71 +1,66 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DCine - Usuarios</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DCine - Usuarios</title>
 
-  <link th:href="@{/static/css/styles.css}" rel="stylesheet">
+    <link th:href="@{/static/css/styles.css}" rel="stylesheet" />
 
-  <!-- Bootstrap CSS -->
-  <link th:href="@{/static//bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-  <!-- Fontawesome -->
-  <link href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" rel="stylesheet">
-  <link  rel="icon"   href="/static/images/Favicon.png" type="image/png" />
+    <!-- Bootstrap CSS -->
+    <link
+      th:href="@{/static//bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
+    <!-- Fontawesome -->
+    <link
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/static/images/Favicon.png" type="image/png" />
+  </head>
 
-</head>
+  <body>
+    <header th:insert="fragments/header::menu"></header>
 
-<body>
-  
-  <header th:insert="fragments/header::menu"></header>
-
-  <div class="container-fluid">
-  
-    <div class="row d-flex justify-content-center mt-3">
-      <div class="col-10">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Apellido</th>
-              <th scope="col">eMail</th>
-              <th scope="col">Teléfono</th>
-              <th scope="col">Dirección</th>
-              <th scope="col">País</th>
-              <th scope="col">Perfil</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="usuario : ${usuarios}">
-              <td th:text="${usuario.id}"></td>
-              <td th:text="${usuario.nombre}"></td>                  
-              <td th:text="${usuario.apellido}"></td>
-              <td th:text="${usuario.email}"></td>
-              <td th:text="${usuario.telefono}"></td>
-              <td th:text="${usuario.direccion}"></td>
-              <td th:text="${usuario.pais}"></td>
-              <td th:text="${usuario.perfil.perfil}"></td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="container-fluid">
+      <div class="row d-flex justify-content-center mt-3">
+        <div class="col-10">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">eMail</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">País</th>
+                <th scope="col">Perfil</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="usuario : ${usuarios}">
+                <td th:text="${usuario.id}"></td>
+                <td th:text="${usuario.nombre}"></td>
+                <td th:text="${usuario.apellido}"></td>
+                <td th:text="${usuario.email}"></td>
+                <td th:text="${usuario.telefono}"></td>
+                <td th:text="${usuario.direccion}"></td>
+                <td th:text="${usuario.pais}"></td>
+                <td th:text="${usuario.perfil.perfil}"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
-  </div>
-
-
-  
-
-  
-
-
-  <!-- Bootstrap core JavaScript
+    <!-- Bootstrap core JavaScript
   ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script> 
-
-</body>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script th:src="@{/static/bootstrap/js/bootstrap.min.js}"></script>
+  </body>
 </html>

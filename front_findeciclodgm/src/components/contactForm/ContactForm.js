@@ -157,7 +157,9 @@ export default function ContactForm() {
               </div>
 
               <div className="flex flex-row justify-end px-4 py-3 bg-gray-50 sm:px-6">
-                {showProgress === true && <CircularProgress color="inherit" className="mr-6"/>}
+                {showProgress === true && (
+                  <CircularProgress color="inherit" className="mr-6" />
+                )}
                 <div>
                   <button
                     type="button"

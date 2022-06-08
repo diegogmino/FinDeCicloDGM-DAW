@@ -126,7 +126,7 @@ export default function ShoppingCart(props) {
                               if (cart.length === 0) {
                                 setOpenCart(false);
                               } else {
-                                navigate('/checkout');
+                                navigate("/checkout");
                               }
                             }
                           }}

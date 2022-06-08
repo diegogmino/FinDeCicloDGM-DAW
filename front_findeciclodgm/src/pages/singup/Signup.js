@@ -50,7 +50,7 @@ export default function Signup() {
           navigate("/login");
         }, 4000);
         setShowProgress(false);
-        localStorage.setItem('wishlist', JSON.stringify(''));
+        localStorage.setItem("wishlist", JSON.stringify(""));
       })
       .catch(function (error) {
         setType("error");

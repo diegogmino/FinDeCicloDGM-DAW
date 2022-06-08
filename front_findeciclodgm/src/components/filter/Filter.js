@@ -51,10 +51,10 @@ export default function Filter() {
     }
 
     navigate(url);
-    setTitle('');
-    setFormat('');
-    setGenre('');
-    setFeatured('');
+    setTitle("");
+    setFormat("");
+    setGenre("");
+    setFeatured("");
   }
 
   return (
@@ -85,6 +85,7 @@ export default function Filter() {
           <option>Fantástico</option>
           <option>Histórico</option>
           <option>Policíaca</option>
+          <option>Romance</option>
           <option>Suspense</option>
           <option>Terror</option>
           <option>Thriller</option>

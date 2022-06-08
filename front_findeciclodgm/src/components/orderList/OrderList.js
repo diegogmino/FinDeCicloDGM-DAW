@@ -57,12 +57,13 @@ function Row(props) {
         </TableCell>
         <TableCell align="left">{order.direccionEnvio}</TableCell>
         <TableCell align="left">
-            {order.entregado == true && 'Sí'}
-            {order.entregado == false && 'No'}
+          {order.entregado == true && "Sí"}
+          {order.entregado == false && "No"}
         </TableCell>
         <TableCell align="left">{order.precioTotal} €</TableCell>
-        <TableCell align="left">{DateTime.fromMillis(order.fechaPedido).toLocaleString()}
-            </TableCell>
+        <TableCell align="left">
+          {DateTime.fromMillis(order.fechaPedido).toLocaleString()}
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -85,9 +86,7 @@ function Row(props) {
                       <TableCell component="th" scope="row" align="left">
                         {films.codigoBarras}
                       </TableCell>
-                      <TableCell align="left">
-                        {films.titulo}
-                      </TableCell>
+                      <TableCell align="left">{films.titulo}</TableCell>
                       <TableCell align="left">{films.precio} €</TableCell>
                     </TableRow>
                   ))}

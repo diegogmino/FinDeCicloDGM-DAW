@@ -5,9 +5,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 
-
-
-
 export default function Review(props) {
   const { cart, totalCart } = props;
   const [addresses, setAdresses] = React.useState([]);
@@ -18,8 +15,8 @@ export default function Review(props) {
     setUserData({
       name: user.nombre,
       lastname: user.apellido,
-      mail: user.email
-    })
+      mail: user.email,
+    });
     setAdresses([user.direccion, user.pais]);
   }, []);
 
@@ -52,7 +49,7 @@ export default function Review(props) {
             <ListItem sx={{ py: 1, px: 0 }}>
               <ListItemText primary="Total" />
               <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-                {Math.round(((totalCart + 3.99) + Number.EPSILON) * 100) / 100} €
+                {Math.round((totalCart + 3.99 + Number.EPSILON) * 100) / 100} €
               </Typography>
             </ListItem>
           </div>
@@ -81,7 +78,9 @@ export default function Review(props) {
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Envío a
           </Typography>
-          <p className="font-bold">{userData.name} {userData.lastname}</p>
+          <p className="font-bold">
+            {userData.name} {userData.lastname}
+          </p>
           <p className="font-bold">{addresses.join(", ")}</p>
           <Typography gutterBottom>{userData.mail}</Typography>
         </Grid>

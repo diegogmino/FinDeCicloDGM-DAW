@@ -12,7 +12,7 @@ export default function PaginationComponent(props) {
   return (
     <div className="flex justify-center mb-5">
       <Pagination
-      onChange={(e) => handleChange(e.target.textContent)}
+        onChange={(e) => handleChange(e.target.textContent)}
         hideNextButton={true}
         hidePrevButton={true}
         count={numberPages}
@@ -22,5 +22,3 @@ export default function PaginationComponent(props) {
     </div>
   );
 }
-
-

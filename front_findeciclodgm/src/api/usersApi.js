@@ -1,18 +1,17 @@
-import axios from 'axios';
-  
+import axios from "axios";
+
 const user = axios.create({
-  baseURL: 'http://localhost:8080/usuarios/',
+  baseURL: "http://localhost:8080/usuarios/",
 });
 
 const usersApi = {
-
-  login: async (email, password) => { 
-    const response = await user.get(`login/${email}/${password}`); 
+  login: async (email, password) => {
+    const response = await user.get(`login/${email}/${password}`);
     return response.data;
   },
 
   signUp: async (body) => {
-    const response = await user.post('guardar', body);
+    const response = await user.post("guardar", body);
     return response.data;
   },
 
@@ -27,10 +26,9 @@ const usersApi = {
   },
 
   postMessage: async (message) => {
-    const response = await user.post('mailContacto', message);
+    const response = await user.post("mailContacto", message);
     return response.data;
   },
-
-}  
+};
 
 export default usersApi;

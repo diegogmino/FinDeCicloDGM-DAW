@@ -6,10 +6,9 @@ import FilmsGallery from "../../components/filmsGallery/FilmsGallery";
 import React, { useState, useEffect } from "react";
 import FilmsApi from "../../api/filmsApi";
 import { useLocation } from "react-router-dom";
-import Filter from './../../components/filter/Filter';
+import Filter from "./../../components/filter/Filter";
 
 export default function FilmsPage(props) {
-
   const search = useLocation().search;
 
   const title = new URLSearchParams(search).get("titulo");
@@ -23,18 +22,17 @@ export default function FilmsPage(props) {
   const [numberPages, setNumberPages] = useState(0);
   const [filmsNumber, setFilmsNumber] = useState(0);
 
-  const {totalItemsCart, cart, totalCart, onRemove} = props;
+  const { totalItemsCart, cart, totalCart, onRemove } = props;
 
   const size = 10;
 
   useEffect(() => {
-
     let filter = {
-        titulo: title == null ? '' : title,
-        destacada: featured == null ? '' : featured,
-        formato: format == null ? '' : format,
-        genero: genre == null ? '' : genre,
-    }
+      titulo: title == null ? "" : title,
+      destacada: featured == null ? "" : featured,
+      formato: format == null ? "" : format,
+      genero: genre == null ? "" : genre,
+    };
 
     console.log(filter);
 
@@ -47,10 +45,20 @@ export default function FilmsPage(props) {
 
   return (
     <div>
-      <Header openCart={openCart} setOpenCart={setOpenCart} totalItemsCart={totalItemsCart}/>
+      <Header
+        openCart={openCart}
+        setOpenCart={setOpenCart}
+        totalItemsCart={totalItemsCart}
+      />
       <FilterButtons />
-      <Filter/>
-      <ShoppingCart openCart={openCart} setOpenCart={setOpenCart} cart={cart} totalCart={totalCart} onRemove={onRemove}/>
+      <Filter />
+      <ShoppingCart
+        openCart={openCart}
+        setOpenCart={setOpenCart}
+        cart={cart}
+        totalCart={totalCart}
+        onRemove={onRemove}
+      />
       <FilmsGallery
         films={films}
         setPage={setPage}

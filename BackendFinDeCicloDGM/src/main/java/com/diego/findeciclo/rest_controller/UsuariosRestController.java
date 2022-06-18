@@ -73,6 +73,7 @@ public class UsuariosRestController {
 		Perfil perfil = perfilService.buscarPerfil(2);
 		usuario.setPerfil(perfil);
 
+		/*
 		String mensaje = "¡Bienvenid@ a la familia, " + usuario.getNombre() + "!" + System.lineSeparator()
 				+ System.lineSeparator() +
 				"Te has registrado correctamente en DCine. Ahora puedes empezar a comprar el mejor cine al mejor precio, ¡nos vemos por los mundos fílmicos!"
@@ -80,7 +81,7 @@ public class UsuariosRestController {
 				"El equipo de DCine :)";
 
 		mailService.sendEmail(usuario.getEmail(), "¡Registro completado!", mensaje);
-
+ 		 */
 		return new ResponseEntity<UsuarioDTO>(
 				UsuarioMapper.INSTANCE.toUsuarioDTO(usuarioService.guardarUsuario(usuario)), HttpStatus.OK);
 
